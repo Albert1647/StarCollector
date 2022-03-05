@@ -56,6 +56,8 @@ namespace StarCollector
                 mouseOnMenu = true;
                 if(isClick()){
                     mouseOnMenuClick = true;
+                    
+
                 } else {
                     mouseOnMenuClick = false;
                 }
