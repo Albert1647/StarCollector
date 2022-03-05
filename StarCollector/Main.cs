@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace StarCollector
 {
@@ -11,7 +12,7 @@ namespace StarCollector
         private SpriteFont Arial;
         private Texture2D startButton;
         private Texture2D startHover;
-
+        private SoundEffect PopClick;
         private bool mouseOnMenu, mouseOnMenuClick;
 
         public Main()
@@ -40,6 +41,8 @@ namespace StarCollector
 
             startButton = Content.Load<Texture2D>("MenuScreen/start_button");
             startHover = Content.Load<Texture2D>("MenuScreen/start_button_hovering");
+
+            PopClick = Content.Load<SoundEffect>("Sound/PopClick");
         }
 
         protected override void Update(GameTime gameTime)
@@ -56,7 +59,7 @@ namespace StarCollector
                 mouseOnMenu = true;
                 if(isClick()){
                     mouseOnMenuClick = true;
-                    
+                    PopClick.Play();
 
                 } else {
                     mouseOnMenuClick = false;
