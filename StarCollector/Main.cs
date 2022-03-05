@@ -12,6 +12,8 @@ namespace StarCollector
         private Texture2D startButton;
         private Texture2D startHover;
 
+        private bool mouseOnMenu, mouseOnMenuClick;
+
         public Main()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -45,6 +47,24 @@ namespace StarCollector
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             // TODO: Add your update logic here
+            // Save Current Mouse Position
+            Singleton.Instance.MousePrevious = Singleton.Instance.MouseCurrent;
+            Singleton.Instance.MouseCurrent = Mouse.GetState();
+
+            // Check If mouse on an element
+            if(mouseOnElement(600, 680, 360,380)){
+                mouseOnMenu = true;
+                if(isClick()){
+                    mouseOnMenuClick = true;
+                } else {
+                    mouseOnMenuClick = false;
+                }
+            } else {
+                mouseOnMenu = false;
+            }
+
+
+
 
             base.Update(gameTime);
         }
@@ -54,15 +74,31 @@ namespace StarCollector
             GraphicsDevice.Clear(Color.CornflowerBlue);
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
-
-            _spriteBatch.DrawString(Arial, "X = " + Singleton.Instance.Dimension.X , new Vector2(0,0), Color.Black);
-            _spriteBatch.DrawString(Arial, "Y = " + Singleton.Instance.Dimension.Y, new Vector2(0, 40), Color.Black);
-            _spriteBatch.Draw(startButton, new Vector2(Singleton.Instance.Dimension.X / 2 - startButton.Width , Singleton.Instance.Dimension.Y / 2) , Color.Black);
-            _spriteBatch.Draw(startHover, new Vector2(Singleton.Instance.Dimension.X / 2 - startButton.Width , Singleton.Instance.Dimension.Y / 2) , Color.Black);
+            
+            _spriteBatch.DrawString(Arial, "X = " + Singleton.Instance.MouseCurrent.X , new Vector2(0,0), Color.Black);
+            _spriteBatch.DrawString(Arial, "Y = " + Singleton.Instance.MouseCurrent.Y, new Vector2(0, 40), Color.Black);
+            _spriteBatch.DrawString(Arial, "Click ?  " + isClick(), new Vector2(0, 60), Color.Black);
+            _spriteBatch.DrawString(Arial, "Mouse on menu ?  " + mouseOnMenu, new Vector2(0, 80), Color.Black);
+            _spriteBatch.DrawString(Arial, "Mouse on menu and Click ?  " + mouseOnMenuClick, new Vector2(0, 100), Color.Black);
+            _spriteBatch.Draw(startButton, centerElement(startButton) , Color.Black);
+            if(mouseOnMenu){
+                _spriteBatch.Draw(startHover, centerElement(startHover) , Color.Black);
+            }
 
             _spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public bool isClick(){
+            return Singleton.Instance.MouseCurrent.LeftButton == ButtonState.Pressed && Singleton.Instance.MousePrevious.LeftButton == ButtonState.Released;
+        }
+        public Vector2 centerElement(Texture2D element){
+            return new Vector2(Singleton.Instance.Dimension.X / 2 - (element.Width / 2) , Singleton.Instance.Dimension.Y / 2);
+        }
+
+        public bool mouseOnElement(int x1, int x2, int y1, int y2){
+            return (Singleton.Instance.MouseCurrent.X > x1 && Singleton.Instance.MouseCurrent.Y > y1) && (Singleton.Instance.MouseCurrent.X < x2 && Singleton.Instance.MouseCurrent.Y < y2);
         }
     }
 }
