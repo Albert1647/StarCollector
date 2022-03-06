@@ -19,7 +19,6 @@ namespace StarCollector
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             _graphics.PreferredBackBufferWidth = (int)Singleton.Instance.Dimension.X;  // set this value to the desired width of your window
             _graphics.PreferredBackBufferHeight = (int)Singleton.Instance.Dimension.Y;   // set this value to the desired height of your window
             _graphics.ApplyChanges();
@@ -41,7 +40,6 @@ namespace StarCollector
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            // TODO: Add your update logic here
             ScreenManager.Instance.Update(gameTime);
 
             base.Update(gameTime);
@@ -50,7 +48,6 @@ namespace StarCollector
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            // TODO: Add your drawing code here
             _spriteBatch.Begin();
             
             ScreenManager.Instance.Draw(_spriteBatch);
@@ -59,6 +56,7 @@ namespace StarCollector
 
             base.Draw(gameTime);
         }
+        
 
 
     }
