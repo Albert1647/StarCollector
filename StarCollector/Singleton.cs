@@ -6,10 +6,12 @@ namespace StarCollector
 {
     class Singleton
     {
+		// Game Resolution
         public Vector2 Dimension = new Vector2(1280, 720);
 		public MouseState MousePrevious, MouseCurrent;
+		public bool IsShooting;
         private static Singleton instance;
-		
+		// Export Instance
 		public static Singleton Instance
 		{
 			get

@@ -10,20 +10,25 @@ using Microsoft.Xna.Framework.Media;
 
 namespace StarCollector.Screen {
     class GameScreen : _GameScreen {
-		private Texture2D gunTexture;
+		private Texture2D GunTexture,StarTexture;
 		private Gun gun;
 
-        public void Initial() {
+		private SpriteFont Arial;
 
-            gun = new Gun(gunTexture) {
-                pos = new Vector2(Singleton.Instance.Dimension.X / 2 - gunTexture.Width / 2, 700 - gunTexture.Height),
+        public void Initial() {
+			// Instantiate gun on GameScren start
+            gun = new Gun(GunTexture, StarTexture) {
+				pos = new Vector2(Singleton.Instance.Dimension.X / 2 - GunTexture.Width / 2, 700 - GunTexture.Height),
+				_gunColor = Color.White
             };
         }
 
         public override void LoadContent() {
             // Load Resource
             base.LoadContent();
-            gunTexture = Content.Load<Texture2D>("gameScreen/gun");
+			Arial = Content.Load<SpriteFont>("Arial");
+            GunTexture = Content.Load<Texture2D>("gameScreen/gun");
+			StarTexture = Content.Load<Texture2D>("gameScreen/star");
             Initial();
         }
         public override void UnloadContent() {
@@ -34,6 +39,7 @@ namespace StarCollector.Screen {
             base.Update(gameTime);
         }
         public override void Draw(SpriteBatch _spriteBatch) {
+			_spriteBatch.DrawString(Arial, "Is Shooting = " + Singleton.Instance.IsShooting , new Vector2(0,0), Color.Black);
 			gun.Draw(_spriteBatch);
         }
     }

@@ -13,10 +13,11 @@ namespace StarCollector.Managers {
 			CollectionScreen
 		}
 		private _GameScreen CurrentGameScreen;
-
+		// Start Screen on Menu
 		public ScreenManager() {
 			CurrentGameScreen = new MenuScreen();
 		}
+		// Switch Screen
 		public void LoadScreen(GameScreenName _ScreenName) {
 			switch (_ScreenName) {
 				case GameScreenName.MenuScreen:
@@ -38,15 +39,16 @@ namespace StarCollector.Managers {
 		public void UnloadContent() {
 			CurrentGameScreen.UnloadContent();
 		}
-
+		// update screen on current screen class
 		public void Update(GameTime gameTime) {
 			CurrentGameScreen.Update(gameTime);
 		}
 
+		// update screen on current screen class
 		public void Draw(SpriteBatch spriteBatch) {
 			CurrentGameScreen.Draw(spriteBatch);
 		}
-
+		// Screen Singleton
 		private static ScreenManager instance;
 		public static ScreenManager Instance {
 			get {

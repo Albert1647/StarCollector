@@ -12,7 +12,6 @@ namespace StarCollector.Screen {
 		}
 		public override void LoadContent() {
 			base.LoadContent();
-
 			Initial();
 		}
 		public override void UnloadContent() {

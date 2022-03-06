@@ -5,6 +5,7 @@ namespace StarCollector.GameObjects {
     	public class _GameObject {
 		protected Texture2D _texture;
 		public Vector2 pos;
+		public Color color;
 
 		public _GameObject(Texture2D texture) {
 			_texture = texture;
