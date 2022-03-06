@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using StarCollector.Managers;
+using StarCollector.GameObjects;
 using System;
 using Microsoft.Xna.Framework.Audio;
 
@@ -22,7 +23,7 @@ namespace StarCollector.Screen {
 			base.LoadContent();
             Arial = Content.Load<SpriteFont>("Alien");
             startButton = Content.Load<Texture2D>("MenuScreen/start_button");
-            startHover = Content.Load<Texture2D>("MenuScreen/start_button_hovering");
+            startHover = Content.Load<Texture2D>("MenuScreen/start_button_hover");
 			Initial();
 		}
 		public override void UnloadContent() {

@@ -14,8 +14,8 @@ namespace StarCollector.GameObjects {
 			
 		}
 
-		public override void Update(GameTime gameTime, Bubble[,] gameObjects) {
-		
+		public override void Update(GameTime gameTime) {
+			
 		}
 
 		private void DetectCollision(Bubble[,] gameObjects) {
