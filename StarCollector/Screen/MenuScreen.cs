@@ -11,17 +11,13 @@ namespace StarCollector.Screen {
         private SpriteFont Arial;
         private Texture2D startButton, startHover;
 
-        private SoundEffect onHoverSound;
-        private SoundEffectInstance onHoverSoundInstance;
-
-
         private bool mouseOnMenu, mouseOnMenuClick;
 		public void Initial() {
 
 		}
 		public override void LoadContent() {
 			base.LoadContent();
-            Arial = Content.Load<SpriteFont>("Alien");
+            Arial = Content.Load<SpriteFont>("Arial");
             startButton = Content.Load<Texture2D>("MenuScreen/start_button");
             startHover = Content.Load<Texture2D>("MenuScreen/start_button_hover");
 			Initial();

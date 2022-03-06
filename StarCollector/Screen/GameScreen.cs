@@ -23,17 +23,18 @@ namespace StarCollector.Screen {
         public override void LoadContent() {
             // Load Resource
             base.LoadContent();
-            gunTexture = Content.Load<Texture2D>("PlayScreen/bow_sheet");
+            gunTexture = Content.Load<Texture2D>("gameScreen/gun");
             Initial();
         }
         public override void UnloadContent() {
             base.UnloadContent();
         }
         public override void Update(GameTime gameTime) {
+			gun.Update(gameTime);
             base.Update(gameTime);
         }
-        public override void Draw(SpriteBatch spriteBatch) {
-
+        public override void Draw(SpriteBatch _spriteBatch) {
+			gun.Draw(_spriteBatch);
         }
     }
 }
