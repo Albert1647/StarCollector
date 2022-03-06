@@ -8,8 +8,11 @@ using Microsoft.Xna.Framework.Audio;
 namespace StarCollector.Screen {
 	class MenuScreen : _GameScreen {
         private SpriteFont Arial;
-        private Texture2D startButton;
-        private Texture2D startHover;
+        private Texture2D startButton, startHover;
+
+        private SoundEffect onHoverSound;
+        private SoundEffectInstance onHoverSoundInstance;
+
 
         private bool mouseOnMenu, mouseOnMenuClick;
 		public void Initial() {
