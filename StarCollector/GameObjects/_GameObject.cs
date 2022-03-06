@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace StarCollector.GameObjects {
     	public class _GameObject {
-        }
 
 		public _GameObject(Texture2D texture) {
 
@@ -13,4 +12,6 @@ namespace StarCollector.GameObjects {
 		}
 		public virtual void Draw(SpriteBatch spriteBatch) {
 		}
+    }
+
 }
