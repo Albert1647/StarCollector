@@ -11,11 +11,13 @@ namespace StarCollector.GameObjects {
 		private float aimAngle;
 		private Color _starColor;
 		private Texture2D starTexture;
-		private Star star;
+		private Texture2D Indicator;
+		private Star star; // star on gun
 		public Color _gunColor;
-		public Gun(Texture2D texture, Texture2D star) : base(texture) {
+		public Gun(Texture2D texture, Texture2D indicator, Texture2D star) : base(texture) {
 			// save texture
 			starTexture = star;
+			Indicator = indicator;
 			// random color
 			_starColor = GetRandomColor();
 			// set gun color
@@ -25,8 +27,9 @@ namespace StarCollector.GameObjects {
 		public override void Update(GameTime gameTime) {
 			Singleton.Instance.MousePrevious = Singleton.Instance.MouseCurrent;
 			Singleton.Instance.MouseCurrent = Mouse.GetState();
-			// shootable
-			if (Singleton.Instance.MouseCurrent.Y < 625) {
+			// shootable at mouse Y
+			if (IsShootable()) {
+				// calculate gun aim angle
 				aimAngle = (float)Math.Atan2((pos.Y + _texture.Height / 2) - Singleton.Instance.MouseCurrent.Y, (pos.X + _texture.Width / 2) - Singleton.Instance.MouseCurrent.X);
 				// shooting
 				if (!Singleton.Instance.IsShooting && IsClick()) {
@@ -36,6 +39,7 @@ namespace StarCollector.GameObjects {
 						Angle = aimAngle + MathHelper.Pi,
 						_starColor = _starColor,
 						Speed = 1000,
+						IsActive = true
 					};
 					_starColor = GetRandomColor();
 					// set state to shooting
@@ -46,12 +50,13 @@ namespace StarCollector.GameObjects {
 			if (Singleton.Instance.IsShooting){
 				// if shooting update logic in star
 				star.Update(gameTime);
-				Debug.WriteLine(star.pos);	
 			}
 
 			
 		}
 		public override void Draw(SpriteBatch _spriteBatch) {
+			// Draw Indicator
+			_spriteBatch.Draw(Indicator, pos + new Vector2(50 + Indicator.Width, 50), null, Color.White, aimAngle + MathHelper.ToRadians(90f), new Vector2(0,0), 1.5f, SpriteEffects.None, 0f);
 			// Draw Gun with Turning Angle
 			_spriteBatch.Draw(_texture, pos + new Vector2(50, 50), null, Color.White, aimAngle + MathHelper.ToRadians(-90f), new Vector2(50, 50), 1.5f, SpriteEffects.None, 0f);
 			if (!Singleton.Instance.IsShooting){
@@ -92,6 +97,15 @@ namespace StarCollector.GameObjects {
 		public bool IsClick(){
             return Singleton.Instance.MouseCurrent.LeftButton == ButtonState.Pressed && Singleton.Instance.MousePrevious.LeftButton == ButtonState.Released;
         }
+
+		public bool IsShootable(){
+			return (Singleton.Instance.MouseCurrent.Y < 625 
+			&& Singleton.Instance.MouseCurrent.X > 0 
+			&& Singleton.Instance.MouseCurrent.Y > 0 
+			&& Singleton.Instance.MouseCurrent.X < Singleton.Instance.Dimension.X
+			// && Singleton.Instance.MouseCurrent.Y < Singleton.Instance.Dimension.Y
+			);
+		}
 
 	}
 }

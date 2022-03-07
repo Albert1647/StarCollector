@@ -2,14 +2,14 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace StarCollector.GameObjects {
+		// Class hold basic attribute of gameObject
     	public class _GameObject {
 		protected Texture2D _texture;
 		public Vector2 pos;
-		public Color color;
-
+		
 		public _GameObject(Texture2D texture) {
-			_texture = texture;
-			pos = Vector2.Zero;
+			_texture = texture; // initialise gameObject texture
+			pos = Vector2.Zero; // default location
 		}
 
 		public virtual void Update(GameTime gameTime) {

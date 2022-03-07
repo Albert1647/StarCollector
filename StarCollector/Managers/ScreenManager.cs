@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace StarCollector.Managers {
 	public class ScreenManager {
+		// Class responsible for switching screen / hold switching behavior and initialise start screen
 		public ContentManager Content { private set; get; }
 		public enum GameScreenName {
 			MenuScreen,

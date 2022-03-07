@@ -11,7 +11,7 @@ namespace StarCollector.Screen {
         private SpriteFont Arial;
         private Texture2D StartButton, StartHover, CollectionButton, CollectionHover ;
 
-        private bool MouseOnStartButton, MouseOnCollectionButton, MouseOnMenuClick;
+        private bool MouseOnStartButton, MouseOnCollectionButton;
 		public void Initial() {
 
 		}
@@ -36,10 +36,7 @@ namespace StarCollector.Screen {
             if(MouseOnElement(600, 680, 280,300)){
                 MouseOnStartButton = true;
                 if(IsClick()){
-                    MouseOnMenuClick = true;
                     ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.GameScreen);
-                } else {
-                    MouseOnMenuClick = false;
                 }
             } else {
                 MouseOnStartButton = false;
@@ -47,10 +44,7 @@ namespace StarCollector.Screen {
             if(MouseOnElement(570, 710, 360,380)){
                 MouseOnCollectionButton = true;
                 if(IsClick()){
-                    MouseOnMenuClick = true;
                     ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
-                } else {
-                    MouseOnMenuClick = false;
                 }
             } else {
                 MouseOnCollectionButton = false;
@@ -62,8 +56,8 @@ namespace StarCollector.Screen {
             _spriteBatch.DrawString(Arial, "X = " + Singleton.Instance.MouseCurrent.X , new Vector2(0,0), Color.Black);
             _spriteBatch.DrawString(Arial, "Y = " + Singleton.Instance.MouseCurrent.Y, new Vector2(0, 40), Color.Black);
             _spriteBatch.DrawString(Arial, "Click ?  " + IsClick(), new Vector2(0, 60), Color.Black);
-            _spriteBatch.DrawString(Arial, "Mouse on menu ?  " + MouseOnStartButton, new Vector2(0, 80), Color.Black);
-            _spriteBatch.DrawString(Arial, "Mouse on menu and Click ?  " + MouseOnMenuClick, new Vector2(0, 100), Color.Black);
+            _spriteBatch.DrawString(Arial, "Mouse on Start ?  " + MouseOnStartButton, new Vector2(0, 80), Color.Black);
+            _spriteBatch.DrawString(Arial, "Mouse on Collection ?  " + MouseOnCollectionButton, new Vector2(0, 100), Color.Black);
             // Swap Texture If mouseHover 
             if(MouseOnStartButton)
                 _spriteBatch.Draw(StartHover, CenterElementWithHeight(StartHover,260) , Color.Black);
@@ -74,12 +68,12 @@ namespace StarCollector.Screen {
                 _spriteBatch.Draw(CollectionHover, CenterElementWithHeight(CollectionHover,340) , Color.Black);
             else
                 _spriteBatch.Draw(CollectionButton, CenterElementWithHeight(CollectionButton,340) , Color.Black);
-            
 		}
-        // if mouse on specify position
+        // if mouse on specify 'location/position'
         public bool MouseOnElement(int x1, int x2, int y1, int y2){
             return (Singleton.Instance.MouseCurrent.X > x1 && Singleton.Instance.MouseCurrent.Y > y1) && (Singleton.Instance.MouseCurrent.X < x2 && Singleton.Instance.MouseCurrent.Y < y2);
         }
+        // helper function to shorten singleton calling
          public bool IsClick(){
             return Singleton.Instance.MouseCurrent.LeftButton == ButtonState.Pressed && Singleton.Instance.MousePrevious.LeftButton == ButtonState.Released;
         }
