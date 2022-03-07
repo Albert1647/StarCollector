@@ -24,7 +24,7 @@ namespace StarCollector.GameObjects {
 			_gunColor = Color.White;
 		}
 
-		public override void Update(GameTime gameTime) {
+		public override void Update(GameTime gameTime, Star[,] starArray) {
 			Singleton.Instance.MousePrevious = Singleton.Instance.MouseCurrent;
 			Singleton.Instance.MouseCurrent = Mouse.GetState();
 			// shootable at mouse Y
@@ -38,7 +38,7 @@ namespace StarCollector.GameObjects {
 						pos = new Vector2(Singleton.Instance.Dimension.X / 2 - starTexture.Width / 2, 700 - starTexture.Height),
 						Angle = aimAngle + MathHelper.Pi,
 						_starColor = _starColor,
-						Speed = 1000,
+						Speed = 500,
 						IsActive = true
 					};
 					_starColor = GetRandomColor();
@@ -49,7 +49,7 @@ namespace StarCollector.GameObjects {
 			// if shooting / go update star
 			if (Singleton.Instance.IsShooting){
 				// if shooting update logic in star
-				star.Update(gameTime);
+				star.Update(gameTime, starArray);
 			}
 
 			

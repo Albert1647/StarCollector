@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace StarCollector.GameObjects {
 		// Class hold basic attribute of gameObject
@@ -12,7 +13,7 @@ namespace StarCollector.GameObjects {
 			pos = Vector2.Zero; // default location
 		}
 
-		public virtual void Update(GameTime gameTime) {
+		public virtual void Update(GameTime gameTime, Star[,] gameObjects) {
 		}
 		public virtual void Draw(SpriteBatch spriteBatch) {
 		}

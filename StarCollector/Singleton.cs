@@ -8,6 +8,7 @@ namespace StarCollector
     {
 		// Game Resolution
         public Vector2 Dimension = new Vector2(1280, 720);
+		public List<Vector2> RemovableStar;
 		public MouseState MousePrevious, MouseCurrent;
 		public bool IsShooting;
         private static Singleton instance;

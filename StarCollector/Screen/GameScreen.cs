@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StarCollector.GameObjects;
 using System;
+using System.Diagnostics;
 using Microsoft.Xna.Framework.Audio;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
@@ -10,16 +11,16 @@ using Microsoft.Xna.Framework.Media;
 
 namespace StarCollector.Screen {
     class GameScreen : _GameScreen {
-		private Texture2D GunTexture,StarTexture,Indicator;
+		private Texture2D GunTexture,StarTexture,Indicator,BG;
 		private Gun gun;
         private Random random = new Random();
-		private Star[,] star = new Star[7,8];
+		public Star[,] star = new Star[8,8];
 
 		private SpriteFont Arial;
-
         private int startLengthRow = 3;
 
         private int ceilingY = 30;
+
         private int leftWallX = 326;
         // private int rightWallX = 600;
 
@@ -34,7 +35,7 @@ namespace StarCollector.Screen {
                 for(int j = 0 ; j < star.GetLength(1) ; j++){
                     star[i,j] = new Star(StarTexture){
                         IsActive = false,
-                        pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)),(ceilingY + (i * (StarTexture.Height-10)))),
+                        pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (ceilingY + (i * (StarTexture.Height-10)))),
                         _starColor = GetRandomColor()
                     };
                 }
@@ -48,6 +49,7 @@ namespace StarCollector.Screen {
             GunTexture = Content.Load<Texture2D>("gameScreen/gun");
 			StarTexture = Content.Load<Texture2D>("gameScreen/star");
 			Indicator = Content.Load<Texture2D>("gameScreen/indicator");
+			BG = Content.Load<Texture2D>("gameScreen/ingame_bg");
             Initial();
         }
         public override void UnloadContent() {
@@ -58,15 +60,16 @@ namespace StarCollector.Screen {
             for(int i = 0 ; i < star.GetLength(0) ; i++){
                 for(int j = 0 ; j < star.GetLength(1) ; j++){
                     if (star[i, j] != null)
-                    star[i,j].Update(gameTime);
+                    star[i,j].Update(gameTime, star);
                 }
             }
 
             // update/load gun logic
-			gun.Update(gameTime);
+			gun.Update(gameTime, star);
             base.Update(gameTime);
         }
         public override void Draw(SpriteBatch _spriteBatch) {
+			_spriteBatch.Draw(BG, Vector2.Zero, Color.White);
             _spriteBatch.DrawString(Arial, "X = " + Singleton.Instance.MouseCurrent.X , new Vector2(0,0), Color.Black);
             _spriteBatch.DrawString(Arial, "Y = " + Singleton.Instance.MouseCurrent.Y, new Vector2(0, 40), Color.Black);
 			_spriteBatch.DrawString(Arial, "Is Shooting = " + Singleton.Instance.IsShooting , new Vector2(0,60), Color.Black);
