@@ -12,6 +12,8 @@ namespace StarCollector.GameObjects {
 
 		public Color _starColor;
 		
+		private bool collision;
+
 		public Star(Texture2D texture) : base(texture) {
 			
 		}
@@ -24,18 +26,18 @@ namespace StarCollector.GameObjects {
 				Velocity.Y = (float)Math.Sin(Angle) * Speed;
 				pos += Velocity * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
 				// If ball reach top ceiling
-				if (pos.Y <= 40) {
+				if (pos.Y <= 30) {
 					IsActive = false;
 					Singleton.Instance.IsShooting = false;
 				}
 				// If ball collision left
-				if (pos.X <= 325) {
+				if (pos.X <= 326) {
 					// flip angle horizontal
 					Angle = -Angle;
 					Angle += MathHelper.ToRadians(180);
 				}
 				// If right side of ball reach collision right
-				if (pos.X + _texture.Width >= 960) {
+				if (pos.X + _texture.Width >= 955) {
 					// flip angle horizontal
 					Angle = -Angle;
 					Angle += MathHelper.ToRadians(180);

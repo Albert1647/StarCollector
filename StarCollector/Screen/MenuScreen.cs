@@ -60,15 +60,16 @@ namespace StarCollector.Screen {
             _spriteBatch.DrawString(Arial, "Mouse on Collection ?  " + MouseOnCollectionButton, new Vector2(0, 100), Color.Black);
             // Swap Texture If mouseHover 
             if(MouseOnStartButton)
-                _spriteBatch.Draw(StartHover, CenterElementWithHeight(StartHover,260) , Color.Black);
+                _spriteBatch.Draw(StartHover, CenterElementWithHeight(StartHover,260) , Color.White);
             else
-                _spriteBatch.Draw(StartButton, CenterElementWithHeight(StartButton,260) , Color.Black);
+                _spriteBatch.Draw(StartButton, CenterElementWithHeight(StartButton,260) , Color.White);
             
             if(MouseOnCollectionButton)
-                _spriteBatch.Draw(CollectionHover, CenterElementWithHeight(CollectionHover,340) , Color.Black);
+                _spriteBatch.Draw(CollectionHover, CenterElementWithHeight(CollectionHover,340) , Color.White);
             else
-                _spriteBatch.Draw(CollectionButton, CenterElementWithHeight(CollectionButton,340) , Color.Black);
+                _spriteBatch.Draw(CollectionButton, CenterElementWithHeight(CollectionButton,340) , Color.White);
 		}
+        
         // if mouse on specify 'location/position'
         public bool MouseOnElement(int x1, int x2, int y1, int y2){
             return (Singleton.Instance.MouseCurrent.X > x1 && Singleton.Instance.MouseCurrent.Y > y1) && (Singleton.Instance.MouseCurrent.X < x2 && Singleton.Instance.MouseCurrent.Y < y2);

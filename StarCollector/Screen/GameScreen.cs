@@ -13,9 +13,15 @@ namespace StarCollector.Screen {
 		private Texture2D GunTexture,StarTexture,Indicator;
 		private Gun gun;
         private Random random = new Random();
-		private Star[,] star = new Star[9,8];
+		private Star[,] star = new Star[7,8];
 
 		private SpriteFont Arial;
+
+        private int startLengthRow = 3;
+
+        private int ceilingY = 30;
+        private int leftWallX = 326;
+        // private int rightWallX = 600;
 
         public void Initial() {
 			// Instantiate gun on start GameScreen 
@@ -23,6 +29,16 @@ namespace StarCollector.Screen {
 				pos = new Vector2(Singleton.Instance.Dimension.X / 2 - GunTexture.Width / 2, 700 - GunTexture.Height),
 				_gunColor = Color.White
             };
+
+            for(int i = 0 ; i < startLengthRow ; i++){
+                for(int j = 0 ; j < star.GetLength(1) ; j++){
+                    star[i,j] = new Star(StarTexture){
+                        IsActive = false,
+                        pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)),(ceilingY + (i * (StarTexture.Height-10)))),
+                        _starColor = GetRandomColor()
+                    };
+                }
+            }
         }
 
         public override void LoadContent() {
@@ -38,14 +54,29 @@ namespace StarCollector.Screen {
             base.UnloadContent();
         }
         public override void Update(GameTime gameTime) {
+            // update star
+            for(int i = 0 ; i < star.GetLength(0) ; i++){
+                for(int j = 0 ; j < star.GetLength(1) ; j++){
+                    if (star[i, j] != null)
+                    star[i,j].Update(gameTime);
+                }
+            }
 
-            
             // update/load gun logic
 			gun.Update(gameTime);
             base.Update(gameTime);
         }
         public override void Draw(SpriteBatch _spriteBatch) {
-			_spriteBatch.DrawString(Arial, "Is Shooting = " + Singleton.Instance.IsShooting , new Vector2(0,0), Color.Black);
+            _spriteBatch.DrawString(Arial, "X = " + Singleton.Instance.MouseCurrent.X , new Vector2(0,0), Color.Black);
+            _spriteBatch.DrawString(Arial, "Y = " + Singleton.Instance.MouseCurrent.Y, new Vector2(0, 40), Color.Black);
+			_spriteBatch.DrawString(Arial, "Is Shooting = " + Singleton.Instance.IsShooting , new Vector2(0,60), Color.Black);
+            // draw star
+            for (int i = 0; i < star.GetLength(0); i++) {
+                for (int j = 0; j < star.GetLength(1); j++) {
+                    if (star[i, j] != null)
+                        star[i, j].Draw(_spriteBatch);
+                }
+            }
             // draw gun
 			gun.Draw(_spriteBatch);
         }
