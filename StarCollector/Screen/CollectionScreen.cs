@@ -109,7 +109,10 @@ namespace StarCollector.Screen
 			// Draw About Screen
 			if (showWarbOne)
 			{
-				_spriteBatch.Draw(detailsWarpOne, new Rectangle(50, 50, 1280 - 100, 720 - 100), Color.White);
+				//Draw details Star 1
+				_spriteBatch.Draw(detailsWarpOne, new Rectangle(57, 57, 1280 - 114, 720 - 114), Color.White);
+				//Draw Leave Button
+				_spriteBatch.Draw(leave, new Rectangle(1140, 70, leave.Width, leave.Height), Color.White);
 			}
 			
 			
