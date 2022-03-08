@@ -15,6 +15,7 @@ namespace StarCollector.Screen
 		private Texture2D question, warpOne, warpTwo, warpThree, warpFour, warpFive , warpSix;
 		private Texture2D detailsWarpOne;
 		private bool showWarbOne;
+		private bool showWarbOnedraw;
 		public void Initial()
 		{
 
@@ -47,18 +48,32 @@ namespace StarCollector.Screen
 			Singleton.Instance.MousePrevious = Singleton.Instance.MouseCurrent;
 			Singleton.Instance.MouseCurrent = Mouse.GetState();
 
-
-			//¶éÒ»Å´´ÒÇáÅéÇ ãËé·Óã¹¹Õé(áµèÂÑ§äÁèÃÙé¨Ð¹ÑºÂÑ§ä§)
+			// Leave to menu
+			if (MouseOnElement(1140,1204,70,135))
+			{
+				if(IsClick()){
+                    ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
+                }
+			} 
+			//ï¿½ï¿½Ò»Å´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ã¹¹ï¿½ï¿½(ï¿½ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¹Ñºï¿½Ñ§ï¿½)
 			// Click WarbOne
-			if ((Singleton.Instance.MouseCurrent.X > 141 && Singleton.Instance.MouseCurrent.Y > 157) && (Singleton.Instance.MouseCurrent.X < 341 && Singleton.Instance.MouseCurrent.Y < 357))
+			if (MouseOnElement(141,341,157,357))
 			{
 				//141, 157
-
-				if (Singleton.Instance.MouseCurrent.LeftButton == ButtonState.Pressed && Singleton.Instance.MousePrevious.LeftButton == ButtonState.Released)
+				if (IsClick())
 				{
 					showWarbOne = true;
-				}
+				}	
 			}
+			// Leave to showWarbOne
+			if (MouseOnElement(1140,1204,70,135) && showWarbOne)
+					{	
+						showWarbOnedraw=true;
+						if(IsClick())
+						{
+                    		ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
+                		}
+					}
 
 			base.Update(gameTime);
 		}
@@ -89,16 +104,28 @@ namespace StarCollector.Screen
 			_spriteBatch.DrawString(Arial, "Click ?  " + IsClick(), new Vector2(0, 60), Color.Black);
 
 
+
+
 			// Draw About Screen
 			if (showWarbOne)
 			{
 				_spriteBatch.Draw(detailsWarpOne, new Rectangle(50, 50, 1280 - 100, 720 - 100), Color.White);
 			}
+			
+			
+			
+				_spriteBatch.DrawString(Arial, "Mouse on Start ?  " + showWarbOnedraw, new Vector2(0, 80), Color.Black);
+			
+			
 		}
 		// helper function to shorten singleton calling
 		public bool IsClick()
 		{
 			return Singleton.Instance.MouseCurrent.LeftButton == ButtonState.Pressed && Singleton.Instance.MousePrevious.LeftButton == ButtonState.Released;
 		}
+		public bool MouseOnElement(int x1, int x2, int y1, int y2){
+            return (Singleton.Instance.MouseCurrent.X > x1 && Singleton.Instance.MouseCurrent.Y > y1) && (Singleton.Instance.MouseCurrent.X < x2 && Singleton.Instance.MouseCurrent.Y < y2);
+        }
 	}
+	
 }
