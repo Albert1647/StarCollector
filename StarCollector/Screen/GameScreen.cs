@@ -14,7 +14,7 @@ namespace StarCollector.Screen {
 		private Texture2D GunTexture,StarTexture,Indicator,BG;
 		private Gun gun;
         private Random random = new Random();
-		public Star[,] star = new Star[8,8];
+		public Star[,] star = new Star[9,8];
 
 		private SpriteFont Arial;
         private int startLengthRow = 3;

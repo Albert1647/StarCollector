@@ -2,6 +2,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 
 namespace StarCollector.GameObjects {
@@ -45,7 +46,6 @@ namespace StarCollector.GameObjects {
 					Angle = -Angle;
 					Angle += MathHelper.ToRadians(180);
 				}
-
 			}
 		}
 
@@ -59,29 +59,93 @@ namespace StarCollector.GameObjects {
 						if (GetMiddleOfStar(pos).X >= GetMiddleOfStar(starArray[i, j].pos).X) {
 							if (i % 2 == 0) {
 								// last row of even row
-								if (j == 7) {
-									starArray[i + 1, j - 1] = this;
-									starArray[i + 1, j - 1].pos = new Vector2(leftWallX + ((j - 1) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (ceilingY + (i + 1) * (_texture.Height-10)));
+								if (j == starArray.GetLength(1) - 1) {	
+									if(starArray[i + 1, j - 1] == null){
+										starArray[i + 1, j - 1] = this;
+										starArray[i + 1, j - 1].pos = new Vector2(leftWallX + ((j - 1) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (ceilingY + (i + 1) * (_texture.Height-10)));
+										CheckRemoveBubble(starArray, _starColor, new Vector2(j - 1, i + 1));
+									} else {
+										starArray[i, j - 1] = this;
+										starArray[i, j - 1].pos = new Vector2(leftWallX + ((j - 1) * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (ceilingY + (i) * (_texture.Height-10)));
+										CheckRemoveBubble(starArray, _starColor, new Vector2(j + 1, i));
+									}
 								} else {
-									starArray[i + 1, j] = this;	
-									starArray[i + 1, j].pos = new Vector2(leftWallX + (j * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (ceilingY + (i + 1) * (_texture.Height-10)));
+									if(starArray[i + 1, j] == null){
+										starArray[i + 1, j] = this;	
+										starArray[i + 1, j].pos = new Vector2(leftWallX + (j * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (ceilingY + (i + 1) * (_texture.Height-10)));
+										CheckRemoveBubble(starArray, _starColor, new Vector2(j, i + 1));
+									} else {
+										starArray[i, j] = this;	
+										starArray[i, j].pos = new Vector2(leftWallX + (j * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (ceilingY + (i) * (_texture.Height-10)));
+										CheckRemoveBubble(starArray, _starColor, new Vector2(j, i + 1));
+									}
 								}
 							} else {
 								// normal row
-								starArray[i + 1, j + 1] = this;
-								starArray[i + 1, j + 1].pos = new Vector2(leftWallX + ((j + 1) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (ceilingY + (i + 1) * (_texture.Height-10)));
+								if(starArray[i + 1, j + 1] == null){
+									starArray[i + 1, j + 1] = this;
+									starArray[i + 1, j + 1].pos = new Vector2(leftWallX + ((j + 1) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (ceilingY + (i + 1) * (_texture.Height-10)));
+									CheckRemoveBubble(starArray, _starColor, new Vector2(j + 1, i + 1));
+								} else {
+									starArray[i, j + 1] = this;
+									starArray[i, j + 1].pos = new Vector2(leftWallX + ((j + 1) * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (ceilingY + (i) * (_texture.Height-10)));
+									CheckRemoveBubble(starArray, _starColor, new Vector2(j, i));
+								}
 							}
 						} else {
 						// if hit bottom left of star 
 							if (i % 2 == 0) {
-								starArray[i + 1, j - 1] = this;
-								starArray[i + 1, j - 1].pos = new Vector2(leftWallX + ((j - 1) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (ceilingY + (i + 1) * (_texture.Height-10)));
+								// bug prevention
+								if( j > 0 ){
+									if(starArray[i + 1, j - 1] == null){
+										starArray[i + 1, j - 1] = this;
+										starArray[i + 1, j - 1].pos = new Vector2(leftWallX + ((j - 1) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (ceilingY + (i + 1) * (_texture.Height-10)));
+										CheckRemoveBubble(starArray, _starColor, new Vector2(j - 1, i + 1));
+									} else {
+										starArray[i, j - 1] = this;
+										starArray[i, j - 1].pos = new Vector2(leftWallX + ((j - 1) * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (ceilingY + (i) * (_texture.Height-10)));
+										CheckRemoveBubble(starArray, _starColor, new Vector2(j - 1, i));
+									}
+								}
+								else {
+									if(starArray[i + 1, j] == null){
+										starArray[i + 1, j] = this;
+										starArray[i + 1, j].pos = new Vector2(leftWallX + ((j) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (ceilingY + (i + 1) * (_texture.Height-10)));
+										CheckRemoveBubble(starArray, _starColor, new Vector2(j, i + 1));
+									} else {
+										starArray[i, j] = this;
+										starArray[i, j].pos = new Vector2(leftWallX + ((j) * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (ceilingY + (i) * (_texture.Height-10)));
+										CheckRemoveBubble(starArray, _starColor, new Vector2(j, i + 1));
+									}
+								}
 							} else {
-								starArray[(i + 1), j] = this;
-								starArray[(i + 1), j].pos = new Vector2(leftWallX + (j * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (ceilingY + (i + 1) * (_texture.Height-10)));
+								if(starArray[i + 1, j] == null){
+									starArray[(i + 1), j] = this;
+									starArray[(i + 1), j].pos = new Vector2(leftWallX + (j * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (ceilingY + (i + 1) * (_texture.Height-10)));
+									CheckRemoveBubble(starArray, _starColor, new Vector2(j, i + 1));
+								} else {
+									starArray[(i), j] = this;
+									starArray[(i), j].pos = new Vector2(leftWallX + (j * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (ceilingY + (i) * (_texture.Height-10)));
+									CheckRemoveBubble(starArray, _starColor, new Vector2(j, i));
+								}
 							}
 						}
 						IsActive = false;
+						if(Singleton.Instance.RemovableStar.Count >= 3){
+							starArray = CheckLeftOver(starArray);
+						}
+						else if (Singleton.Instance.RemovableStar.Count > 0) {
+							foreach (Vector2 v in Singleton.Instance.RemovableStar) {
+								starArray[(int)v.Y, (int)v.X] = new Star(_texture) {
+								pos = new Vector2(leftWallX + (v.X * _texture.Width) + ((v.Y) % 2 == 0 ? 0 : _texture.Width / 2), (ceilingY + (v.Y) * (_texture.Height-10))),
+								_starColor = _starColor,
+								IsActive = false
+							};
+							// starArray[(int)v.Y, (int)v.X] = null;
+							}
+						}
+						// Clear Removable star
+						Singleton.Instance.RemovableStar.Clear();
 						Singleton.Instance.IsShooting = false;
 						return;
 					}
@@ -90,7 +154,61 @@ namespace StarCollector.GameObjects {
 		}
 		
 		public Vector2 GetMiddleOfStar(Vector2 star){
-			return new Vector2(star.X + 50 , star.Y + 50);
+			return new Vector2(star.X + 50 , star.Y + 50 );
+		}
+
+		public Star[,] CheckLeftOver(Star[,] starArray){
+			for(int i = 1 ; i < starArray.GetLength(0) ; i++){
+                for(int j = 0 ; j < starArray.GetLength(1) ; j++){
+					if(!StarIsEmpty(starArray[i,j])){
+						if( (i % 2) == 0){
+							if(j == 0 ){
+								if(starArray[i-1,j] == null){
+									starArray[i,j] = null;
+								}
+							} else {
+								if(starArray[i-1,j] == null && starArray[i-1,j - 1] == null){
+									starArray[i,j] = null;
+								}
+							}
+						} else {
+							if(j == starArray.GetLength(1) - 1){
+								if(starArray[i-1,j] == null){
+									starArray[i,j] = null;
+								}
+							} else {
+								if(starArray[i-1,j] == null && starArray[i-1,j + 1] == null){
+									starArray[i,j] = null;
+								}
+							}
+						}
+					}
+                }
+            }
+
+			return starArray;
+		}
+
+		public void CheckRemoveBubble(Star[,] starArray, Color targetColor, Vector2 star) {
+			if ((star.X >= 0 && star.Y >= 0) && (star.X <= 7 && star.Y <= starArray.GetLength(1)) && starArray[(int)star.Y, (int)star.X] != null && starArray[(int)star.Y, (int)star.X]._starColor == targetColor) {
+				Singleton.Instance.RemovableStar.Add(star);
+				starArray[(int)star.Y, (int)star.X] = null;
+			} else {
+				return;
+			}
+			CheckRemoveBubble(starArray, targetColor, new Vector2(star.X + 1, star.Y)); // Right
+			CheckRemoveBubble(starArray, targetColor, new Vector2(star.X - 1, star.Y)); // Left
+			if (star.Y % 2 == 0) {
+				CheckRemoveBubble(starArray, targetColor, new Vector2(star.X, star.Y - 1)); // Top Right
+				CheckRemoveBubble(starArray, targetColor, new Vector2(star.X - 1, star.Y - 1)); // Top Left
+				CheckRemoveBubble(starArray, targetColor, new Vector2(star.X, star.Y + 1)); // Bot Right
+				CheckRemoveBubble(starArray, targetColor, new Vector2(star.X - 1, star.Y + 1)); // Bot Left
+			} else {
+				CheckRemoveBubble(starArray, targetColor, new Vector2(star.X + 1, star.Y - 1)); // Top Right
+				CheckRemoveBubble(starArray, targetColor, new Vector2(star.X, star.Y - 1)); // Top Left
+				CheckRemoveBubble(starArray, targetColor, new Vector2(star.X + 1, star.Y + 1)); // Bot Right
+				CheckRemoveBubble(starArray, targetColor, new Vector2(star.X, star.Y + 1)); // Bot 		}
+			}
 		}
 		public bool StarIsCollide(Vector2 currentPos , Vector2 starPos){
 			return (int)Math.Sqrt(Math.Pow(currentPos.X - starPos.X, 2) + Math.Pow(currentPos.Y - starPos.Y, 2)) <= starDelimeter;
@@ -106,17 +224,8 @@ namespace StarCollector.GameObjects {
 			base.Draw(_spriteBatch);
 		}
 
-		public int CheckCollision(Star other) {
-			return 0;
-		}
-
 		public bool IsRemoveable(Star[,] StarArray, Color TargetColor, Vector2 current){
-			
-		}
-
-		
-		public void CheckRemoveBubble(Star[,] gameObjects, Color ColorTarget, Vector2 me) {
-            
+			return false;
 		}
 	}
 }

@@ -69,7 +69,7 @@ namespace StarCollector.GameObjects {
 			}
 		}
 		// Random Color
-		public Color GetRandomColor() {
+		 public Color GetRandomColor() {
 			Color _starColor = Color.Black;
 			switch (random.Next(0, 6)) {
 				case 0:
