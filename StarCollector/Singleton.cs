@@ -13,6 +13,7 @@ namespace StarCollector
 		public bool IsShooting;
         private static Singleton instance;
 		// Export Instance
+		public int Score = 0;
 		public static Singleton Instance
 		{
 			get

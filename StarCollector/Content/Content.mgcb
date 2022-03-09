@@ -308,6 +308,13 @@
 /processorParam:TextureFormat=Color
 /build:MenuScreen/start_button_hover.png
 
+#begin score.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:score.spritefont
+
 #begin Sound/PopCat.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

@@ -29,6 +29,7 @@ namespace StarCollector.GameObjects {
 				pos += Velocity * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
 				// send flying star to process collision
 				DetectCollision(starArray);
+
 				// If ball reach top ceiling
 				if (pos.Y <= 30) {
 					IsActive = false;
@@ -132,6 +133,7 @@ namespace StarCollector.GameObjects {
 						}
 						IsActive = false;
 						if(Singleton.Instance.RemovableStar.Count >= 3){
+							Singleton.Instance.Score += Singleton.Instance.RemovableStar.Count * 10;
 							starArray = CheckLeftOver(starArray);
 						}
 						else if (Singleton.Instance.RemovableStar.Count > 0) {

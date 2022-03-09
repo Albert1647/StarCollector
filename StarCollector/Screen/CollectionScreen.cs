@@ -18,7 +18,7 @@ namespace StarCollector.Screen
 		private bool showWarbOnedraw, showWarbTwodraw, showWarbThreedraw, showWarbFourdraw, showWarbFivedraw, showWarbSixdraw ;
 		public void Initial()
 		{
-
+			
 		}
 		public override void LoadContent()
 		{

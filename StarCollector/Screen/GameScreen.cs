@@ -16,7 +16,7 @@ namespace StarCollector.Screen {
         private Random random = new Random();
 		public Star[,] star = new Star[9,8];
 
-		private SpriteFont Arial;
+		private SpriteFont Arial,scoreFont;
         private int startLengthRow = 3;
 
         private int ceilingY = 30;
@@ -46,6 +46,7 @@ namespace StarCollector.Screen {
             // Load Resource
             base.LoadContent();
 			Arial = Content.Load<SpriteFont>("Arial");
+            scoreFont = Content.Load<SpriteFont>("score");
             GunTexture = Content.Load<Texture2D>("gameScreen/gun");
 			StarTexture = Content.Load<Texture2D>("gameScreen/star");
 			Indicator = Content.Load<Texture2D>("gameScreen/indicator");
@@ -82,6 +83,9 @@ namespace StarCollector.Screen {
             }
             // draw gun
 			gun.Draw(_spriteBatch);
+
+            // draw score
+            _spriteBatch.DrawString(scoreFont, "score  " + Singleton.Instance.Score, new Vector2(50, 50), Color.Black);
         }
 
         public Color GetRandomColor() {
