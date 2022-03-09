@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace StarCollector.Screen {
     class GameScreen : _GameScreen {
-		private Texture2D GunTexture,StarTexture,Indicator,BG;
+		private Texture2D GunTexture,StarTexture,Indicator,BG,StarDiscover;
 		private Gun gun;
         private Random random = new Random();
 		public Star[,] star = new Star[11,8];
@@ -23,6 +23,7 @@ namespace StarCollector.Screen {
 
         private int leftWallX = 326;
         // private int rightWallX = 600;
+        private bool gameComplete;
 
         public void Initial() {
 			// Instantiate gun on start GameScreen 
@@ -31,19 +32,74 @@ namespace StarCollector.Screen {
 				_gunColor = Color.White
             };
 
-             // switch(Singleton.Instance.currentLevel){
-            //     case 1:
-            //         for(int i = 0 ; i < 3; i++){
-            //         for(int j = 0 ; j < star.GetLength(1) ; j++){
-            //             star[i,j] = new Star(StarTexture){
-            //                 IsActive = false,
-            //                 pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
-            //                 _starColor = GetRandomColor()
-            //             };
-            //         }
-            //     }
-            //     break;
-            // }
+             switch(Singleton.Instance.currentLevel){
+                case 1:
+                    for(int i = 0 ; i < 3; i++){
+                    for(int j = 0 ; j < star.GetLength(1) ; j++){
+                        star[i,j] = new Star(StarTexture){
+                            IsActive = false,
+                            pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
+                            _starColor = GetRandomColor()
+                        };
+                    }
+                }
+                break;
+                case 2:
+                    for(int i = 0 ; i < 3; i++){
+                    for(int j = 0 ; j < star.GetLength(1) ; j++){
+                        star[i,j] = new Star(StarTexture){
+                            IsActive = false,
+                            pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
+                            _starColor = GetRandomColor()
+                        };
+                    }
+                }
+                break;
+                case 3:
+                    for(int i = 0 ; i < 4; i++){
+                    for(int j = 0 ; j < star.GetLength(1) ; j++){
+                        star[i,j] = new Star(StarTexture){
+                            IsActive = false,
+                            pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
+                            _starColor = GetRandomColor()
+                        };
+                    }
+                }
+                break;
+                case 4:
+                    for(int i = 0 ; i < 5; i++){
+                    for(int j = 0 ; j < star.GetLength(1) ; j++){
+                        star[i,j] = new Star(StarTexture){
+                            IsActive = false,
+                            pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
+                            _starColor = GetRandomColor()
+                        };
+                    }
+                }
+                break;
+                case 5:
+                    for(int i = 0 ; i < 6; i++){
+                    for(int j = 0 ; j < star.GetLength(1) ; j++){
+                        star[i,j] = new Star(StarTexture){
+                            IsActive = false,
+                            pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
+                            _starColor = GetRandomColor()
+                        };
+                    }
+                }
+                break;
+                case 6:
+                    for(int i = 0 ; i < 7; i++){
+                    for(int j = 0 ; j < star.GetLength(1) ; j++){
+                        star[i,j] = new Star(StarTexture){
+                            IsActive = false,
+                            pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
+                            _starColor = GetRandomColor()
+                        };
+                    }
+                }
+                break;
+            }
 
             // Original
             for(int i = 0 ; i < startLengthRow ; i++){
@@ -66,6 +122,27 @@ namespace StarCollector.Screen {
 			StarTexture = Content.Load<Texture2D>("gameScreen/star");
 			Indicator = Content.Load<Texture2D>("gameScreen/indicator");
 			BG = Content.Load<Texture2D>("gameScreen/ingame_bg");
+            
+            switch(Singleton.Instance.currentLevel){
+                            case 1:
+                                StarDiscover = Content.Load<Texture2D>("gameScreen/star_in_discover");
+                            break;
+                            case 2:
+                                StarDiscover = Content.Load<Texture2D>("gameScreen/gun");
+                            break;
+                            case 3:
+                                StarDiscover = Content.Load<Texture2D>("gameScreen/star_in_discover");
+                            break;
+                            case 4:
+                                StarDiscover = Content.Load<Texture2D>("gameScreen/star_in_discover");
+                            break;
+                            case 5:
+                                StarDiscover = Content.Load<Texture2D>("gameScreen/star_in_discover");
+                            break;
+                            case 6:
+                                StarDiscover = Content.Load<Texture2D>("gameScreen/star_in_discover");
+                            break;
+            }
             Initial();
         }
         public override void UnloadContent() {
@@ -102,9 +179,18 @@ namespace StarCollector.Screen {
                 for(int j = 0 ; j < star.GetLength(1) ; j++){
                     if (star[i, j] != null){
                         gameWin = false;
-                    }
+                    } 
                 }
             }
+            if (gameWin == true) {                       
+                if (Singleton.Instance.currentLevel < 6 )
+                    {
+                        Singleton.Instance.currentLevel += 1;
+                        ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.GameScreen);
+                    } else {
+                        gameComplete = true;
+                    }                        
+                }
             // update/load gun logic
 			gun.Update(gameTime, star);
             base.Update(gameTime);
@@ -129,6 +215,12 @@ namespace StarCollector.Screen {
 
             // draw score
             _spriteBatch.DrawString(scoreFont, "score  " + Singleton.Instance.Score, new Vector2(50, 50), Color.Black);
+
+            // check level
+            _spriteBatch.DrawString(Arial, "level = " + Singleton.Instance.currentLevel, new Vector2(0, 300), Color.Black);
+
+            _spriteBatch.Draw(StarDiscover, new Vector2(1120, 110),Color.White);
+
         }
 
         public Color GetRandomColor() {

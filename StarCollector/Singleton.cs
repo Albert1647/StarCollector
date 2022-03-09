@@ -12,7 +12,7 @@ namespace StarCollector
 		public MouseState MousePrevious, MouseCurrent;
 		public bool IsShooting;
 		public int Score = 0;
-		public int currentLevel = 1;
+		public int currentLevel = 2;
 		public List<Color> starColor = new List<Color>();
 		public int oldCeilingY = 30;
 		public int ceilingY = 30;
