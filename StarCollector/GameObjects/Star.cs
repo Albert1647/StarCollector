@@ -196,7 +196,7 @@ namespace StarCollector.GameObjects {
 		}
 
 		public void CheckRemoveBubble(Star[,] starArray, Color targetColor, Vector2 star) {
-			if ((star.X >= 0 && star.Y >= 0) && (star.X <= starArray.GetLength(1) && star.Y <= starArray.GetLength(0)) && starArray[(int)star.Y, (int)star.X] != null && starArray[(int)star.Y, (int)star.X]._starColor == targetColor) {
+			if ((star.X >= 0 && star.Y >= 0) && (star.X <= starArray.GetLength(1) - 1 && star.Y <= starArray.GetLength(0) - 1) && starArray[(int)star.Y, (int)star.X] != null && starArray[(int)star.Y, (int)star.X]._starColor == targetColor) {
 				Singleton.Instance.RemovableStar.Add(star);
 				starArray[(int)star.Y, (int)star.X] = null;
 			} else {
