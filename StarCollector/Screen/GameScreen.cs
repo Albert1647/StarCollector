@@ -19,8 +19,6 @@ namespace StarCollector.Screen {
 		private SpriteFont Arial,scoreFont;
         private int startLengthRow = 3;
 
-        private int ceilingY = 30;
-
         private int leftWallX = 326;
         // private int rightWallX = 600;
 
@@ -35,7 +33,7 @@ namespace StarCollector.Screen {
                 for(int j = 0 ; j < star.GetLength(1) ; j++){
                     star[i,j] = new Star(StarTexture){
                         IsActive = false,
-                        pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (ceilingY + (i * (StarTexture.Height-10)))),
+                        pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
                         _starColor = GetRandomColor()
                     };
                 }
