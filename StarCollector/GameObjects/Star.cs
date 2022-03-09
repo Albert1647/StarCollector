@@ -9,7 +9,7 @@ namespace StarCollector.GameObjects {
 	public class Star : _GameObject {
 		public float Speed;
 		public float Angle;
-		public bool IsActive;
+		public  bool IsActive;
 		public Vector2 Velocity;
 		public Color _starColor;
 		//define star delimiter
