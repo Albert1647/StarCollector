@@ -188,6 +188,10 @@ namespace StarCollector.Screen {
                         Singleton.Instance.currentLevel += 1;
                         Singleton.Instance.ceilingY = 30;
                         Singleton.Instance.oldCeilingY = 30;
+                        if(Singleton.Instance.clearStar < 6)
+                        {
+                            Singleton.Instance.clearStar += 1;
+                        }
                         ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.GameScreen);
                     } else {
                         gameComplete = true;

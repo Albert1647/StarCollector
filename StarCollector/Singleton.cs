@@ -18,6 +18,7 @@ namespace StarCollector
 		public List<Color> starColor = new List<Color>();
 		public int oldCeilingY = 30;
 		public int ceilingY = 30;
+		public int clearStar = 0;
 
 		public Color GetColor(){
 			List<Color> color = new List<Color>();
