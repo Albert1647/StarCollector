@@ -12,13 +12,13 @@ namespace StarCollector.Screen
 	{
 		private SpriteFont Arial;
 		private Texture2D squareBG, leave;
-		private Texture2D question, warpOne, warpTwo, warpThree, warpFour, warpFive , warpSix;
+		private Texture2D question, warpOne, warpTwo, warpThree, warpFour, warpFive, warpSix;
 		private Texture2D detailsWarpOne, detailsWarpTwo, detailsWarpThree, detailsWarpFour, detailsWarpFive, detailsWarpSix;
-		private bool showWarbOne, showWarbTwo , showWarbThree , showWarbFour, showWarbFive, showWarbSix ;
-		private bool showWarbOnedraw, showWarbTwodraw, showWarbThreedraw, showWarbFourdraw, showWarbFivedraw, showWarbSixdraw ;
+		private bool showWarbOne, showWarbTwo, showWarbThree, showWarbFour, showWarbFive, showWarbSix;
+		private bool showWarbOnedraw, showWarbTwodraw, showWarbThreedraw, showWarbFourdraw, showWarbFivedraw, showWarbSixdraw;
 		public void Initial()
 		{
-			
+
 		}
 		public override void LoadContent()
 		{
@@ -54,131 +54,151 @@ namespace StarCollector.Screen
 			Singleton.Instance.MouseCurrent = Mouse.GetState();
 
 			// Leave to menu
-			if (MouseOnElement(1140,1204,70,135))
-			{
-				if(IsClick()){
-                    ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
-                }
-			}
-			
-			//if(passStarOne)
-			// Click WarbOne
-			if (MouseOnElement(141,341,157,357))
+			if (MouseOnElement(1140, 1204, 70, 135))
 			{
 				if (IsClick())
 				{
-					showWarbOne = true;
-				}	
-			}
-			// Leave to showWarbOne
-			if (MouseOnElement(1140,1204,70,135) && showWarbOne)
-			{	
-				showWarbOnedraw=true;
-				if(IsClick())
-				{
-                    ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
-					showWarbOnedraw = false;
+					ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
 				}
 			}
 
-			//if(passStarTwo)
-			// Click WarbTwo
-			if (MouseOnElement(540, 740, 157, 357))
+			//unlock star 1 when win
+			if (Singleton.Instance.clearStar > 0)
 			{
-				if (IsClick())
+				// Click WarbOne
+				if (MouseOnElement(141, 341, 157, 357))
 				{
-					showWarbTwo = true;
+					if (IsClick())
+					{
+						showWarbOne = true;
+					}
 				}
-			}
-			// Leave to showWarbTwo
-			if (MouseOnElement(1140, 1204, 70, 135) && showWarbTwo)
-			{
-				showWarbTwodraw = true;
-				if (IsClick())
+				// Leave to showWarbOne
+				if (MouseOnElement(1140, 1204, 70, 135) && showWarbOne)
 				{
-					ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
-					showWarbTwodraw = false;
-				}
-			}
-
-			//if(passStarThree)
-			// Click WarbThree
-			if (MouseOnElement(939, 1139, 157, 357))
-			{
-				if (IsClick())
-				{
-					showWarbThree = true;
-				}
-			}
-			// Leave to showWarbThree
-			if (MouseOnElement(1140, 1204, 70, 135) && showWarbThree)
-			{
-				showWarbThreedraw = true;
-				if (IsClick())
-				{
-					ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
-					showWarbThreedraw = false;
+					showWarbOnedraw = true;
+					if (IsClick())
+					{
+						ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
+						showWarbOnedraw = false;
+					}
 				}
 			}
 
-			//if(passStarFour)
-			// Click WarbFour
-			if (MouseOnElement(141, 341, 407, 607))
+			//unlock star 2 when win
+			if (Singleton.Instance.clearStar > 1)
 			{
-				if (IsClick())
+				// Click WarbTwo
+				if (MouseOnElement(540, 740, 157, 357))
 				{
-					showWarbFour = true;
+					if (IsClick())
+					{
+						showWarbTwo = true;
+					}
 				}
-			}
-			// Leave to showWarbThree
-			if (MouseOnElement(1140, 1204, 70, 135) && showWarbFour)
-			{
-				showWarbFourdraw = true;
-				if (IsClick())
+				// Leave to showWarbTwo
+				if (MouseOnElement(1140, 1204, 70, 135) && showWarbTwo)
 				{
-					ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
-					showWarbFourdraw = false;
-				}
-			}
-
-			//if(passStarFive)
-			// Click WarbFive
-			if (MouseOnElement(540, 740, 407, 607))
-			{
-				if (IsClick())
-				{
-					showWarbFive = true;
-				}
-			}
-			// Leave to showWarbFive
-			if (MouseOnElement(1140, 1204, 70, 135) && showWarbFive)
-			{
-				showWarbFivedraw = true;
-				if (IsClick())
-				{
-					ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
-					showWarbFivedraw = false;
-				}
-			}
-			//if(passStarSix)
-			if (MouseOnElement(939, 1139, 407, 607))
-			{
-				if (IsClick())
-				{
-					showWarbSix = true;
-				}
-			}
-			// Leave to showWarbFive
-			if (MouseOnElement(1140, 1204, 70, 135) && showWarbSix)
-			{
-				showWarbSixdraw = true;
-				if (IsClick())
-				{
-					ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
-					showWarbSixdraw = false;
+					showWarbTwodraw = true;
+					if (IsClick())
+					{
+						ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
+						showWarbTwodraw = false;
+					}
 				}
 			}
 
+			//unlock star 3 when win
+			if (Singleton.Instance.clearStar > 2)
+			{
+				// Click WarbThree
+				if (MouseOnElement(939, 1139, 157, 357))
+				{
+					if (IsClick())
+					{
+						showWarbThree = true;
+					}
+				}
+				// Leave to showWarbThree
+				if (MouseOnElement(1140, 1204, 70, 135) && showWarbThree)
+				{
+					showWarbThreedraw = true;
+					if (IsClick())
+					{
+						ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
+						showWarbThreedraw = false;
+					}
+				}
+			}
+
+			//unlock star 4 when win
+			if (Singleton.Instance.clearStar > 3)
+			{
+				// Click WarbFour
+				if (MouseOnElement(141, 341, 407, 607))
+				{
+					if (IsClick())
+					{
+						showWarbFour = true;
+					}
+				}
+				// Leave to showWarbThree
+				if (MouseOnElement(1140, 1204, 70, 135) && showWarbFour)
+				{
+					showWarbFourdraw = true;
+					if (IsClick())
+					{
+						ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
+						showWarbFourdraw = false;
+					}
+				}
+			}
+
+			//unlock star 5 when win
+			if (Singleton.Instance.clearStar > 4)
+			{
+				// Click WarbFive
+				if (MouseOnElement(540, 740, 407, 607))
+				{
+					if (IsClick())
+					{
+						showWarbFive = true;
+					}
+				}
+				// Leave to showWarbFive
+				if (MouseOnElement(1140, 1204, 70, 135) && showWarbFive)
+				{
+					showWarbFivedraw = true;
+					if (IsClick())
+					{
+						ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
+						showWarbFivedraw = false;
+					}
+				}
+			}
+
+
+			//unlock star 6 when win
+			if (Singleton.Instance.clearStar > 5)
+			{
+				if (MouseOnElement(939, 1139, 407, 607))
+				{
+					if (IsClick())
+					{
+						showWarbSix = true;
+					}
+				}
+				// Leave to showWarbFive
+				if (MouseOnElement(1140, 1204, 70, 135) && showWarbSix)
+				{
+					showWarbSixdraw = true;
+					if (IsClick())
+					{
+						ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
+						showWarbSixdraw = false;
+					}
+				}
+			}
 
 			base.Update(gameTime);
 		}
@@ -188,20 +208,44 @@ namespace StarCollector.Screen
 			_spriteBatch.Draw(squareBG, new Rectangle(50, 50, 1280 - 100, 720 - 100), Color.White);
 			//Draw Leave Button
 			_spriteBatch.Draw(leave, new Rectangle(1140, 70, leave.Width, leave.Height), Color.White);
-			//Draw Star
-			_spriteBatch.Draw(warpOne, new Rectangle(141, 157, warpOne.Width, warpOne.Height), Color.White);
-			_spriteBatch.Draw(warpTwo, new Rectangle(540, 157, warpTwo.Width, warpTwo.Height), Color.White);
-			_spriteBatch.Draw(warpThree, new Rectangle(939, 157, warpThree.Width, warpThree.Height), Color.White);
-			_spriteBatch.Draw(warpFour, new Rectangle(141, 407, warpFour.Width, warpFour.Height), Color.White);
-			_spriteBatch.Draw(warpFive, new Rectangle(540, 407, warpFive.Width, warpFive.Height), Color.White);
-			_spriteBatch.Draw(warpSix, new Rectangle(939, 407, warpSix.Width, warpSix.Height), Color.White);
 			//question
-			//_spriteBatch.Draw(question, new Rectangle(141, 157, question.Width, question.Height), Color.White);
-			//_spriteBatch.Draw(question, new Rectangle(540, 157, question.Width, question.Height), Color.White);
-			//_spriteBatch.Draw(question, new Rectangle(939, 157, question.Width, question.Height), Color.White);
-			//_spriteBatch.Draw(question, new Rectangle(141, 407, question.Width, question.Height), Color.White);
-			//_spriteBatch.Draw(question, new Rectangle(540, 407, question.Width, question.Height), Color.White);
-			//_spriteBatch.Draw(question, new Rectangle(939, 407, question.Width, question.Height), Color.White);
+			_spriteBatch.Draw(question, new Rectangle(141, 157, question.Width, question.Height), Color.White);
+			_spriteBatch.Draw(question, new Rectangle(540, 157, question.Width, question.Height), Color.White);
+			_spriteBatch.Draw(question, new Rectangle(939, 157, question.Width, question.Height), Color.White);
+			_spriteBatch.Draw(question, new Rectangle(141, 407, question.Width, question.Height), Color.White);
+			_spriteBatch.Draw(question, new Rectangle(540, 407, question.Width, question.Height), Color.White);
+			_spriteBatch.Draw(question, new Rectangle(939, 407, question.Width, question.Height), Color.White);
+			//Draw Star
+			//draw star 1 when win
+			if (Singleton.Instance.clearStar > 0)
+			{
+				_spriteBatch.Draw(warpOne, new Rectangle(141, 157, warpOne.Width, warpOne.Height), Color.White);
+			}
+			//draw star 2 when win
+			if (Singleton.Instance.clearStar > 1)
+			{
+				_spriteBatch.Draw(warpTwo, new Rectangle(540, 157, warpTwo.Width, warpTwo.Height), Color.White);
+			}
+			//draw star 3 when win
+			if (Singleton.Instance.clearStar > 2)
+			{
+				_spriteBatch.Draw(warpThree, new Rectangle(939, 157, warpThree.Width, warpThree.Height), Color.White);
+			}
+			//draw star 4 when win
+			if (Singleton.Instance.clearStar > 3)
+			{
+				_spriteBatch.Draw(warpFour, new Rectangle(141, 407, warpFour.Width, warpFour.Height), Color.White);
+			}
+			//draw star 5 when win
+			if (Singleton.Instance.clearStar > 4)
+			{
+				_spriteBatch.Draw(warpFive, new Rectangle(540, 407, warpFive.Width, warpFive.Height), Color.White);
+			}
+			//draw star 6 when win
+			if (Singleton.Instance.clearStar > 5)
+			{
+				_spriteBatch.Draw(warpSix, new Rectangle(939, 407, warpSix.Width, warpSix.Height), Color.White);
+			}
 
 			//mouse
 			_spriteBatch.DrawString(Arial, "X = " + Singleton.Instance.MouseCurrent.X, new Vector2(0, 0), Color.Black);
@@ -211,7 +255,7 @@ namespace StarCollector.Screen
 
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-			// Draw showWarbOne Screen
+			// details Star 1
 			if (showWarbOne)
 			{
 				//Draw details Star 1
@@ -219,55 +263,59 @@ namespace StarCollector.Screen
 				//Draw Leave Button
 				_spriteBatch.Draw(leave, new Rectangle(1140, 70, leave.Width, leave.Height), Color.White);
 			}
-			// Draw showWarbOne Screen
+			// details Star 2
 			if (showWarbTwo)
 			{
-				//Draw details Star 1
+				//Draw details Star 2
 				_spriteBatch.Draw(detailsWarpTwo, new Rectangle(57, 57, 1280 - 114, 720 - 114), Color.White);
 				//Draw Leave Button
 				_spriteBatch.Draw(leave, new Rectangle(1140, 70, leave.Width, leave.Height), Color.White);
 			}
-			// Draw showWarbOne Screen
+			// details Star 3
 			if (showWarbThree)
 			{
-				//Draw details Star 1
+				//Draw details Star 3
 				_spriteBatch.Draw(detailsWarpThree, new Rectangle(57, 57, 1280 - 114, 720 - 114), Color.White);
 				//Draw Leave Button
 				_spriteBatch.Draw(leave, new Rectangle(1140, 70, leave.Width, leave.Height), Color.White);
 			}
+			// details Star 4
 			if (showWarbFour)
 			{
-				//Draw details Star 1
+				//Draw details Star 4
 				_spriteBatch.Draw(detailsWarpFour, new Rectangle(57, 57, 1280 - 114, 720 - 114), Color.White);
 				//Draw Leave Button
 				_spriteBatch.Draw(leave, new Rectangle(1140, 70, leave.Width, leave.Height), Color.White);
 			}
+			//details Star 5
 			if (showWarbFive)
 			{
-				//Draw details Star 1
+				//Draw details Star 5
 				_spriteBatch.Draw(detailsWarpFive, new Rectangle(57, 57, 1280 - 114, 720 - 114), Color.White);
 				//Draw Leave Button
 				_spriteBatch.Draw(leave, new Rectangle(1140, 70, leave.Width, leave.Height), Color.White);
 			}
+			//details Star 6
 			if (showWarbSix)
 			{
-				//Draw details Star 1
+				//Draw details Star 6
 				_spriteBatch.Draw(detailsWarpSix, new Rectangle(57, 57, 1280 - 114, 720 - 114), Color.White);
 				//Draw Leave Button
 				_spriteBatch.Draw(leave, new Rectangle(1140, 70, leave.Width, leave.Height), Color.White);
 			}
 			_spriteBatch.DrawString(Arial, "Mouse on Start ?  " + showWarbOnedraw, new Vector2(0, 80), Color.Black);
-			
-			
+
+
 		}
 		// helper function to shorten singleton calling
 		public bool IsClick()
 		{
 			return Singleton.Instance.MouseCurrent.LeftButton == ButtonState.Pressed && Singleton.Instance.MousePrevious.LeftButton == ButtonState.Released;
 		}
-		public bool MouseOnElement(int x1, int x2, int y1, int y2){
-            return (Singleton.Instance.MouseCurrent.X > x1 && Singleton.Instance.MouseCurrent.Y > y1) && (Singleton.Instance.MouseCurrent.X < x2 && Singleton.Instance.MouseCurrent.Y < y2);
-        }
+		public bool MouseOnElement(int x1, int x2, int y1, int y2)
+		{
+			return (Singleton.Instance.MouseCurrent.X > x1 && Singleton.Instance.MouseCurrent.Y > y1) && (Singleton.Instance.MouseCurrent.X < x2 && Singleton.Instance.MouseCurrent.Y < y2);
+		}
 	}
-	
+
 }
