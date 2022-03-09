@@ -19,7 +19,7 @@ namespace StarCollector.Screen {
 		private SpriteFont Arial,scoreFont;
         private int startLengthRow = 3;
 
-        private bool gameOver;
+        private bool gameOver,gameWin;
 
         private int leftWallX = 326;
         // private int rightWallX = 600;
@@ -82,6 +82,14 @@ namespace StarCollector.Screen {
                     }
                 }
             }
+            gameWin = true;
+            for(int i = 0 ; i < star.GetLength(0) ; i++){
+                for(int j = 0 ; j < star.GetLength(1) ; j++){
+                    if (star[i, j] != null){
+                        gameWin = false;
+                    }
+                }
+            }
             // update/load gun logic
 			gun.Update(gameTime, star);
             base.Update(gameTime);
@@ -93,6 +101,7 @@ namespace StarCollector.Screen {
 			_spriteBatch.DrawString(Arial, "Is Shooting = " + Singleton.Instance.IsShooting , new Vector2(0,60), Color.Black);
             _spriteBatch.DrawString(Arial, "Ceiling = " + Singleton.Instance.ceilingY, new Vector2(0, 160), Color.Black);
             _spriteBatch.DrawString(Arial, "game is over ?????? = " + gameOver, new Vector2(0, 180), Color.Black);
+            _spriteBatch.DrawString(Arial, "game is win ?????? = " + gameWin, new Vector2(0, 200), Color.Black);
             // draw star
             for (int i = 0; i < star.GetLength(0); i++) {
                 for (int j = 0; j < star.GetLength(1); j++) {
