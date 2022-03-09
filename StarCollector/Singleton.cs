@@ -11,6 +11,7 @@ namespace StarCollector
         public Vector2 Dimension = new Vector2(1280, 720);
 		public List<Vector2> RemovableStar = new List<Vector2>();
 		public MouseState MousePrevious, MouseCurrent;
+		private Random random = new Random();
 		public bool IsShooting;
 		public int Score = 0;
 		public int currentLevel = 2;
