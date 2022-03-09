@@ -14,7 +14,7 @@ namespace StarCollector
 		private Random random = new Random();
 		public bool IsShooting;
 		public int Score = 0;
-		public int currentLevel = 6;
+		public int currentLevel = 1;
 		public List<Color> starColor = new List<Color>();
 		public int oldCeilingY = 30;
 		public int ceilingY = 30;
