@@ -14,37 +14,41 @@ namespace StarCollector
 		private Random random = new Random();
 		public bool IsShooting;
 		public int Score = 0;
-		public int currentLevel = 2;
+		public int currentLevel = 6;
 		public List<Color> starColor = new List<Color>();
 		public int oldCeilingY = 30;
 		public int ceilingY = 30;
 
+		public int STARHITBOX = 74;
+
 		public Color GetColor(){
 			List<Color> color = new List<Color>();
 			color.Add(new Color(255 ,85, 85));
-			color.Add(Color.Blue);
-			color.Add(Color.Green);
-			color.Add(Color.Yellow);
+			color.Add(new Color(64, 64, 184));
+			color.Add(new Color(72, 200, 72));
+			color.Add(new Color(255, 255, 25));
 			switch(Singleton.Instance.currentLevel){
 				case 1 : case 2 : 
 					break;
 				case 3 : 
-					color.Add(Color.Purple);
+					color.Add(new Color(149, 85, 213));
 					break;
 				case 4 : case 5 : 
-					color.Add(Color.Purple);
-					color.Add(Color.White);
+					color.Add(new Color(149, 85, 213));
+					color.Add(new Color(255, 255, 255));
 					break;
 				case 6 :
-					color.Add(Color.Purple);
-					color.Add(Color.White);
-					color.Add(Color.SkyBlue);
+					color.Add(new Color(149, 85, 213));
+					color.Add(new Color(255, 255, 255));
+					color.Add(new Color(72, 136, 200));
 					break;
 				default :
 					break;
 			}
 			return color[random.Next(0, color.Count)];
 		}
+
+		
 		// Export Instance
         private static Singleton instance;
 		public static Singleton Instance

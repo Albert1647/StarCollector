@@ -39,7 +39,7 @@ namespace StarCollector.GameObjects {
 						pos = new Vector2(Singleton.Instance.Dimension.X / 2 - starTexture.Width / 2, 700 - starTexture.Height),
 						Angle = aimAngle + MathHelper.Pi,
 						_starColor = _starColor,
-						Speed = 2000,
+						Speed = 1000,
 						IsActive = true
 					};
 					// update starColor in board

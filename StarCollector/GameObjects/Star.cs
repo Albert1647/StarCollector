@@ -60,8 +60,8 @@ namespace StarCollector.GameObjects {
 						// if hit bottom right of star
 						if (GetMiddleOfStar(pos).X >= GetMiddleOfStar(starArray[i, j].pos).X) {
 							if (i % 2 == 0) {
-								// last row of even row
-								if (j == starArray.GetLength(1) - 1) {	
+								// last row of even row	
+								if (j == starArray.GetLength(1)) {	
 									if(starArray[i + 1, j - 1] == null){
 										starArray[i + 1, j - 1] = this;
 										starArray[i + 1, j - 1].pos = new Vector2(leftWallX + ((j - 1) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i + 1) * (_texture.Height-10)));
@@ -160,7 +160,7 @@ namespace StarCollector.GameObjects {
 		}
 		
 		public Vector2 GetMiddleOfStar(Vector2 star){
-			return new Vector2(star.X + 50 , star.Y + 50 );
+			return new Vector2(star.X + 50  , star.Y  + 50);
 		}
 		// Check hanging star
 		public Star[,] CheckLeftOver(Star[,] starArray){
@@ -196,7 +196,7 @@ namespace StarCollector.GameObjects {
 		}
 
 		public void CheckRemoveBubble(Star[,] starArray, Color targetColor, Vector2 star) {
-			if ((star.X >= 0 && star.Y >= 0) && (star.X <= 7 && star.Y <= starArray.GetLength(1)) && starArray[(int)star.Y, (int)star.X] != null && starArray[(int)star.Y, (int)star.X]._starColor == targetColor) {
+			if ((star.X >= 0 && star.Y >= 0) && (star.X <= starArray.GetLength(1) && star.Y <= starArray.GetLength(0)) && starArray[(int)star.Y, (int)star.X] != null && starArray[(int)star.Y, (int)star.X]._starColor == targetColor) {
 				Singleton.Instance.RemovableStar.Add(star);
 				starArray[(int)star.Y, (int)star.X] = null;
 			} else {

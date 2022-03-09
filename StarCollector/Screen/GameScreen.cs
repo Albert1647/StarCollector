@@ -14,7 +14,9 @@ namespace StarCollector.Screen {
 		private Texture2D GunTexture,StarTexture,Indicator,BG,StarDiscover;
 		private Gun gun;
         private Random random = new Random();
-		public Star[,] star = new Star[11,8];
+
+        private float Timer = 0f;
+		public Star[,] star = new Star[23,8];
 
 		private SpriteFont Arial,scoreFont;
         private int startLengthRow = 3;
@@ -34,7 +36,9 @@ namespace StarCollector.Screen {
 
              switch(Singleton.Instance.currentLevel){
                 case 1:
-                    for(int i = 0 ; i < 3; i++){
+                    Singleton.Instance.ceilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
+                    Singleton.Instance.oldCeilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
+                    for(int i = 0 ; i < getRowOfCurrentLevel(); i++){
                     for(int j = 0 ; j < star.GetLength(1) ; j++){
                         star[i,j] = new Star(StarTexture){
                             IsActive = false,
@@ -45,7 +49,9 @@ namespace StarCollector.Screen {
                 }
                 break;
                 case 2:
-                    for(int i = 0 ; i < 3; i++){
+                    Singleton.Instance.ceilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
+                    Singleton.Instance.oldCeilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
+                    for(int i = 0 ; i < getRowOfCurrentLevel(); i++){
                     for(int j = 0 ; j < star.GetLength(1) ; j++){
                         star[i,j] = new Star(StarTexture){
                             IsActive = false,
@@ -56,7 +62,9 @@ namespace StarCollector.Screen {
                 }
                 break;
                 case 3:
-                    for(int i = 0 ; i < 4; i++){
+                    Singleton.Instance.ceilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
+                    Singleton.Instance.oldCeilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
+                    for(int i = 0 ; i < getRowOfCurrentLevel(); i++){
                     for(int j = 0 ; j < star.GetLength(1) ; j++){
                         star[i,j] = new Star(StarTexture){
                             IsActive = false,
@@ -67,7 +75,9 @@ namespace StarCollector.Screen {
                 }
                 break;
                 case 4:
-                    for(int i = 0 ; i < 5; i++){
+                    Singleton.Instance.ceilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
+                    Singleton.Instance.oldCeilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
+                    for(int i = 0 ; i < getRowOfCurrentLevel(); i++){
                     for(int j = 0 ; j < star.GetLength(1) ; j++){
                         star[i,j] = new Star(StarTexture){
                             IsActive = false,
@@ -78,7 +88,9 @@ namespace StarCollector.Screen {
                 }
                 break;
                 case 5:
-                    for(int i = 0 ; i < 6; i++){
+                    Singleton.Instance.ceilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
+                    Singleton.Instance.oldCeilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
+                    for(int i = 0 ; i < getRowOfCurrentLevel(); i++){
                     for(int j = 0 ; j < star.GetLength(1) ; j++){
                         star[i,j] = new Star(StarTexture){
                             IsActive = false,
@@ -89,7 +101,9 @@ namespace StarCollector.Screen {
                 }
                 break;
                 case 6:
-                    for(int i = 0 ; i < 7; i++){
+                    Singleton.Instance.ceilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
+                    Singleton.Instance.oldCeilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
+                    for(int i = 0 ; i < getRowOfCurrentLevel(); i++){
                     for(int j = 0 ; j < star.GetLength(1) ; j++){
                         star[i,j] = new Star(StarTexture){
                             IsActive = false,
@@ -98,18 +112,8 @@ namespace StarCollector.Screen {
                         };
                     }
                 }
-                break;
-            }
 
-            // Original
-            for(int i = 0 ; i < startLengthRow ; i++){
-                for(int j = 0 ; j < star.GetLength(1) ; j++){
-                    star[i,j] = new Star(StarTexture){
-                        IsActive = false,
-                        pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
-                        _starColor = Singleton.Instance.GetColor()
-                    };
-                }
+                break;
             }
         }
 
@@ -124,24 +128,24 @@ namespace StarCollector.Screen {
 			BG = Content.Load<Texture2D>("gameScreen/ingame_bg");
             
             switch(Singleton.Instance.currentLevel){
-                            case 1:
-                                StarDiscover = Content.Load<Texture2D>("gameScreen/star_in_discover");
-                            break;
-                            case 2:
-                                StarDiscover = Content.Load<Texture2D>("gameScreen/gun");
-                            break;
-                            case 3:
-                                StarDiscover = Content.Load<Texture2D>("gameScreen/star_in_discover");
-                            break;
-                            case 4:
-                                StarDiscover = Content.Load<Texture2D>("gameScreen/star_in_discover");
-                            break;
-                            case 5:
-                                StarDiscover = Content.Load<Texture2D>("gameScreen/star_in_discover");
-                            break;
-                            case 6:
-                                StarDiscover = Content.Load<Texture2D>("gameScreen/star_in_discover");
-                            break;
+                case 1:
+                    StarDiscover = Content.Load<Texture2D>("gameScreen/star_in_discover");
+                break;
+                case 2:
+                    StarDiscover = Content.Load<Texture2D>("gameScreen/gun");
+                break;
+                case 3:
+                    StarDiscover = Content.Load<Texture2D>("gameScreen/star_in_discover");
+                break;
+                case 4:
+                    StarDiscover = Content.Load<Texture2D>("gameScreen/star_in_discover");
+                break;
+                case 5:
+                    StarDiscover = Content.Load<Texture2D>("gameScreen/star_in_discover");
+                break;
+                case 6:
+                    StarDiscover = Content.Load<Texture2D>("gameScreen/star_in_discover");
+                break;
             }
             Initial();
         }
@@ -160,8 +164,14 @@ namespace StarCollector.Screen {
                     }
                 }
             }
+            // update/load gun logic
+			gun.Update(gameTime, star);
             Singleton.Instance.oldCeilingY = Singleton.Instance.ceilingY;
-
+            Timer += (float)gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
+            if(Timer >= getTimePerUpdate()){
+                Singleton.Instance.ceilingY += StarTexture.Height;
+                Timer -= getTimePerUpdate();
+            }
             // if star reach bottom boundary -> GameOver
             for(int i = 0 ; i < star.GetLength(0) ; i++){
                 for(int j = 0 ; j < star.GetLength(1) ; j++){
@@ -193,8 +203,7 @@ namespace StarCollector.Screen {
                         gameComplete = true;
                     }                        
                 }
-            // update/load gun logic
-			gun.Update(gameTime, star);
+            
             base.Update(gameTime);
         }
         public override void Draw(SpriteBatch _spriteBatch) {
@@ -205,6 +214,8 @@ namespace StarCollector.Screen {
             _spriteBatch.DrawString(Arial, "Ceiling = " + Singleton.Instance.ceilingY, new Vector2(0, 160), Color.Black);
             _spriteBatch.DrawString(Arial, "game is over ?????? = " + gameOver, new Vector2(0, 180), Color.Black);
             _spriteBatch.DrawString(Arial, "game is win ?????? = " + gameWin, new Vector2(0, 200), Color.Black);
+            _spriteBatch.DrawString(Arial, "Time : " + Timer.ToString("F"), new Vector2(20, 260), Color.Black);
+
             // draw star
             for (int i = 0; i < star.GetLength(0); i++) {
                 for (int j = 0; j < star.GetLength(1); j++) {
@@ -223,6 +234,61 @@ namespace StarCollector.Screen {
 
             _spriteBatch.Draw(StarDiscover, new Vector2(1120, 110),Color.White);
 
+        }
+        public int GetStartCeilingY(int row, int show){
+			return ((Singleton.Instance.STARHITBOX * show) + 30) - (row * (Singleton.Instance.STARHITBOX));
+		}
+
+
+        public float getTimePerUpdate(){
+            switch(Singleton.Instance.currentLevel){
+                case 1:
+                    return 12f;
+                case 2:
+                    return 12f;
+                case 3:
+                    return 10f;
+                case 4:
+                    return 10f;
+                case 5:
+                    return 9f;
+                case 6:
+                    return 9f;
+                default:
+                    return 12f;
+            }
+        }
+        public int getRowOfCurrentLevel(){
+            switch(Singleton.Instance.currentLevel){
+                case 1:
+                    return 8;
+                case 2:
+                    return 10;
+                case 3:
+                    return 11;
+                case 4:
+                    return 13;
+                case 5:
+                    return 14;
+                case 6:
+                    return 16;
+                default:
+                    return 8;
+            }
+        }
+        public int getShowRowOfCurrentLevel(){
+            switch(Singleton.Instance.currentLevel){
+                case 1:
+                    return 4;
+                case 2: case 3:
+                    return 5;
+                case 4: case 5:
+                    return 6;
+                case 6:
+                    return 7;
+                default:
+                    return 4;
+            }
         }
     }
 }
