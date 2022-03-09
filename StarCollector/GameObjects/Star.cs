@@ -34,6 +34,7 @@ namespace StarCollector.GameObjects {
 					IsActive = false;
 					Singleton.Instance.IsShooting = false;
 					Singleton.Instance.Score -= 10;
+					Singleton.Instance.ceilingY += (_texture.Width * 2);
 				}
 				// If ball collision left
 				if (pos.X <= 326) {
@@ -76,9 +77,9 @@ namespace StarCollector.GameObjects {
 										starArray[i + 1, j].pos = new Vector2(leftWallX + (j * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i + 1) * (_texture.Height-10)));
 										CheckRemoveBubble(starArray, _starColor, new Vector2(j, i + 1));
 									} else {
-										starArray[i, j] = this;	
-										starArray[i, j].pos = new Vector2(leftWallX + (j * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i) * (_texture.Height-10)));
-										CheckRemoveBubble(starArray, _starColor, new Vector2(j, i + 1));
+										starArray[i, j + 1] = this;	
+										starArray[i, j + 1].pos = new Vector2(leftWallX + ((j + 1)  * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i) * (_texture.Height-10)));
+										CheckRemoveBubble(starArray, _starColor, new Vector2((j + 1), i));
 									}
 								}
 							} else {
@@ -131,19 +132,22 @@ namespace StarCollector.GameObjects {
 								}
 							}
 						}
+
 						IsActive = false;
+						// 
 						if(Singleton.Instance.RemovableStar.Count >= 3){
 							Singleton.Instance.Score += Singleton.Instance.RemovableStar.Count * 10;
 							starArray = CheckLeftOver(starArray);
+							checkStarColor(starArray);
 						}
 						else if (Singleton.Instance.RemovableStar.Count > 0) {
+							// Redraw 
 							foreach (Vector2 v in Singleton.Instance.RemovableStar) {
 								starArray[(int)v.Y, (int)v.X] = new Star(_texture) {
 								pos = new Vector2(leftWallX + (v.X * _texture.Width) + ((v.Y) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (v.Y) * (_texture.Height-10))),
 								_starColor = _starColor,
 								IsActive = false
 							};
-							// starArray[(int)v.Y, (int)v.X] = null;
 							}
 						}
 						// Clear Removable star
@@ -158,7 +162,7 @@ namespace StarCollector.GameObjects {
 		public Vector2 GetMiddleOfStar(Vector2 star){
 			return new Vector2(star.X + 50 , star.Y + 50 );
 		}
-
+		// Check hanging star
 		public Star[,] CheckLeftOver(Star[,] starArray){
 			for(int i = 1 ; i < starArray.GetLength(0) ; i++){
                 for(int j = 0 ; j < starArray.GetLength(1) ; j++){
@@ -225,9 +229,18 @@ namespace StarCollector.GameObjects {
 			_spriteBatch.Draw(_texture, pos, _starColor);
 			base.Draw(_spriteBatch);
 		}
-
-		public bool IsRemoveable(Star[,] StarArray, Color TargetColor, Vector2 current){
-			return false;
+		// Update Existing StarColor in board
+		public void checkStarColor(Star[,] starArray) {
+			Singleton.Instance.starColor.Clear();
+            for(int i = 0 ; i < starArray.GetLength(0) ; i++){
+                for(int j = 0 ; j < starArray.GetLength(1) ; j++){
+                    if (starArray[i, j] != null){
+                        if(!Singleton.Instance.starColor.Contains(starArray[i,j]._starColor)){
+                            Singleton.Instance.starColor.Add(starArray[i,j]._starColor);
+                        }
+                    }
+                }
+            }
 		}
 	}
 }

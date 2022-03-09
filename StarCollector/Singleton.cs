@@ -14,7 +14,8 @@ namespace StarCollector
         private static Singleton instance;
 		// Export Instance
 		public int Score = 0;
-
+		public List<Color> starColor = new List<Color>();
+		public int oldCeilingY = 30;
 		public int ceilingY = 30;
 		public static Singleton Instance
 		{

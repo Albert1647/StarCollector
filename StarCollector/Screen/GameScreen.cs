@@ -14,10 +14,12 @@ namespace StarCollector.Screen {
 		private Texture2D GunTexture,StarTexture,Indicator,BG;
 		private Gun gun;
         private Random random = new Random();
-		public Star[,] star = new Star[9,8];
+		public Star[,] star = new Star[11,8];
 
 		private SpriteFont Arial,scoreFont;
         private int startLengthRow = 3;
+
+        private bool gameOver;
 
         private int leftWallX = 326;
         // private int rightWallX = 600;
@@ -55,14 +57,31 @@ namespace StarCollector.Screen {
             base.UnloadContent();
         }
         public override void Update(GameTime gameTime) {
-            // update star
+            // Update star
             for(int i = 0 ; i < star.GetLength(0) ; i++){
                 for(int j = 0 ; j < star.GetLength(1) ; j++){
-                    if (star[i, j] != null)
-                    star[i,j].Update(gameTime, star);
+                    if (star[i, j] != null){
+                        // If ceiling is moving
+                        if(Singleton.Instance.oldCeilingY < Singleton.Instance.ceilingY)
+                            star[i,j].pos.Y += Singleton.Instance.ceilingY - Singleton.Instance.oldCeilingY;
+                        star[i,j].Update(gameTime, star);
+                    }
                 }
             }
+            Singleton.Instance.oldCeilingY = Singleton.Instance.ceilingY;
 
+            // if star reach bottom boundary -> GameOver
+            for(int i = 0 ; i < star.GetLength(0) ; i++){
+                for(int j = 0 ; j < star.GetLength(1) ; j++){
+                    if (star[i, j] != null){
+                        if((star[i,j].pos.Y + StarTexture.Width) > 620){
+                            gameOver = true;
+                        } else {
+                            gameOver = false;
+                        }
+                    }
+                }
+            }
             // update/load gun logic
 			gun.Update(gameTime, star);
             base.Update(gameTime);
@@ -72,6 +91,8 @@ namespace StarCollector.Screen {
             _spriteBatch.DrawString(Arial, "X = " + Singleton.Instance.MouseCurrent.X , new Vector2(0,0), Color.Black);
             _spriteBatch.DrawString(Arial, "Y = " + Singleton.Instance.MouseCurrent.Y, new Vector2(0, 40), Color.Black);
 			_spriteBatch.DrawString(Arial, "Is Shooting = " + Singleton.Instance.IsShooting , new Vector2(0,60), Color.Black);
+            _spriteBatch.DrawString(Arial, "Ceiling = " + Singleton.Instance.ceilingY, new Vector2(0, 160), Color.Black);
+            _spriteBatch.DrawString(Arial, "game is over ?????? = " + gameOver, new Vector2(0, 180), Color.Black);
             // draw star
             for (int i = 0; i < star.GetLength(0); i++) {
                 for (int j = 0; j < star.GetLength(1); j++) {

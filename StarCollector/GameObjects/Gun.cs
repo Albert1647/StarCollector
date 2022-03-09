@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 using System;
 using System.Diagnostics;
 
@@ -41,7 +42,10 @@ namespace StarCollector.GameObjects {
 						Speed = 500,
 						IsActive = true
 					};
-					_starColor = GetRandomColor();
+					// update starColor in board
+					checkStarColor(starArray);
+					// get existing starColor in board
+					_starColor = getStarColor(starArray);
 					// set state to shooting
 					Singleton.Instance.IsShooting = true;
 				}
@@ -51,8 +55,6 @@ namespace StarCollector.GameObjects {
 				// if shooting update logic in star
 				star.Update(gameTime, starArray);
 			}
-
-			
 		}
 		public override void Draw(SpriteBatch _spriteBatch) {
 			// Draw Indicator
@@ -69,7 +71,38 @@ namespace StarCollector.GameObjects {
 			}
 		}
 		// Random Color
-		 public Color GetRandomColor() {
+		 public Color getStarColor(Star[,] starArray) {
+            
+			return Singleton.Instance.starColor[random.Next(0, Singleton.Instance.starColor.Count)];
+		}
+		// Update Existing StarColor in board
+		 public void checkStarColor(Star[,] starArray) {
+			Singleton.Instance.starColor.Clear();
+            for(int i = 0 ; i < starArray.GetLength(0) ; i++){
+                for(int j = 0 ; j < starArray.GetLength(1) ; j++){
+                    if (starArray[i, j] != null){
+                        if(!Singleton.Instance.starColor.Contains(starArray[i,j]._starColor)){
+                            Singleton.Instance.starColor.Add(starArray[i,j]._starColor);
+                        }
+                    }
+                }
+            }
+		}
+
+		public bool IsClick(){
+            return Singleton.Instance.MouseCurrent.LeftButton == ButtonState.Pressed && Singleton.Instance.MousePrevious.LeftButton == ButtonState.Released;
+        }
+
+		public bool IsShootable(){
+			return (Singleton.Instance.MouseCurrent.Y < 625 
+			&& Singleton.Instance.MouseCurrent.X > 0 
+			&& Singleton.Instance.MouseCurrent.Y > 0 
+			&& Singleton.Instance.MouseCurrent.X < Singleton.Instance.Dimension.X
+			// && Singleton.Instance.MouseCurrent.Y < Singleton.Instance.Dimension.Y
+			);
+		}
+		// Initial Random
+		public Color GetRandomColor() {
 			Color _starColor = Color.Black;
 			switch (random.Next(0, 6)) {
 				case 0:
@@ -93,19 +126,5 @@ namespace StarCollector.GameObjects {
 			}
 			return _starColor;
 		}
-
-		public bool IsClick(){
-            return Singleton.Instance.MouseCurrent.LeftButton == ButtonState.Pressed && Singleton.Instance.MousePrevious.LeftButton == ButtonState.Released;
-        }
-
-		public bool IsShootable(){
-			return (Singleton.Instance.MouseCurrent.Y < 625 
-			&& Singleton.Instance.MouseCurrent.X > 0 
-			&& Singleton.Instance.MouseCurrent.Y > 0 
-			&& Singleton.Instance.MouseCurrent.X < Singleton.Instance.Dimension.X
-			// && Singleton.Instance.MouseCurrent.Y < Singleton.Instance.Dimension.Y
-			);
-		}
-
 	}
 }
