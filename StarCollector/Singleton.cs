@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using System;
 
 namespace StarCollector
 {
@@ -16,6 +17,33 @@ namespace StarCollector
 		public List<Color> starColor = new List<Color>();
 		public int oldCeilingY = 30;
 		public int ceilingY = 30;
+
+		public Color GetColor(){
+			List<Color> color = new List<Color>();
+			color.Add(new Color(255 ,85, 85));
+			color.Add(Color.Blue);
+			color.Add(Color.Green);
+			color.Add(Color.Yellow);
+			switch(Singleton.Instance.currentLevel){
+				case 1 : case 2 : 
+					break;
+				case 3 : 
+					color.Add(Color.Purple);
+					break;
+				case 4 : case 5 : 
+					color.Add(Color.Purple);
+					color.Add(Color.White);
+					break;
+				case 6 :
+					color.Add(Color.Purple);
+					color.Add(Color.White);
+					color.Add(Color.SkyBlue);
+					break;
+				default :
+					break;
+			}
+			return color[random.Next(0, color.Count)];
+		}
 		// Export Instance
         private static Singleton instance;
 		public static Singleton Instance

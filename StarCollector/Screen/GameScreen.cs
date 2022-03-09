@@ -39,7 +39,7 @@ namespace StarCollector.Screen {
                         star[i,j] = new Star(StarTexture){
                             IsActive = false,
                             pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
-                            _starColor = GetRandomColor()
+                            _starColor = Singleton.Instance.GetColor()
                         };
                     }
                 }
@@ -50,7 +50,7 @@ namespace StarCollector.Screen {
                         star[i,j] = new Star(StarTexture){
                             IsActive = false,
                             pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
-                            _starColor = GetRandomColor()
+                            _starColor = Singleton.Instance.GetColor()
                         };
                     }
                 }
@@ -61,7 +61,7 @@ namespace StarCollector.Screen {
                         star[i,j] = new Star(StarTexture){
                             IsActive = false,
                             pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
-                            _starColor = GetRandomColor()
+                            _starColor = Singleton.Instance.GetColor()
                         };
                     }
                 }
@@ -72,7 +72,7 @@ namespace StarCollector.Screen {
                         star[i,j] = new Star(StarTexture){
                             IsActive = false,
                             pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
-                            _starColor = GetRandomColor()
+                            _starColor = Singleton.Instance.GetColor()
                         };
                     }
                 }
@@ -83,7 +83,7 @@ namespace StarCollector.Screen {
                         star[i,j] = new Star(StarTexture){
                             IsActive = false,
                             pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
-                            _starColor = GetRandomColor()
+                            _starColor = Singleton.Instance.GetColor()
                         };
                     }
                 }
@@ -94,7 +94,7 @@ namespace StarCollector.Screen {
                         star[i,j] = new Star(StarTexture){
                             IsActive = false,
                             pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
-                            _starColor = GetRandomColor()
+                            _starColor = Singleton.Instance.GetColor()
                         };
                     }
                 }
@@ -107,7 +107,7 @@ namespace StarCollector.Screen {
                     star[i,j] = new Star(StarTexture){
                         IsActive = false,
                         pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
-                        _starColor = GetRandomColor()
+                        _starColor = Singleton.Instance.GetColor()
                     };
                 }
             }
@@ -222,30 +222,5 @@ namespace StarCollector.Screen {
             _spriteBatch.Draw(StarDiscover, new Vector2(1120, 110),Color.White);
 
         }
-
-        public Color GetRandomColor() {
-			Color _starColor = Color.Black;
-			switch (random.Next(0, 6)) {
-				case 0:
-					_starColor = Color.White;
-					break;
-				case 1:
-					_starColor = Color.Blue;
-					break;
-				case 2:
-					_starColor = Color.Yellow;
-					break;
-				case 3:
-					_starColor = Color.Red;
-					break;
-				case 4:
-					_starColor = Color.Green;
-					break;
-				case 5:
-					_starColor = Color.Purple;
-					break;
-			}
-			return _starColor;
-		}
     }
 }

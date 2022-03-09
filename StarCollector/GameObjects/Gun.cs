@@ -20,7 +20,7 @@ namespace StarCollector.GameObjects {
 			starTexture = star;
 			Indicator = indicator;
 			// random color
-			_starColor = GetRandomColor();
+			_starColor = Singleton.Instance.GetColor();
 			// set gun color
 			_gunColor = Color.White;
 		}
@@ -100,31 +100,6 @@ namespace StarCollector.GameObjects {
 			&& Singleton.Instance.MouseCurrent.X < Singleton.Instance.Dimension.X
 			// && Singleton.Instance.MouseCurrent.Y < Singleton.Instance.Dimension.Y
 			);
-		}
-		// Initial Random
-		public Color GetRandomColor() {
-			Color _starColor = Color.Black;
-			switch (random.Next(0, 6)) {
-				case 0:
-					_starColor = Color.White;
-					break;
-				case 1:
-					_starColor = Color.Blue;
-					break;
-				case 2:
-					_starColor = Color.Yellow;
-					break;
-				case 3:
-					_starColor = Color.Red;
-					break;
-				case 4:
-					_starColor = Color.Green;
-					break;
-				case 5:
-					_starColor = Color.Purple;
-					break;
-			}
-			return _starColor;
 		}
 	}
 }
