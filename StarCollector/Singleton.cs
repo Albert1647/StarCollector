@@ -11,12 +11,13 @@ namespace StarCollector
 		public List<Vector2> RemovableStar = new List<Vector2>();
 		public MouseState MousePrevious, MouseCurrent;
 		public bool IsShooting;
-        private static Singleton instance;
-		// Export Instance
 		public int Score = 0;
+		public int currentLevel = 1;
 		public List<Color> starColor = new List<Color>();
 		public int oldCeilingY = 30;
 		public int ceilingY = 30;
+		// Export Instance
+        private static Singleton instance;
 		public static Singleton Instance
 		{
 			get
