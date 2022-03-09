@@ -186,6 +186,8 @@ namespace StarCollector.Screen {
                 if (Singleton.Instance.currentLevel < 6 )
                     {
                         Singleton.Instance.currentLevel += 1;
+                        Singleton.Instance.ceilingY = 30;
+                        Singleton.Instance.oldCeilingY = 30;
                         ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.GameScreen);
                     } else {
                         gameComplete = true;
