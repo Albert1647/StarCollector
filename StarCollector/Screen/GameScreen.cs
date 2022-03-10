@@ -24,6 +24,7 @@ namespace StarCollector.Screen {
         // private int rightWallX = 600;
         private bool gameComplete;
         private bool MouseOnMainButton,MouseOnRetryButton,MouseOnContinueButton,MouseOnOkButton;
+        private Vector2 FontWidth;
 
         public void Initial() {
 			// Instantiate gun on start GameScreen 
@@ -49,12 +50,12 @@ namespace StarCollector.Screen {
             // Load Resource
             base.LoadContent();
 			Arial = Content.Load<SpriteFont>("Arial");
-            scoreFont = Content.Load<SpriteFont>("score");
+            scoreFont = Content.Load<SpriteFont>("kor_bau");
             GunTexture = Content.Load<Texture2D>("gameScreen/gun");
 			StarTexture = Content.Load<Texture2D>("gameScreen/star");
 			Ceiling = Content.Load<Texture2D>("gameScreen/ceiling");
 			Indicator = Content.Load<Texture2D>("gameScreen/indicator");
-			BG = Content.Load<Texture2D>("gameScreen/ingame_bg");
+			BG = Content.Load<Texture2D>("gameScreen/ingame_bg3");
             WinWindow = Content.Load<Texture2D>("gameScreen/win");
             LoseWindow = Content.Load<Texture2D>("gameScreen/Lose");
             Mainmenu_button = Content.Load<Texture2D>("gameScreen/mainmenu_button");
@@ -233,9 +234,9 @@ namespace StarCollector.Screen {
 
             // draw gun
 			gun.Draw(_spriteBatch);
-
+            FontWidth = scoreFont.MeasureString(Singleton.Instance.Score.ToString());
             // draw score
-            _spriteBatch.DrawString(scoreFont, "score  " + Singleton.Instance.Score, new Vector2(50, 50), Color.Black);
+            _spriteBatch.DrawString(scoreFont,Singleton.Instance.Score.ToString(), new Vector2(150-FontWidth.X/2, 80), Color.Black);
 
             // check level
             _spriteBatch.DrawString(Arial, "level = " + Singleton.Instance.currentLevel, new Vector2(0, 300), Color.Black);

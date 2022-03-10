@@ -284,6 +284,18 @@
 /processorParam:TextureFormat=Color
 /build:GameScreen/ingame_bg.png
 
+#begin GameScreen/ingame_bg3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:GameScreen/ingame_bg3.png
+
 #begin GameScreen/Lose.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -404,6 +416,13 @@
 /processorParam:TextureFormat=Color
 /build:GameScreen/Win.png
 
+#begin kor_bau.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:kor_bau.spritefont
+
 #begin MenuScreen/collection_button.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -463,13 +482,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:MenuScreen/start_button_hover.png
-
-#begin score.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:score.spritefont
 
 #begin Sound/PopCat.wav
 /importer:WavImporter
