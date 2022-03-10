@@ -13,7 +13,8 @@ namespace StarCollector.Screen {
     class GameScreen : _GameScreen {
 		private Texture2D GunTexture,StarTexture,Indicator,BG,StarDiscover,
                             WinWindow,LoseWindow,Mainmenu_button,Continue_button,Continue_button_hover,
-                            Mainmenu_button_hover,Retry_button,Retry_button_hover;
+                            Mainmenu_button_hover,Retry_button,Retry_button_hover,
+                            Ok_button,Ok_button_hover;
 		private Gun gun;
         private float Timer = 0f;
 		public Star[,] star = new Star[23,8];
@@ -22,7 +23,7 @@ namespace StarCollector.Screen {
         private int leftWallX = 326;
         // private int rightWallX = 600;
         private bool gameComplete;
-        private bool MouseOnMainButton,MouseOnRetryButton,MouseOnContinueButton;
+        private bool MouseOnMainButton,MouseOnRetryButton,MouseOnContinueButton,MouseOnOkButton;
 
         public void Initial() {
 			// Instantiate gun on start GameScreen 
@@ -61,6 +62,8 @@ namespace StarCollector.Screen {
             Continue_button_hover = Content.Load<Texture2D>("gameScreen/continue_button_hover");
             Retry_button = Content.Load<Texture2D>("gameScreen/retry_button");
             Retry_button_hover = Content.Load<Texture2D>("gameScreen/retry_button_hover");
+            Ok_button = Content.Load<Texture2D>("gameScreen/ok_button");
+            Ok_button_hover = Content.Load<Texture2D>("gameScreen/ok_button_hover");
             
             switch(Singleton.Instance.currentLevel){
                 case 1:
@@ -140,14 +143,14 @@ namespace StarCollector.Screen {
                  Singleton.Instance.MousePrevious = Singleton.Instance.MouseCurrent;
                  Singleton.Instance.MouseCurrent = Mouse.GetState();
                  if(gameWin && gameComplete){
-                    if(MouseOnTexture(395,435,Mainmenu_button)) {
-                        MouseOnMainButton = true;
+                    if(MouseOnTexture(395,435,Ok_button)) {
+                        MouseOnOkButton = true;
                         if(IsClick()){
                             Singleton.Instance.currentLevel = 1;
                             ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
                         }
                     } else {
-                        MouseOnMainButton = false;
+                        MouseOnOkButton = false;
                     }
                  }else if (gameWin) {
                     // MainMenu Button
@@ -237,15 +240,15 @@ namespace StarCollector.Screen {
             _spriteBatch.DrawString(Arial, "level = " + Singleton.Instance.currentLevel, new Vector2(0, 300), Color.Black);
             _spriteBatch.Draw(StarDiscover, new Vector2(1120, 110),Color.White);
             
-            if (gameWin && gameComplete) {
+            if (gameWin && gameComplete) { 
                 // draw WinWindow
                 _spriteBatch.Draw(WinWindow, new Vector2(325, 100),Color.White);
-                if (MouseOnMainButton)
+                if (MouseOnOkButton)
                 {
-                    _spriteBatch.Draw(Mainmenu_button_hover, new Vector2(272, 412),Color.White);
+                    _spriteBatch.Draw(Ok_button_hover, new Vector2(452, 412),Color.White);
                 }
                 else {
-                    _spriteBatch.Draw(Mainmenu_button, new Vector2(272, 412),Color.White);
+                    _spriteBatch.Draw(Ok_button, new Vector2(452, 412),Color.White);
                 }
             } else if (gameWin) {
                 // draw WinWindow
