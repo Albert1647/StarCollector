@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace StarCollector.Screen {
     class GameScreen : _GameScreen {
-		private Texture2D GunTexture,StarTexture,Indicator,BG,StarDiscover,
+		private Texture2D GunTexture,StarTexture,Indicator,BG,StarDiscover, Ceiling,
                             WinWindow,LoseWindow,Mainmenu_button,Continue_button,Continue_button_hover,
                             Mainmenu_button_hover,Retry_button,Retry_button_hover,
                             Ok_button,Ok_button_hover;
@@ -52,6 +52,7 @@ namespace StarCollector.Screen {
             scoreFont = Content.Load<SpriteFont>("score");
             GunTexture = Content.Load<Texture2D>("gameScreen/gun");
 			StarTexture = Content.Load<Texture2D>("gameScreen/star");
+			Ceiling = Content.Load<Texture2D>("gameScreen/ceiling");
 			Indicator = Content.Load<Texture2D>("gameScreen/indicator");
 			BG = Content.Load<Texture2D>("gameScreen/ingame_bg");
             WinWindow = Content.Load<Texture2D>("gameScreen/win");
@@ -238,6 +239,8 @@ namespace StarCollector.Screen {
 
             // check level
             _spriteBatch.DrawString(Arial, "level = " + Singleton.Instance.currentLevel, new Vector2(0, 300), Color.Black);
+
+            _spriteBatch.Draw(Ceiling, new Vector2(0, Singleton.Instance.ceilingY - Ceiling.Height),Color.White);
             _spriteBatch.Draw(StarDiscover, new Vector2(1120, 110),Color.White);
             
             if (gameWin && gameComplete) { 

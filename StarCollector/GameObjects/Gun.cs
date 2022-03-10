@@ -15,6 +15,7 @@ namespace StarCollector.GameObjects {
 		private Texture2D Indicator;
 		private Star star; // star on gun
 		public Color _gunColor;
+        private float rotate = 0;
 		public Gun(Texture2D texture, Texture2D indicator, Texture2D star) : base(texture) {
 			// save texture
 			starTexture = star;
@@ -54,16 +55,25 @@ namespace StarCollector.GameObjects {
 			if (Singleton.Instance.IsShooting){
 				// if shooting update logic in star
 				star.Update(gameTime, starArray);
+				rotate = 0;
 			}
+
+			if(rotate < 360){
+                rotate += 0.05f;
+				if(rotate >= 360){
+					rotate = 0;
+				}
+            }
+
 		}
-		public override void Draw(SpriteBatch _spriteBatch) {
+		public override async void Draw(SpriteBatch _spriteBatch) {
 			// Draw Indicator
 			_spriteBatch.Draw(Indicator, pos + new Vector2(50, 50), null, Color.White, aimAngle + MathHelper.ToRadians(90f), new Vector2(Indicator.Width/2,2), 1.5f, SpriteEffects.FlipVertically, 0f);
 			// Draw Gun with Turning Angle
 			_spriteBatch.Draw(_texture, pos + new Vector2(50, 50), null, Color.White, aimAngle + MathHelper.ToRadians(-90f), new Vector2(50, 50), 1.5f, SpriteEffects.None, 0f);
 			if (!Singleton.Instance.IsShooting){
 				// Draw Bubble On Gun
-				_spriteBatch.Draw(starTexture, new Vector2(Singleton.Instance.Dimension.X / 2 - starTexture.Width / 2, 700 - starTexture.Height), _starColor);
+				_spriteBatch.Draw(starTexture, new Vector2(Singleton.Instance.Dimension.X / 2 , 700 - starTexture.Height),null, _starColor, rotate, new Vector2(starTexture.Width/2 , starTexture.Height/2), 1f, SpriteEffects.None, 0f);
 			}
 			else{
 				// Draw Shooting Star
