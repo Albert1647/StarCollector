@@ -76,22 +76,22 @@ namespace StarCollector.Screen {
             
             switch(Singleton.Instance.currentLevel){
                 case 1:
-                    Warp = Content.Load<Texture2D>("gameScreen/warp_One");
+                    Warp = Content.Load<Texture2D>("CollectionScreen/warp_One");
                 break;
                 case 2:
-                    Warp = Content.Load<Texture2D>("gameScreen/warp_Two");
+                    Warp = Content.Load<Texture2D>("CollectionScreen/warp_Two");
                 break;
                 case 3:
-                    Warp = Content.Load<Texture2D>("gameScreen/warp_Three");
+                    Warp = Content.Load<Texture2D>("CollectionScreen/warp_Three");
                 break;
                 case 4:
-                    Warp = Content.Load<Texture2D>("gameScreen/warp_Four");
+                    Warp = Content.Load<Texture2D>("CollectionScreen/warp_Four");
                 break;
                 case 5:
-                    Warp = Content.Load<Texture2D>("gameScreen/warp_Five");
+                    Warp = Content.Load<Texture2D>("CollectionScreen/warp_Five");
                 break;
                 case 6:
-                    Warp = Content.Load<Texture2D>("gameScreen/warp_Six");
+                    Warp = Content.Load<Texture2D>("CollectionScreen/warp_Six");
                 break;
             }
             Initial();
