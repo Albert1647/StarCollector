@@ -58,7 +58,7 @@ namespace StarCollector.GameObjects {
 		}
 		public override void Draw(SpriteBatch _spriteBatch) {
 			// Draw Indicator
-			_spriteBatch.Draw(Indicator, pos + new Vector2(50 + Indicator.Width, 50), null, Color.White, aimAngle + MathHelper.ToRadians(90f), new Vector2(0,0), 1.5f, SpriteEffects.None, 0f);
+			_spriteBatch.Draw(Indicator, pos + new Vector2(50, 50), null, Color.White, aimAngle + MathHelper.ToRadians(90f), new Vector2(Indicator.Width/2,0), 1.5f, SpriteEffects.FlipVertically, 0f);
 			// Draw Gun with Turning Angle
 			_spriteBatch.Draw(_texture, pos + new Vector2(50, 50), null, Color.White, aimAngle + MathHelper.ToRadians(-90f), new Vector2(50, 50), 1.5f, SpriteEffects.None, 0f);
 			if (!Singleton.Instance.IsShooting){

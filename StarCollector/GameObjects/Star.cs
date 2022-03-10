@@ -61,23 +61,23 @@ namespace StarCollector.GameObjects {
 							if (i % 2 == 0) {
 								// Row With no gap left
 								if (j == starArray.GetLength(1) - 1) {	
-									if(starArray[i + 1, j - 1] == null){
-										starArray[i + 1, j - 1] = this;
-										starArray[i + 1, j - 1].pos = new Vector2(leftWallX + ((j - 1) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i + 1) * (_texture.Height-10)));
-										CheckRemoveBubble(starArray, _starColor, new Vector2(j - 1, i + 1));
+									if(starArray[i + 1, j] == null){
+										starArray[i + 1, j] = this;
+										starArray[i + 1, j].pos = new Vector2(leftWallX + ((j) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i + 1) * (_texture.Height-Singleton.Instance.rowGapClosing)));
+										CheckRemoveBubble(starArray, _starColor, new Vector2(j, i + 1));
 									} else {
 										starArray[i, j - 1] = this;
-										starArray[i, j - 1].pos = new Vector2(leftWallX + ((j - 1) * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i) * (_texture.Height-10)));
+										starArray[i, j - 1].pos = new Vector2(leftWallX + ((j - 1) * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i) * (_texture.Height-Singleton.Instance.rowGapClosing)));
 										CheckRemoveBubble(starArray, _starColor, new Vector2(j + 1, i));
 									}
 								} else {
 									if(starArray[i + 1, j] == null){
 										starArray[i + 1, j] = this;	
-										starArray[i + 1, j].pos = new Vector2(leftWallX + (j * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i + 1) * (_texture.Height-10)));
+										starArray[i + 1, j].pos = new Vector2(leftWallX + (j * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i + 1) * (_texture.Height-Singleton.Instance.rowGapClosing)));
 										CheckRemoveBubble(starArray, _starColor, new Vector2(j, i + 1));
 									} else {
 										starArray[i, j + 1] = this;	
-										starArray[i, j + 1].pos = new Vector2(leftWallX + ((j + 1)  * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i) * (_texture.Height-10)));
+										starArray[i, j + 1].pos = new Vector2(leftWallX + ((j + 1)  * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i) * (_texture.Height-Singleton.Instance.rowGapClosing)));
 										CheckRemoveBubble(starArray, _starColor, new Vector2((j + 1), i));
 									}
 								}
@@ -86,21 +86,21 @@ namespace StarCollector.GameObjects {
 								if(j == starArray.GetLength(1) - 1){
 									if(starArray[i + 1, j ] == null){
 										starArray[i + 1, j] = this;
-										starArray[i + 1, j].pos = new Vector2(leftWallX + ((j) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i + 1) * (_texture.Height-10)));
+										starArray[i + 1, j].pos = new Vector2(leftWallX + ((j) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i + 1) * (_texture.Height-Singleton.Instance.rowGapClosing)));
 										CheckRemoveBubble(starArray, _starColor, new Vector2(j, i + 1));
 									} else {
 										starArray[i, j] = this;
-										starArray[i, j].pos = new Vector2(leftWallX + ((j) * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i) * (_texture.Height-10)));
+										starArray[i, j].pos = new Vector2(leftWallX + ((j) * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i) * (_texture.Height-Singleton.Instance.rowGapClosing)));
 										CheckRemoveBubble(starArray, _starColor, new Vector2(j, i));
 									}
 								} else {
 									if(starArray[i + 1, j + 1] == null){
 										starArray[i + 1, j + 1] = this;
-										starArray[i + 1, j + 1].pos = new Vector2(leftWallX + ((j + 1) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i + 1) * (_texture.Height-10)));
+										starArray[i + 1, j + 1].pos = new Vector2(leftWallX + ((j + 1) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i + 1) * (_texture.Height-Singleton.Instance.rowGapClosing)));
 										CheckRemoveBubble(starArray, _starColor, new Vector2(j + 1, i + 1));
 									} else {
 										starArray[i, j + 1] = this;
-										starArray[i, j + 1].pos = new Vector2(leftWallX + ((j + 1) * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i) * (_texture.Height-10)));
+										starArray[i, j + 1].pos = new Vector2(leftWallX + ((j + 1) * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i) * (_texture.Height-Singleton.Instance.rowGapClosing)));
 										CheckRemoveBubble(starArray, _starColor, new Vector2(j, i));
 									}
 								}
@@ -113,22 +113,22 @@ namespace StarCollector.GameObjects {
 								if( j > 0 ){
 									if(starArray[i + 1, j - 1] == null){
 										starArray[i + 1, j - 1] = this;
-										starArray[i + 1, j - 1].pos = new Vector2(leftWallX + ((j - 1) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i + 1) * (_texture.Height-10)));
+										starArray[i + 1, j - 1].pos = new Vector2(leftWallX + ((j - 1) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i + 1) * (_texture.Height-Singleton.Instance.rowGapClosing)));
 										CheckRemoveBubble(starArray, _starColor, new Vector2(j - 1, i + 1));
 									} else {
 										starArray[i, j - 1] = this;
-										starArray[i, j - 1].pos = new Vector2(leftWallX + ((j - 1) * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i) * (_texture.Height-10)));
+										starArray[i, j - 1].pos = new Vector2(leftWallX + ((j - 1) * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i) * (_texture.Height-Singleton.Instance.rowGapClosing)));
 										CheckRemoveBubble(starArray, _starColor, new Vector2(j - 1, i));
 									}
 								}
 								else {
 									if(starArray[i + 1, j] == null){
 										starArray[i + 1, j] = this;
-										starArray[i + 1, j].pos = new Vector2(leftWallX + ((j) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i + 1) * (_texture.Height-10)));
+										starArray[i + 1, j].pos = new Vector2(leftWallX + ((j) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i + 1) * (_texture.Height-Singleton.Instance.rowGapClosing)));
 										CheckRemoveBubble(starArray, _starColor, new Vector2(j, i + 1));
 									} else {
 										starArray[i, j] = this;
-										starArray[i, j].pos = new Vector2(leftWallX + ((j) * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i) * (_texture.Height-10)));
+										starArray[i, j].pos = new Vector2(leftWallX + ((j) * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i) * (_texture.Height-Singleton.Instance.rowGapClosing)));
 										CheckRemoveBubble(starArray, _starColor, new Vector2(j, i + 1));
 									}
 								}
@@ -136,11 +136,11 @@ namespace StarCollector.GameObjects {
 							} else {
 								if(starArray[i + 1, j] == null){
 									starArray[(i + 1), j] = this;
-									starArray[(i + 1), j].pos = new Vector2(leftWallX + (j * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i + 1) * (_texture.Height-10)));
+									starArray[(i + 1), j].pos = new Vector2(leftWallX + (j * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i + 1) * (_texture.Height-Singleton.Instance.rowGapClosing)));
 									CheckRemoveBubble(starArray, _starColor, new Vector2(j, i + 1));
 								} else {
 									starArray[(i), j] = this;
-									starArray[(i), j].pos = new Vector2(leftWallX + (j * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i) * (_texture.Height-10)));
+									starArray[(i), j].pos = new Vector2(leftWallX + (j * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i) * (_texture.Height-Singleton.Instance.rowGapClosing)));
 									CheckRemoveBubble(starArray, _starColor, new Vector2(j, i));
 								}
 							}
@@ -157,7 +157,7 @@ namespace StarCollector.GameObjects {
 							// Redraw 
 							foreach (Vector2 v in Singleton.Instance.RemovableStar) {
 								starArray[(int)v.Y, (int)v.X] = new Star(_texture) {
-								pos = new Vector2(leftWallX + (v.X * _texture.Width) + ((v.Y) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (v.Y) * (_texture.Height-10))),
+								pos = new Vector2(leftWallX + (v.X * _texture.Width) + ((v.Y) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (v.Y) * (_texture.Height-Singleton.Instance.rowGapClosing))),
 								_starColor = _starColor,
 								IsActive = false
 							};

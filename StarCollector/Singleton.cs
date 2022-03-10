@@ -15,12 +15,13 @@ namespace StarCollector
 		public bool IsShooting;
 		public int Score = 0;
 		public int currentLevel = 1;
-		public List<Color> starColor = new List<Color>();
-		public int oldCeilingY = 30;
-		public int ceilingY = 30;
-		public int clearStar = 0;
 
 		public int STARHITBOX = 74;
+		public int rowGapClosing = 10;
+		public int oldCeilingY = 30;
+		public int ceilingY = 30;
+		public List<Color> starColor = new List<Color>();
+		public int clearStar = 0;
 
 		public Color GetColor(){
 			List<Color> color = new List<Color>();
