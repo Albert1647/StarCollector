@@ -11,23 +11,18 @@ using Microsoft.Xna.Framework.Media;
 
 namespace StarCollector.Screen {
     class GameScreen : _GameScreen {
-		private Texture2D GunTexture,StarTexture,Indicator,BG,StarDiscover,WinWindow,LoseWindow,continue_button,continue_button_hover,mainmenu_button_hover,mainmenu_button;
+		private Texture2D GunTexture,StarTexture,Indicator,BG,StarDiscover,
+                            WinWindow,LoseWindow,continue_button,continue_button_hover,
+                            mainmenu_button_hover,mainmenu_button;
 		private Gun gun;
-        private Random random = new Random();
-
         private float Timer = 0f;
 		public Star[,] star = new Star[23,8];
-
 		private SpriteFont Arial,scoreFont;
-        private int startLengthRow = 3;
-
         private bool gameOver,gameWin;
-
         private int leftWallX = 326;
         // private int rightWallX = 600;
         private bool gameComplete;
-
-         private bool MouseOnMainButton;
+        private bool MouseOnMainButton;
 
         public void Initial() {
 			// Instantiate gun on start GameScreen 
@@ -45,7 +40,7 @@ namespace StarCollector.Screen {
                     pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-Singleton.Instance.rowGapClosing)))),
                     _starColor = Singleton.Instance.GetColor()
                 };
-            }
+                }
             }
         }
 
@@ -110,6 +105,8 @@ namespace StarCollector.Screen {
                     Singleton.Instance.ceilingY += StarTexture.Height;
                     Timer = 0;
                 }
+                
+                
                 // if star reach bottom boundary -> GameOver
                 for(int i = 0 ; i < star.GetLength(0) ; i++){
                     for(int j = 0 ; j < star.GetLength(1) ; j++){
@@ -122,6 +119,7 @@ namespace StarCollector.Screen {
                         }
                     }
                 }
+                // CheckGamewin
                 gameWin = true;
                 for(int i = 0 ; i < star.GetLength(0) ; i++){
                     for(int j = 0 ; j < star.GetLength(1) ; j++){
@@ -130,21 +128,21 @@ namespace StarCollector.Screen {
                         } 
                     }
                 }
-                    if (gameWin == true) {                       
-                        if (Singleton.Instance.currentLevel < 6 )
-                            {
-                                Singleton.Instance.currentLevel += 1;
-                                Singleton.Instance.ceilingY = 30;
-                                Singleton.Instance.oldCeilingY = 30;
-                                if(Singleton.Instance.clearStar < 6)
-                                {
-                                    Singleton.Instance.clearStar += 1;
-                                }
-                                ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.GameScreen);
-                            } else {
-                                gameComplete = true;
-                            }                        
+
+                if (gameWin == true) {                       
+                    if (Singleton.Instance.currentLevel < 6 ){
+                        Singleton.Instance.currentLevel += 1;
+                        Singleton.Instance.ceilingY = 30;
+                        Singleton.Instance.oldCeilingY = 30;
+                        if(Singleton.Instance.clearStar < 6)
+                        {
+                            Singleton.Instance.clearStar += 1;
                         }
+                        ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.GameScreen);
+                    } else {
+                        gameComplete = true;
+                    }                        
+                }
             }
              else {
                 Singleton.Instance.MousePrevious = Singleton.Instance.MouseCurrent;
@@ -155,8 +153,8 @@ namespace StarCollector.Screen {
                         ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
                     }
                 } else {
-                        MouseOnMainButton = false;
-                    }
+                    MouseOnMainButton = false;
+                }
             }
             base.Update(gameTime);
         }
@@ -186,17 +184,14 @@ namespace StarCollector.Screen {
 
             // check level
             _spriteBatch.DrawString(Arial, "level = " + Singleton.Instance.currentLevel, new Vector2(0, 300), Color.Black);
-
             _spriteBatch.Draw(StarDiscover, new Vector2(1120, 110),Color.White);
-
-             if ( gameWin ) {
+            if (gameWin) {
                 // draw WinWindow
                 _spriteBatch.Draw(WinWindow, new Vector2(325, 100),Color.White);
                  _spriteBatch.Draw(mainmenu_button, new Vector2(272, 412),Color.White);
                  _spriteBatch.Draw(continue_button, new Vector2(600, 412),Color.White);
             }  //gameOver == true
-            if (gameOver == true)
-            {
+            if (gameOver){
                 // draw LoseWindow
                 _spriteBatch.Draw(LoseWindow, new Vector2(325, 100),Color.White);
                  _spriteBatch.Draw(mainmenu_button, new Vector2(272, 412),Color.White);
