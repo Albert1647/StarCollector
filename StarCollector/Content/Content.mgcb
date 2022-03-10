@@ -519,9 +519,63 @@
 /processorParam:TextureFormat=Color
 /build:MenuScreen/start_button_hover.png
 
+#begin Sound/click.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/click.wav
+
+#begin Sound/game_over.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/game_over.wav
+
+#begin Sound/game_win.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/game_win.wav
+
+#begin Sound/got_star.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/got_star.wav
+
+#begin Sound/gun_shoot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/gun_shoot.wav
+
+#begin Sound/menu_select.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/menu_select.wav
+
 #begin Sound/PopCat.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sound/PopCat.wav;Sound/PopClick.wav
+
+#begin Sound/star_new.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/star_new.wav
+
+#begin Sound/star_pop.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/star_pop.wav
+
+#begin Sound/theme.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/theme.wav
 
