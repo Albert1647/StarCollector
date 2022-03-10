@@ -12,8 +12,8 @@ using Microsoft.Xna.Framework.Media;
 namespace StarCollector.Screen {
     class GameScreen : _GameScreen {
 		private Texture2D GunTexture,StarTexture,Indicator,BG,StarDiscover,
-                            WinWindow,LoseWindow,continue_button,continue_button_hover,
-                            mainmenu_button_hover,mainmenu_button;
+                            WinWindow,LoseWindow,Mainmenu_button,Continue_button,Continue_button_hover,
+                            Mainmenu_button_hover,Retry_button,Retry_button_hover;
 		private Gun gun;
         private float Timer = 0f;
 		public Star[,] star = new Star[23,8];
@@ -22,7 +22,7 @@ namespace StarCollector.Screen {
         private int leftWallX = 326;
         // private int rightWallX = 600;
         private bool gameComplete;
-        private bool MouseOnMainButton;
+        private bool MouseOnMainButton,MouseOnRetryButton,MouseOnContinueButton;
 
         public void Initial() {
 			// Instantiate gun on start GameScreen 
@@ -55,8 +55,11 @@ namespace StarCollector.Screen {
 			BG = Content.Load<Texture2D>("gameScreen/ingame_bg");
             WinWindow = Content.Load<Texture2D>("gameScreen/win");
             LoseWindow = Content.Load<Texture2D>("gameScreen/Lose");
-            mainmenu_button = Content.Load<Texture2D>("gameScreen/mainmenu_button");
-            continue_button = Content.Load<Texture2D>("gameScreen/continue_button");
+            Mainmenu_button = Content.Load<Texture2D>("gameScreen/mainmenu_button");
+            Mainmenu_button_hover = Content.Load<Texture2D>("gameScreen/mainmenu_button_hover");
+            Continue_button = Content.Load<Texture2D>("gameScreen/continue_button");
+            Retry_button = Content.Load<Texture2D>("gameScreen/retry_button");
+            Retry_button_hover = Content.Load<Texture2D>("gameScreen/retry_button_hover");
             
             switch(Singleton.Instance.currentLevel){
                 case 1:
@@ -127,37 +130,61 @@ namespace StarCollector.Screen {
                             gameWin = false;
                         } 
                     }
-                }
-
-                if (gameWin == true) {                       
-                    if (Singleton.Instance.currentLevel < 6 ){
-                        Singleton.Instance.currentLevel += 1;
-                        Singleton.Instance.ceilingY = 30;
-                        Singleton.Instance.oldCeilingY = 30;
-                        if(Singleton.Instance.clearStar < 6)
-                        {
-                            Singleton.Instance.clearStar += 1;
-                        }
-                        ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.GameScreen);
-                    } else {
-                        gameComplete = true;
-                    }                        
-                }
+                }   
             }
              else {
-                Singleton.Instance.MousePrevious = Singleton.Instance.MouseCurrent;
-                Singleton.Instance.MouseCurrent = Mouse.GetState();
-                if(MouseOnElement(395,548,435,452)) {
-                    MouseOnMainButton = true;
-                    if(IsClick()){
-                        ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
+                 Singleton.Instance.MousePrevious = Singleton.Instance.MouseCurrent;
+                 Singleton.Instance.MouseCurrent = Mouse.GetState();
+                 if (gameWin) {
+                     if(MouseOnTexture(395,435,Mainmenu_button)) {
+                        MouseOnMainButton = true;
+                        if(IsClick()){
+                            ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
+                        }
+                    } else {
+                        MouseOnMainButton = false;
                     }
-                } else {
-                    MouseOnMainButton = false;
-                }
-            }
-            base.Update(gameTime);
+                    if(MouseOnTexture(758,425,Continue_button)) {
+                        MouseOnContinueButton = true;
+                        if(IsClick()){
+                            if (gameWin == true) {                       
+                                if (Singleton.Instance.currentLevel < 6 ) {
+                                    Singleton.Instance.currentLevel += 1;
+                                    Singleton.Instance.ceilingY = 30;
+                                    Singleton.Instance.oldCeilingY = 30;
+                                    if(Singleton.Instance.clearStar < 6) {
+                                        Singleton.Instance.clearStar += 1;
+                                    }
+                                    ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.GameScreen);
+                                } else {
+                                gameComplete = true;
+                                }                        
+                            }
+                        }
+                    } else {
+                        MouseOnContinueButton = false;
+                }  
+                 } else {
+                    if(MouseOnElement(395,548,435,452)) {
+                        MouseOnMainButton = true;
+                        if(IsClick()){
+                            ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
+                        }
+                    } else {
+                        MouseOnMainButton = false;
+                    }
+                    if(MouseOnElement(758,835,425,448)) {
+                        MouseOnRetryButton = true;
+                        if(IsClick()){
+                            ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.GameScreen);
+                        }
+                    } else {
+                        MouseOnRetryButton = false;
+                }  
+            }    
         }
+        base.Update(gameTime);
+    }
         public override void Draw(SpriteBatch _spriteBatch) {
 			_spriteBatch.Draw(BG, Vector2.Zero, Color.White);
             _spriteBatch.DrawString(Arial, "X = " + Singleton.Instance.MouseCurrent.X , new Vector2(0,0), Color.Black);
@@ -185,19 +212,48 @@ namespace StarCollector.Screen {
             // check level
             _spriteBatch.DrawString(Arial, "level = " + Singleton.Instance.currentLevel, new Vector2(0, 300), Color.Black);
             _spriteBatch.Draw(StarDiscover, new Vector2(1120, 110),Color.White);
+            
             if (gameWin) {
                 // draw WinWindow
                 _spriteBatch.Draw(WinWindow, new Vector2(325, 100),Color.White);
-                 _spriteBatch.Draw(mainmenu_button, new Vector2(272, 412),Color.White);
-                 _spriteBatch.Draw(continue_button, new Vector2(600, 412),Color.White);
-            }  //gameOver == true
+                if (MouseOnMainButton)
+                {
+                    _spriteBatch.Draw(Mainmenu_button_hover, new Vector2(272, 412),Color.White);
+                }
+                else {
+                    _spriteBatch.Draw(Mainmenu_button, new Vector2(272, 412),Color.White);
+                }
+                if (MouseOnContinueButton)
+                {
+                    _spriteBatch.Draw(Continue_button_hover, new Vector2(600, 412),Color.White);
+                }
+                else {
+                    _spriteBatch.Draw(Continue_button, new Vector2(600, 412),Color.White);
+                }
+
+                 _spriteBatch.Draw(Mainmenu_button_hover, new Vector2(272, 412),Color.White);
+                 _spriteBatch.Draw(Continue_button, new Vector2(600, 412),Color.White);
+            }  
+            //gameOver == true
             if (gameOver){
                 // draw LoseWindow
                 _spriteBatch.Draw(LoseWindow, new Vector2(325, 100),Color.White);
-                 _spriteBatch.Draw(mainmenu_button, new Vector2(272, 412),Color.White);
-                _spriteBatch.Draw(continue_button, new Vector2(600, 412),Color.White);
-            }
+                if (MouseOnMainButton)
+                {
+                    _spriteBatch.Draw(Mainmenu_button_hover, new Vector2(272, 412),Color.White);
+                }
+                else {
+                    _spriteBatch.Draw(Mainmenu_button, new Vector2(272, 412),Color.White);
 
+                }
+                if (MouseOnRetryButton)
+                {
+                    _spriteBatch.Draw(Retry_button_hover, new Vector2(600, 412),Color.White);
+                }
+                else {
+                    _spriteBatch.Draw(Retry_button, new Vector2(600, 412),Color.White);
+                }
+            }
         }
         public int GetStartCeilingY(int row, int show){
 			return ((Singleton.Instance.STARHITBOX * show) + 30) - (row * (Singleton.Instance.STARHITBOX));
