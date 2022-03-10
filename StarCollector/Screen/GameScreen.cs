@@ -22,7 +22,7 @@ namespace StarCollector.Screen {
         private bool gameOver,gameWin;
         private int leftWallX = 326;
         // private int rightWallX = 600;
-        private bool gameComplete;
+        private bool gameComplete,Dialog;
         private bool MouseOnMainButton,MouseOnRetryButton,MouseOnContinueButton,MouseOnOkButton;
         private Vector2 FontWidth;
 
@@ -147,6 +147,11 @@ namespace StarCollector.Screen {
                 //  On Dialog
                  Singleton.Instance.MousePrevious = Singleton.Instance.MouseCurrent;
                  Singleton.Instance.MouseCurrent = Mouse.GetState();
+                //checkDialog
+                Dialog = false;
+                if (gameWin && !Dialog) {
+                    Dialog = true;
+                }
                  if(gameWin && gameComplete){
                     if(MouseOnTexture(395,435,Ok_button)) {
                         MouseOnOkButton = true;
