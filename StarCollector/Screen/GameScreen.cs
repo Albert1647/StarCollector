@@ -21,6 +21,8 @@ namespace StarCollector.Screen {
 		private SpriteFont Arial,scoreFont;
         private bool gameOver,gameWin;
         private int leftWallX = 326;
+
+        private bool dialog;
         // private int rightWallX = 600;
         private bool gameComplete,Dialog;
         private bool MouseOnMainButton,MouseOnRetryButton,MouseOnContinueButton,MouseOnOkButton;
@@ -148,11 +150,15 @@ namespace StarCollector.Screen {
                  Singleton.Instance.MousePrevious = Singleton.Instance.MouseCurrent;
                  Singleton.Instance.MouseCurrent = Mouse.GetState();
                 //checkDialog
-                Dialog = false;
-                if (gameWin && !Dialog) {
-                    Dialog = true;
-                }
-                 if(gameWin && gameComplete){
+                if(!dialog){
+                    if(MouseOnTexture(395,435,Ok_button)) {
+                        MouseOnOkButton = true;
+                        if(IsClick()){
+                            dialog = true;
+                        }
+                    }
+                } else 
+                if(gameWin && gameComplete){
                     if(MouseOnTexture(395,435,Ok_button)) {
                         MouseOnOkButton = true;
                         if(IsClick()){
@@ -258,9 +264,10 @@ namespace StarCollector.Screen {
             _spriteBatch.DrawString(Arial, "level = " + Singleton.Instance.currentLevel, new Vector2(0, 300), Color.Black);
 
             
-            
-            
-            if (gameWin && gameComplete) { 
+            if(gameWin && !dialog){
+                _spriteBatch.Draw(Ok_button, new Vector2(452, 412),Color.White);
+            }
+            else if (gameWin && gameComplete) { 
                 // draw WinWindow
                 _spriteBatch.Draw(WinWindow, new Vector2(325, 100),Color.White);
                 if (MouseOnOkButton)
@@ -335,7 +342,7 @@ namespace StarCollector.Screen {
         public int getRowOfCurrentLevel(){
             switch(Singleton.Instance.currentLevel){
                 case 1:
-                    return 4;
+                    return 1;
                 case 2:
                     return 10;
                 case 3:
@@ -353,7 +360,7 @@ namespace StarCollector.Screen {
         public int getShowRowOfCurrentLevel(){
             switch(Singleton.Instance.currentLevel){
                 case 1:
-                    return 4;
+                    return 1;
                 case 2: case 3:
                     return 5;
                 case 4: case 5:
