@@ -555,17 +555,11 @@
 /processorParam:Quality=Best
 /build:Sound/got_star.wav
 
-#begin Sound/gun_shoot.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
+#begin Sound/gun_shoot(new).mp3
+/importer:Mp3Importer
+/processor:SongProcessor
 /processorParam:Quality=Best
-/build:Sound/gun_shoot.wav
-
-#begin Sound/gun_shoot.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sound/gun_shoot.wav
+/build:Sound/gun_shoot(new).mp3
 
 #begin Sound/menu_select.wav
 /importer:WavImporter
