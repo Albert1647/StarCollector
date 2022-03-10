@@ -14,7 +14,7 @@ namespace StarCollector.Screen {
 		private Texture2D GunTexture,StarTexture,Indicator,BG,StarDiscover, Ceiling,
                             WinWindow,LoseWindow,Mainmenu_button,Continue_button,Continue_button_hover,
                             Mainmenu_button_hover,Retry_button,Retry_button_hover,
-                            Ok_button,Ok_button_hover,Discover_Frame,Ship,Score_Board;
+                            Ok_button,Ok_button_hover,Discover_Frame,Ship,Score_Board,Star_Collect;
 		private Gun gun;
         private float Timer = 0f;
 		public Star[,] star = new Star[23,8];
@@ -71,6 +71,7 @@ namespace StarCollector.Screen {
             Discover_Frame = Content.Load<Texture2D>("gameScreen/discover_frame");
             Ship = Content.Load<Texture2D>("gameScreen/ship");
             Score_Board = Content.Load<Texture2D>("gameScreen/score_board");
+            Star_Collect = Content.Load<Texture2D>("gameScreen/star_Collect");
             
             switch(Singleton.Instance.currentLevel){
                 case 1:
@@ -156,12 +157,15 @@ namespace StarCollector.Screen {
                 }
 
                 if(!dialog){
-                    if(MouseOnTexture(395,600,Ok_button)) {
+                    if(MouseOnTexture(395,435,Ok_button)) {
                         MouseOnOkButton = true;
                         if(IsClick()){
                             dialog = true;
                         }
-                    }
+                    } else {
+                            MouseOnOkButton = false;
+                        }
+
                 } else 
                 if(gameWin && gameComplete){
                     if(MouseOnTexture(395,435,Ok_button)) {
@@ -271,7 +275,14 @@ namespace StarCollector.Screen {
 
             
             if(gameWin && !dialog){
-                _spriteBatch.Draw(Ok_button, new Vector2(452, 412),Color.White);
+                _spriteBatch.Draw(Star_Collect, new Vector2(325, 100),Color.White);
+                if (MouseOnOkButton)
+                {
+                    _spriteBatch.Draw(Ok_button_hover, new Vector2(452, 412),Color.White);
+                }
+                else {
+                    _spriteBatch.Draw(Ok_button, new Vector2(452, 412),Color.White);
+                }
             }
             else if (gameWin && gameComplete) { 
                 // draw WinWindow

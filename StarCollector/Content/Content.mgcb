@@ -116,18 +116,6 @@
 /processorParam:TextureFormat=Color
 /build:CollectionScreen/question.png
 
-#begin CollectionScreen/squareBG.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:CollectionScreen/squareBG.png
-
 #begin CollectionScreen/warp_Five.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -427,6 +415,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:GameScreen/star.png
+
+#begin GameScreen/star_collect.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:GameScreen/star_collect.png
 
 #begin GameScreen/star_in_discover.png
 /importer:TextureImporter
