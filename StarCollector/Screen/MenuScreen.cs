@@ -9,9 +9,12 @@ using Microsoft.Xna.Framework.Audio;
 namespace StarCollector.Screen {
 	class MenuScreen : _GameScreen {
         private SpriteFont Arial;
-        private Texture2D StartButton, StartHover, CollectionButton, CollectionHover ;
-
+        private Texture2D StartButton, StartHover, CollectionButton, CollectionHover,
+                            StarRotate;
         private bool MouseOnStartButton, MouseOnCollectionButton;
+        private float rotate = 0;
+        private int counter = 0;
+        private bool reRotate;
 		public void Initial() {
 
 		}
@@ -22,6 +25,7 @@ namespace StarCollector.Screen {
             StartHover = Content.Load<Texture2D>("MenuScreen/start_button_hover");
             CollectionButton = Content.Load<Texture2D>("MenuScreen/collection_button");
             CollectionHover = Content.Load<Texture2D>("MenuScreen/collection_button_hover");
+            StarRotate = Content.Load<Texture2D>("MenuScreen/star_rotate");
 			Initial();
 		}
 		public override void UnloadContent() {
@@ -31,6 +35,36 @@ namespace StarCollector.Screen {
             // Save Current Mouse Position
             Singleton.Instance.MousePrevious = Singleton.Instance.MouseCurrent;
             Singleton.Instance.MouseCurrent = Mouse.GetState();
+
+            if(!reRotate){
+                counter += 1;
+                if(counter > 50){
+                    rotate = 0;
+                    reRotate = !reRotate;
+                    counter = 0;
+                }
+            }
+
+            if(reRotate){
+                counter += 1;
+                if(counter > 50){
+                    rotate = 60;
+                    reRotate = !reRotate;
+                    counter = 0;
+                }
+            }
+
+            // if(!reRotate){
+            //     rotate += 3;
+            //     if(rotate >= 360)
+            //         reRotate = !reRotate;
+            // }
+
+            // if(reRotate){
+            //     rotate -= 3;
+            //     if(rotate <= 0)
+            //         reRotate = !reRotate;
+            // }
 
             // Check mouse on UI
             if(MouseOnElement(600, 680, 280,300)){
@@ -53,11 +87,15 @@ namespace StarCollector.Screen {
 			base.Update(gameTime);
 		}
 		public override void Draw(SpriteBatch _spriteBatch) {
+            _spriteBatch.Draw(StarRotate, new Vector2(200, 370), null, Color.White, MathHelper.ToRadians(rotate) , new Vector2(StarRotate.Width / 2, StarRotate.Height/2), 0.5f, SpriteEffects.None, 0f);
+            _spriteBatch.Draw(StarRotate, new Vector2(800, 370), null, Color.White, MathHelper.ToRadians(rotate) , new Vector2(StarRotate.Width / 2, StarRotate.Height/2), 0.5f, SpriteEffects.None, 0f);
             _spriteBatch.DrawString(Arial, "X = " + Singleton.Instance.MouseCurrent.X , new Vector2(0,0), Color.Black);
             _spriteBatch.DrawString(Arial, "Y = " + Singleton.Instance.MouseCurrent.Y, new Vector2(0, 40), Color.Black);
             _spriteBatch.DrawString(Arial, "Click ?  " + IsClick(), new Vector2(0, 60), Color.Black);
             _spriteBatch.DrawString(Arial, "Mouse on Start ?  " + MouseOnStartButton, new Vector2(0, 80), Color.Black);
             _spriteBatch.DrawString(Arial, "Mouse on Collection ?  " + MouseOnCollectionButton, new Vector2(0, 100), Color.Black);
+            _spriteBatch.DrawString(Arial, "Roatation ?  " + rotate, new Vector2(0, 120), Color.Black);
+
             // Swap Texture If mouseHover 
             if(MouseOnStartButton)
                 _spriteBatch.Draw(StartHover, CenterElementWithHeight(StartHover,260) , Color.White);

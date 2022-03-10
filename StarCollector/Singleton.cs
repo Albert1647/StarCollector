@@ -14,7 +14,7 @@ namespace StarCollector
 		private Random random = new Random();
 		public bool IsShooting;
 		public int Score = 0;
-		public int currentLevel = 1;
+		public int currentLevel = 6;
 
 		public int STARHITBOX = 74;
 		public int rowGapClosing = 10;

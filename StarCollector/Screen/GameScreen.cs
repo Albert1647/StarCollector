@@ -135,13 +135,20 @@ namespace StarCollector.Screen {
                 if(gameWin && Singleton.Instance.currentLevel == 6){
                     gameComplete = true;
                 }
-            }
-             else {
+            } else {
                 //  On Dialog
                  Singleton.Instance.MousePrevious = Singleton.Instance.MouseCurrent;
                  Singleton.Instance.MouseCurrent = Mouse.GetState();
                  if(gameWin && gameComplete){
-                     
+                    if(MouseOnTexture(395,435,Mainmenu_button)) {
+                        MouseOnMainButton = true;
+                        if(IsClick()){
+                            Singleton.Instance.currentLevel = 1;
+                            ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
+                        }
+                    } else {
+                        MouseOnMainButton = false;
+                    }
                  }else if (gameWin) {
                     // MainMenu Button
                      if(MouseOnTexture(395,435,Mainmenu_button)) {
@@ -195,9 +202,9 @@ namespace StarCollector.Screen {
                         }
                     } else {
                         MouseOnRetryButton = false;
-                }  
-            }    
-        }
+                    }
+                }    
+            }
         base.Update(gameTime);
     }
         public override void Draw(SpriteBatch _spriteBatch) {
@@ -218,6 +225,8 @@ namespace StarCollector.Screen {
                         star[i, j].Draw(_spriteBatch);
                 }
             }
+
+
             // draw gun
 			gun.Draw(_spriteBatch);
 
@@ -228,7 +237,17 @@ namespace StarCollector.Screen {
             _spriteBatch.DrawString(Arial, "level = " + Singleton.Instance.currentLevel, new Vector2(0, 300), Color.Black);
             _spriteBatch.Draw(StarDiscover, new Vector2(1120, 110),Color.White);
             
-            if (gameWin) {
+            if (gameWin && gameComplete) {
+                // draw WinWindow
+                _spriteBatch.Draw(WinWindow, new Vector2(325, 100),Color.White);
+                if (MouseOnMainButton)
+                {
+                    _spriteBatch.Draw(Mainmenu_button_hover, new Vector2(272, 412),Color.White);
+                }
+                else {
+                    _spriteBatch.Draw(Mainmenu_button, new Vector2(272, 412),Color.White);
+                }
+            } else if (gameWin) {
                 // draw WinWindow
                 _spriteBatch.Draw(WinWindow, new Vector2(325, 100),Color.White);
                 if (MouseOnMainButton)
@@ -303,7 +322,7 @@ namespace StarCollector.Screen {
                 case 5:
                     return 14;
                 case 6:
-                    return 16;
+                    return 3;
                 default:
                     return 8;
             }
@@ -317,7 +336,7 @@ namespace StarCollector.Screen {
                 case 4: case 5:
                     return 6;
                 case 6:
-                    return 7;
+                    return 3;
                 default:
                     return 4;
             }
