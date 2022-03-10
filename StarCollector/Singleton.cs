@@ -25,24 +25,24 @@ namespace StarCollector
 
 		public Color GetColor(){
 			List<Color> color = new List<Color>();
-			color.Add(new Color(255 ,85, 85));
-			color.Add(new Color(64, 64, 184));
-			color.Add(new Color(72, 200, 72));
-			color.Add(new Color(255, 255, 25));
+			color.Add(new Color(255 ,85, 85)); // red
+			color.Add(new Color(64, 64, 184)); // blue
+			color.Add(new Color(72, 200, 72)); // green
+			color.Add(new Color(255, 255, 25)); // yellow
 			switch(Singleton.Instance.currentLevel){
 				case 1 : case 2 : 
 					break;
 				case 3 : 
-					color.Add(new Color(149, 85, 213));
+					color.Add(new Color(149, 85, 213)); // purple
 					break;
 				case 4 : case 5 : 
-					color.Add(new Color(149, 85, 213));
-					color.Add(new Color(255, 255, 255));
+					color.Add(new Color(149, 85, 213)); // purple
+					color.Add(new Color(255, 255, 255)); // white
 					break;
 				case 6 :
-					color.Add(new Color(149, 85, 213));
-					color.Add(new Color(255, 255, 255));
-					color.Add(new Color(72, 136, 200));
+					color.Add(new Color(149, 85, 213)); // purple
+					color.Add(new Color(255, 255, 255)); // white
+					color.Add(new Color(72, 136, 200)); // skyblue
 					break;
 				default :
 					break;
