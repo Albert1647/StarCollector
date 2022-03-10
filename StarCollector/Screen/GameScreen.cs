@@ -58,6 +58,7 @@ namespace StarCollector.Screen {
             Mainmenu_button = Content.Load<Texture2D>("gameScreen/mainmenu_button");
             Mainmenu_button_hover = Content.Load<Texture2D>("gameScreen/mainmenu_button_hover");
             Continue_button = Content.Load<Texture2D>("gameScreen/continue_button");
+            Continue_button_hover = Content.Load<Texture2D>("gameScreen/continue_button_hover");
             Retry_button = Content.Load<Texture2D>("gameScreen/retry_button");
             Retry_button_hover = Content.Load<Texture2D>("gameScreen/retry_button_hover");
             
@@ -130,20 +131,32 @@ namespace StarCollector.Screen {
                             gameWin = false;
                         } 
                     }
-                }   
+                }
+                if(gameWin && Singleton.Instance.currentLevel == 6){
+                    gameComplete = true;
+                }
             }
              else {
+                //  On Dialog
                  Singleton.Instance.MousePrevious = Singleton.Instance.MouseCurrent;
                  Singleton.Instance.MouseCurrent = Mouse.GetState();
-                 if (gameWin) {
+                 if(gameWin && gameComplete){
+                     
+                 }else if (gameWin) {
+                    // MainMenu Button
                      if(MouseOnTexture(395,435,Mainmenu_button)) {
                         MouseOnMainButton = true;
                         if(IsClick()){
+                            if(Singleton.Instance.currentLevel < 6)
+                            {
+                                Singleton.Instance.currentLevel += 1;
+                            }
                             ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
                         }
                     } else {
                         MouseOnMainButton = false;
                     }
+                    // Continue Button
                     if(MouseOnTexture(758,425,Continue_button)) {
                         MouseOnContinueButton = true;
                         if(IsClick()){
@@ -157,14 +170,15 @@ namespace StarCollector.Screen {
                                     }
                                     ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.GameScreen);
                                 } else {
-                                gameComplete = true;
+                                    gameComplete = true;
                                 }                        
                             }
                         }
                     } else {
                         MouseOnContinueButton = false;
-                }  
+                    }  
                  } else {
+                    // MainMenu Button
                     if(MouseOnElement(395,548,435,452)) {
                         MouseOnMainButton = true;
                         if(IsClick()){
@@ -173,6 +187,7 @@ namespace StarCollector.Screen {
                     } else {
                         MouseOnMainButton = false;
                     }
+                    // Retry Button
                     if(MouseOnElement(758,835,425,448)) {
                         MouseOnRetryButton = true;
                         if(IsClick()){
@@ -230,9 +245,6 @@ namespace StarCollector.Screen {
                 else {
                     _spriteBatch.Draw(Continue_button, new Vector2(600, 412),Color.White);
                 }
-
-                 _spriteBatch.Draw(Mainmenu_button_hover, new Vector2(272, 412),Color.White);
-                 _spriteBatch.Draw(Continue_button, new Vector2(600, 412),Color.White);
             }  
             //gameOver == true
             if (gameOver){
@@ -281,7 +293,7 @@ namespace StarCollector.Screen {
         public int getRowOfCurrentLevel(){
             switch(Singleton.Instance.currentLevel){
                 case 1:
-                    return 8;
+                    return 4;
                 case 2:
                     return 10;
                 case 3:
