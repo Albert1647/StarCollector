@@ -20,18 +20,6 @@
 /processorParam:TextureFormat=Compressed
 /build:Alien.spritefont;Arial.spritefont
 
-#begin CollectionScreen/bg_collection.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:CollectionScreen/bg_collection.png
-
 #begin CollectionScreen/details_warp_Five.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -127,6 +115,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:CollectionScreen/question.png
+
+#begin CollectionScreen/squareBG.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CollectionScreen/squareBG.png
 
 #begin CollectionScreen/warp_Five.png
 /importer:TextureImporter

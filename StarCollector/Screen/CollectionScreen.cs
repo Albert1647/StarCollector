@@ -11,8 +11,9 @@ namespace StarCollector.Screen
 	class CollectionScreen : _GameScreen
 	{
 		private SpriteFont Arial;
-		private Texture2D squareBG, leave;
-		private Texture2D question, warpOne, warpTwo, warpThree, warpFour, warpFive, warpSix;
+		private Texture2D leave;
+		private Texture2D question, squareBG ;
+		private Texture2D warpOne, warpTwo, warpThree, warpFour, warpFive, warpSix;
 		private Texture2D detailsWarpOne, detailsWarpTwo, detailsWarpThree, detailsWarpFour, detailsWarpFive, detailsWarpSix;
 		private bool showWarbOne, showWarbTwo, showWarbThree, showWarbFour, showWarbFive, showWarbSix;
 		private bool showWarbOnedraw, showWarbTwodraw, showWarbThreedraw, showWarbFourdraw, showWarbFivedraw, showWarbSixdraw;
@@ -25,9 +26,7 @@ namespace StarCollector.Screen
 			base.LoadContent();
 			//location file
 			Arial = Content.Load<SpriteFont>("Arial");
-			squareBG = Content.Load<Texture2D>("CollectionScreen/bg_collection");
 			leave = Content.Load<Texture2D>("CollectionScreen/leave");
-			question = Content.Load<Texture2D>("CollectionScreen/question");
 			warpOne = Content.Load<Texture2D>("CollectionScreen/warp_One");
 			warpTwo = Content.Load<Texture2D>("CollectionScreen/warp_Two");
 			warpThree = Content.Load<Texture2D>("CollectionScreen/warp_Three");
@@ -40,6 +39,8 @@ namespace StarCollector.Screen
 			detailsWarpFour = Content.Load<Texture2D>("CollectionScreen/details_warp_Four");
 			detailsWarpFive = Content.Load<Texture2D>("CollectionScreen/details_warp_Five");
 			detailsWarpSix = Content.Load<Texture2D>("CollectionScreen/details_warp_Six");
+			question = Content.Load<Texture2D>("CollectionScreen/question");
+			squareBG = Content.Load<Texture2D>("CollectionScreen/squareBG");
 
 			Initial();
 		}
@@ -53,8 +54,8 @@ namespace StarCollector.Screen
 			Singleton.Instance.MousePrevious = Singleton.Instance.MouseCurrent;
 			Singleton.Instance.MouseCurrent = Mouse.GetState();
 
-			// Leave to menu
-			if (MouseOnElement(1140, 1204, 70, 135))
+			// Leave to menu 1150, 80
+			if (MouseOnElement(1150, 1196, 80, 118))
 			{
 				if (IsClick())
 				{
@@ -74,7 +75,7 @@ namespace StarCollector.Screen
 					}
 				}
 				// Leave to showWarbOne
-				if (MouseOnElement(1140, 1204, 70, 135) && showWarbOne)
+				if (MouseOnElement(1150, 1196, 80, 118) && showWarbOne)
 				{
 					showWarbOnedraw = true;
 					if (IsClick())
@@ -97,7 +98,7 @@ namespace StarCollector.Screen
 					}
 				}
 				// Leave to showWarbTwo
-				if (MouseOnElement(1140, 1204, 70, 135) && showWarbTwo)
+				if (MouseOnElement(1150, 1196, 80, 118) && showWarbTwo)
 				{
 					showWarbTwodraw = true;
 					if (IsClick())
@@ -120,7 +121,7 @@ namespace StarCollector.Screen
 					}
 				}
 				// Leave to showWarbThree
-				if (MouseOnElement(1140, 1204, 70, 135) && showWarbThree)
+				if (MouseOnElement(1150, 1196, 80, 118) && showWarbThree)
 				{
 					showWarbThreedraw = true;
 					if (IsClick())
@@ -143,7 +144,7 @@ namespace StarCollector.Screen
 					}
 				}
 				// Leave to showWarbThree
-				if (MouseOnElement(1140, 1204, 70, 135) && showWarbFour)
+				if (MouseOnElement(1150, 1196, 80, 118) && showWarbFour)
 				{
 					showWarbFourdraw = true;
 					if (IsClick())
@@ -166,7 +167,7 @@ namespace StarCollector.Screen
 					}
 				}
 				// Leave to showWarbFive
-				if (MouseOnElement(1140, 1204, 70, 135) && showWarbFive)
+				if (MouseOnElement(1150, 1196, 80, 118) && showWarbFive)
 				{
 					showWarbFivedraw = true;
 					if (IsClick())
@@ -189,7 +190,7 @@ namespace StarCollector.Screen
 					}
 				}
 				// Leave to showWarbFive
-				if (MouseOnElement(1140, 1204, 70, 135) && showWarbSix)
+				if (MouseOnElement(1150, 1196, 80, 118) && showWarbSix)
 				{
 					showWarbSixdraw = true;
 					if (IsClick())
@@ -204,47 +205,48 @@ namespace StarCollector.Screen
 		}
 		public override void Draw(SpriteBatch _spriteBatch)
 		{
-			//Draw squareBG
+			//Draw question BG 
 			_spriteBatch.Draw(squareBG, new Rectangle(50, 50, 1280 - 100, 720 - 100), Color.White);
 			//Draw Leave Button
-			_spriteBatch.Draw(leave, new Rectangle(1140, 70, leave.Width, leave.Height), Color.White);
+			_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
+
 			//question
-			_spriteBatch.Draw(question, new Rectangle(141, 157, question.Width, question.Height), Color.White);
-			_spriteBatch.Draw(question, new Rectangle(540, 157, question.Width, question.Height), Color.White);
-			_spriteBatch.Draw(question, new Rectangle(939, 157, question.Width, question.Height), Color.White);
-			_spriteBatch.Draw(question, new Rectangle(141, 407, question.Width, question.Height), Color.White);
-			_spriteBatch.Draw(question, new Rectangle(540, 407, question.Width, question.Height), Color.White);
-			_spriteBatch.Draw(question, new Rectangle(939, 407, question.Width, question.Height), Color.White);
+			_spriteBatch.Draw(question, new Rectangle(195, 100, 196, 220), Color.White);
+			_spriteBatch.Draw(question, new Rectangle(542, 100, 196, 220), Color.White);
+			_spriteBatch.Draw(question, new Rectangle(889, 100, 196, 220), Color.White);
+			_spriteBatch.Draw(question, new Rectangle(195, 412, 196, 220), Color.White);
+			_spriteBatch.Draw(question, new Rectangle(542, 412, 196, 220), Color.White);
+			_spriteBatch.Draw(question, new Rectangle(889, 412, 196, 220), Color.White);
 			//Draw Star
 			//draw star 1 when win
 			if (Singleton.Instance.clearStar > 0)
 			{
-				_spriteBatch.Draw(warpOne, new Rectangle(141, 157, warpOne.Width, warpOne.Height), Color.White);
+				_spriteBatch.Draw(warpOne, new Rectangle(195, 100, 196, 220), Color.White);
 			}
 			//draw star 2 when win
 			if (Singleton.Instance.clearStar > 1)
 			{
-				_spriteBatch.Draw(warpTwo, new Rectangle(540, 157, warpTwo.Width, warpTwo.Height), Color.White);
+				_spriteBatch.Draw(warpTwo, new Rectangle(542, 100, warpTwo.Width, warpTwo.Height), Color.White);
 			}
 			//draw star 3 when win
 			if (Singleton.Instance.clearStar > 2)
 			{
-				_spriteBatch.Draw(warpThree, new Rectangle(939, 157, warpThree.Width, warpThree.Height), Color.White);
+				_spriteBatch.Draw(warpThree, new Rectangle(889, 100, warpThree.Width, warpThree.Height), Color.White);
 			}
 			//draw star 4 when win
 			if (Singleton.Instance.clearStar > 3)
 			{
-				_spriteBatch.Draw(warpFour, new Rectangle(141, 407, warpFour.Width, warpFour.Height), Color.White);
+				_spriteBatch.Draw(warpFour, new Rectangle(195, 412, warpFour.Width, warpFour.Height), Color.White);
 			}
 			//draw star 5 when win
 			if (Singleton.Instance.clearStar > 4)
 			{
-				_spriteBatch.Draw(warpFive, new Rectangle(540, 407, warpFive.Width, warpFive.Height), Color.White);
+				_spriteBatch.Draw(warpFive, new Rectangle(542, 412, warpFive.Width, warpFive.Height), Color.White);
 			}
 			//draw star 6 when win
 			if (Singleton.Instance.clearStar > 5)
 			{
-				_spriteBatch.Draw(warpSix, new Rectangle(939, 407, warpSix.Width, warpSix.Height), Color.White);
+				_spriteBatch.Draw(warpSix, new Rectangle(889, 412, warpSix.Width, warpSix.Height), Color.White);
 			}
 
 			//mouse
@@ -259,49 +261,49 @@ namespace StarCollector.Screen
 			if (showWarbOne)
 			{
 				//Draw details Star 1
-				_spriteBatch.Draw(detailsWarpOne, new Rectangle(57, 57, 1280 - 114, 720 - 114), Color.White);
+				_spriteBatch.Draw(detailsWarpOne, new Rectangle(50, 50, 1280 - 100, 720 - 100), Color.White);
 				//Draw Leave Button
-				_spriteBatch.Draw(leave, new Rectangle(1140, 70, leave.Width, leave.Height), Color.White);
+				_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
 			}
 			// details Star 2
 			if (showWarbTwo)
 			{
 				//Draw details Star 2
-				_spriteBatch.Draw(detailsWarpTwo, new Rectangle(57, 57, 1280 - 114, 720 - 114), Color.White);
+				_spriteBatch.Draw(detailsWarpTwo, new Rectangle(50, 50, 1280 - 100, 720 - 100), Color.White);
 				//Draw Leave Button
-				_spriteBatch.Draw(leave, new Rectangle(1140, 70, leave.Width, leave.Height), Color.White);
+				_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
 			}
 			// details Star 3
 			if (showWarbThree)
 			{
 				//Draw details Star 3
-				_spriteBatch.Draw(detailsWarpThree, new Rectangle(57, 57, 1280 - 114, 720 - 114), Color.White);
+				_spriteBatch.Draw(detailsWarpThree, new Rectangle(50, 50, 1280 - 100, 720 - 100), Color.White);
 				//Draw Leave Button
-				_spriteBatch.Draw(leave, new Rectangle(1140, 70, leave.Width, leave.Height), Color.White);
+				_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
 			}
 			// details Star 4
 			if (showWarbFour)
 			{
 				//Draw details Star 4
-				_spriteBatch.Draw(detailsWarpFour, new Rectangle(57, 57, 1280 - 114, 720 - 114), Color.White);
+				_spriteBatch.Draw(detailsWarpFour, new Rectangle(50, 50, 1280 - 100, 720 - 100), Color.White);
 				//Draw Leave Button
-				_spriteBatch.Draw(leave, new Rectangle(1140, 70, leave.Width, leave.Height), Color.White);
+				_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
 			}
 			//details Star 5
 			if (showWarbFive)
 			{
 				//Draw details Star 5
-				_spriteBatch.Draw(detailsWarpFive, new Rectangle(57, 57, 1280 - 114, 720 - 114), Color.White);
+				_spriteBatch.Draw(detailsWarpFive, new Rectangle(50, 50, 1280 - 100, 720 - 100), Color.White);
 				//Draw Leave Button
-				_spriteBatch.Draw(leave, new Rectangle(1140, 70, leave.Width, leave.Height), Color.White);
+				_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
 			}
 			//details Star 6
 			if (showWarbSix)
 			{
 				//Draw details Star 6
-				_spriteBatch.Draw(detailsWarpSix, new Rectangle(57, 57, 1280 - 114, 720 - 114), Color.White);
+				_spriteBatch.Draw(detailsWarpSix, new Rectangle(50, 50, 1280 - 100, 720 - 100), Color.White);
 				//Draw Leave Button
-				_spriteBatch.Draw(leave, new Rectangle(1140, 70, leave.Width, leave.Height), Color.White);
+				_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
 			}
 			_spriteBatch.DrawString(Arial, "Mouse on Start ?  " + showWarbOnedraw, new Vector2(0, 80), Color.Black);
 
