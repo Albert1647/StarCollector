@@ -106,9 +106,9 @@ namespace StarCollector.Screen {
                 
                 Singleton.Instance.oldCeilingY = Singleton.Instance.ceilingY;
                 Timer += (float)gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
-                if(Timer >= getTimePerUpdate()){
+                if(Timer >= getLevelTimePerUpdate()){
                     Singleton.Instance.ceilingY += StarTexture.Height;
-                    Timer -= getTimePerUpdate();
+                    Timer = 0;
                 }
                 // if star reach bottom boundary -> GameOver
                 for(int i = 0 ; i < star.GetLength(0) ; i++){
@@ -209,7 +209,7 @@ namespace StarCollector.Screen {
 		}
 
 
-        public float getTimePerUpdate(){
+        public float getLevelTimePerUpdate(){
             switch(Singleton.Instance.currentLevel){
                 case 1:
                     return 12f;
