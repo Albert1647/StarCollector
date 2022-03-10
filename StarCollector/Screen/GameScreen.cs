@@ -15,7 +15,7 @@ namespace StarCollector.Screen {
                             WinWindow,LoseWindow,Mainmenu_button,Continue_button,Continue_button_hover,
                             Mainmenu_button_hover,Retry_button,Retry_button_hover,
                             Ok_button,Ok_button_hover,Discover_Frame,Ship,Score_Board,Star_Collect,
-                            Warp_One,Warp_Two,Warp_Three,Warp_Four,Warp_Five,Warp_Six;
+                            Warp;
 		private Gun gun;
         private float Timer = 0f;
 		public Star[,] star = new Star[23,8];
@@ -76,22 +76,22 @@ namespace StarCollector.Screen {
             
             switch(Singleton.Instance.currentLevel){
                 case 1:
-                    Warp_One = Content.Load<Texture2D>("gameScreen/warp_One");
+                    Warp = Content.Load<Texture2D>("gameScreen/warp_One");
                 break;
                 case 2:
-                    Warp_Two = Content.Load<Texture2D>("gameScreen/warp_Two");
+                    Warp = Content.Load<Texture2D>("gameScreen/warp_Two");
                 break;
                 case 3:
-                    Warp_Three = Content.Load<Texture2D>("gameScreen/warp_Three");
+                    Warp = Content.Load<Texture2D>("gameScreen/warp_Three");
                 break;
                 case 4:
-                    Warp_Four = Content.Load<Texture2D>("gameScreen/warp_Four");
+                    Warp = Content.Load<Texture2D>("gameScreen/warp_Four");
                 break;
                 case 5:
-                    Warp_Five = Content.Load<Texture2D>("gameScreen/warp_Five");
+                    Warp = Content.Load<Texture2D>("gameScreen/warp_Five");
                 break;
                 case 6:
-                    Warp_Six = Content.Load<Texture2D>("gameScreen/warp_Six");
+                    Warp = Content.Load<Texture2D>("gameScreen/warp_Six");
                 break;
             }
             Initial();
@@ -269,7 +269,7 @@ namespace StarCollector.Screen {
             // draw Discover_Frame
             _spriteBatch.Draw(Discover_Frame, new Vector2(1000, 60),Color.White);
             _spriteBatch.Draw(Ship, new Vector2(1095, 370),Color.White);
-            // _spriteBatch.Draw(StarDiscover, new Vector2(1055, 85),Color.White);
+            _spriteBatch.Draw(Warp, new Vector2(1055, 85),Color.White);
 
             // check level
             _spriteBatch.DrawString(Arial, "level = " + Singleton.Instance.currentLevel, new Vector2(0, 300), Color.Black);
