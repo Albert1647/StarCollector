@@ -14,7 +14,7 @@ namespace StarCollector.Screen {
 		private Texture2D GunTexture,StarTexture,Indicator,BG,StarDiscover, Ceiling,
                             WinWindow,LoseWindow,Mainmenu_button,Continue_button,Continue_button_hover,
                             Mainmenu_button_hover,Retry_button,Retry_button_hover,
-                            Ok_button,Ok_button_hover;
+                            Ok_button,Ok_button_hover,Discover_Frame,Ship,Score_Board;
 		private Gun gun;
         private float Timer = 0f;
 		public Star[,] star = new Star[23,8];
@@ -66,6 +66,9 @@ namespace StarCollector.Screen {
             Retry_button_hover = Content.Load<Texture2D>("gameScreen/retry_button_hover");
             Ok_button = Content.Load<Texture2D>("gameScreen/ok_button");
             Ok_button_hover = Content.Load<Texture2D>("gameScreen/ok_button_hover");
+            Discover_Frame = Content.Load<Texture2D>("gameScreen/discover_frame");
+            Ship = Content.Load<Texture2D>("gameScreen/ship");
+            Score_Board = Content.Load<Texture2D>("gameScreen/score_board");
             
             switch(Singleton.Instance.currentLevel){
                 case 1:
@@ -156,7 +159,7 @@ namespace StarCollector.Screen {
                     }
                  }else if (gameWin) {
                     // MainMenu Button
-                     if(MouseOnTexture(395,435,Mainmenu_button)) {
+                     if(MouseOnElement(395,535,435,452)) {
                         MouseOnMainButton = true;
                         if(IsClick()){
                             if(Singleton.Instance.currentLevel < 6)
@@ -169,7 +172,7 @@ namespace StarCollector.Screen {
                         MouseOnMainButton = false;
                     }
                     // Continue Button
-                    if(MouseOnTexture(758,425,Continue_button)) {
+                    if(MouseOnElement(736,862,435,452)) {
                         MouseOnContinueButton = true;
                         if(IsClick()){
                             if (gameWin == true) {                       
@@ -214,6 +217,7 @@ namespace StarCollector.Screen {
     }
         public override void Draw(SpriteBatch _spriteBatch) {
 			_spriteBatch.Draw(BG, Vector2.Zero, Color.White);
+            _spriteBatch.Draw(Ceiling, new Vector2(0, Singleton.Instance.ceilingY - Ceiling.Height),Color.White);
             _spriteBatch.DrawString(Arial, "X = " + Singleton.Instance.MouseCurrent.X , new Vector2(0,0), Color.Black);
             _spriteBatch.DrawString(Arial, "Y = " + Singleton.Instance.MouseCurrent.Y, new Vector2(0, 40), Color.Black);
 			_spriteBatch.DrawString(Arial, "Is Shooting = " + Singleton.Instance.IsShooting , new Vector2(0,60), Color.Black);
@@ -235,14 +239,21 @@ namespace StarCollector.Screen {
             // draw gun
 			gun.Draw(_spriteBatch);
             FontWidth = scoreFont.MeasureString(Singleton.Instance.Score.ToString());
+
             // draw score
+            _spriteBatch.Draw(Score_Board, new Vector2(42, 54),Color.White);
             _spriteBatch.DrawString(scoreFont,Singleton.Instance.Score.ToString(), new Vector2(150-FontWidth.X/2, 80), Color.Black);
+            
+            // draw Discover_Frame
+            _spriteBatch.Draw(Discover_Frame, new Vector2(1000, 60),Color.White);
+            _spriteBatch.Draw(Ship, new Vector2(1095, 370),Color.White);
+            _spriteBatch.Draw(StarDiscover, new Vector2(1055, 85),Color.White);
 
             // check level
             _spriteBatch.DrawString(Arial, "level = " + Singleton.Instance.currentLevel, new Vector2(0, 300), Color.Black);
 
-            _spriteBatch.Draw(Ceiling, new Vector2(0, Singleton.Instance.ceilingY - Ceiling.Height),Color.White);
-            _spriteBatch.Draw(StarDiscover, new Vector2(1120, 110),Color.White);
+            
+            
             
             if (gameWin && gameComplete) { 
                 // draw WinWindow
