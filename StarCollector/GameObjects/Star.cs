@@ -34,6 +34,23 @@ namespace StarCollector.GameObjects {
 					IsActive = false;
 					Singleton.Instance.IsShooting = false;
 					Singleton.Instance.Score -= 10;
+					
+					int block = (int)Math.Ceiling(((GetMiddleOfStar(pos).X - leftWallX) / _texture.Width)) - 1;
+					starArray[0, block] = this;
+					starArray[0, block].pos = new Vector2(leftWallX + (block * _texture.Width) + ((0) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (0) * (_texture.Height - Singleton.Instance.rowGapClosing)));
+					CheckRemoveBubble(starArray, _starColor, new Vector2(block ,0));
+					if (Singleton.Instance.RemovableStar.Count > 0) {
+						// Redraw 
+						foreach (Vector2 v in Singleton.Instance.RemovableStar) {
+							starArray[(int)v.Y, (int)v.X] = new Star(_texture) {
+							pos = new Vector2(leftWallX + (v.X * _texture.Width) + ((v.Y) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (v.Y) * (_texture.Height-Singleton.Instance.rowGapClosing))),
+							_starColor = _starColor,
+							IsActive = false
+							};
+						}
+					}
+					Singleton.Instance.RemovableStar.Clear();
+					
 				}
 				// If ball collision left
 				if (pos.X <= 326) {
@@ -173,7 +190,7 @@ namespace StarCollector.GameObjects {
 		}
 		
 		public Vector2 GetMiddleOfStar(Vector2 star){
-			return new Vector2(star.X + 50  , star.Y  + 50);
+			return new Vector2(star.X + _texture.Width / 2  , star.Y  + _texture.Width / 2);
 		}
 		// Check hanging star
 		public Star[,] CheckLeftOver(Star[,] starArray){
