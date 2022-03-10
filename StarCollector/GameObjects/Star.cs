@@ -34,7 +34,6 @@ namespace StarCollector.GameObjects {
 					IsActive = false;
 					Singleton.Instance.IsShooting = false;
 					Singleton.Instance.Score -= 10;
-					Singleton.Instance.ceilingY += (_texture.Width * 2);
 				}
 				// If ball collision left
 				if (pos.X <= 326) {
@@ -60,8 +59,8 @@ namespace StarCollector.GameObjects {
 						// if hit bottom right of star
 						if (GetMiddleOfStar(pos).X >= GetMiddleOfStar(starArray[i, j].pos).X) {
 							if (i % 2 == 0) {
-								// last row of even row	
-								if (j == starArray.GetLength(1)) {	
+								// Row With no gap left
+								if (j == starArray.GetLength(1) - 1) {	
 									if(starArray[i + 1, j - 1] == null){
 										starArray[i + 1, j - 1] = this;
 										starArray[i + 1, j - 1].pos = new Vector2(leftWallX + ((j - 1) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i + 1) * (_texture.Height-10)));
@@ -83,19 +82,32 @@ namespace StarCollector.GameObjects {
 									}
 								}
 							} else {
-								// normal row
-								if(starArray[i + 1, j + 1] == null){
-									starArray[i + 1, j + 1] = this;
-									starArray[i + 1, j + 1].pos = new Vector2(leftWallX + ((j + 1) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i + 1) * (_texture.Height-10)));
-									CheckRemoveBubble(starArray, _starColor, new Vector2(j + 1, i + 1));
+								// Row With gap left
+								if(j == starArray.GetLength(1) - 1){
+									if(starArray[i + 1, j ] == null){
+										starArray[i + 1, j] = this;
+										starArray[i + 1, j].pos = new Vector2(leftWallX + ((j) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i + 1) * (_texture.Height-10)));
+										CheckRemoveBubble(starArray, _starColor, new Vector2(j, i + 1));
+									} else {
+										starArray[i, j] = this;
+										starArray[i, j].pos = new Vector2(leftWallX + ((j) * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i) * (_texture.Height-10)));
+										CheckRemoveBubble(starArray, _starColor, new Vector2(j, i));
+									}
 								} else {
-									starArray[i, j + 1] = this;
-									starArray[i, j + 1].pos = new Vector2(leftWallX + ((j + 1) * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i) * (_texture.Height-10)));
-									CheckRemoveBubble(starArray, _starColor, new Vector2(j, i));
+									if(starArray[i + 1, j + 1] == null){
+										starArray[i + 1, j + 1] = this;
+										starArray[i + 1, j + 1].pos = new Vector2(leftWallX + ((j + 1) * _texture.Width) + ((i + 1) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i + 1) * (_texture.Height-10)));
+										CheckRemoveBubble(starArray, _starColor, new Vector2(j + 1, i + 1));
+									} else {
+										starArray[i, j + 1] = this;
+										starArray[i, j + 1].pos = new Vector2(leftWallX + ((j + 1) * _texture.Width) + ((i) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (i) * (_texture.Height-10)));
+										CheckRemoveBubble(starArray, _starColor, new Vector2(j, i));
+									}
 								}
 							}
 						} else {
 						// if hit bottom left of star 
+							// Row With no gap left
 							if (i % 2 == 0) {
 								// bug prevention
 								if( j > 0 ){
@@ -120,6 +132,7 @@ namespace StarCollector.GameObjects {
 										CheckRemoveBubble(starArray, _starColor, new Vector2(j, i + 1));
 									}
 								}
+							// Row With gap left
 							} else {
 								if(starArray[i + 1, j] == null){
 									starArray[(i + 1), j] = this;
@@ -220,8 +233,8 @@ namespace StarCollector.GameObjects {
 			return (int)Math.Sqrt(Math.Pow(currentPos.X - starPos.X, 2) + Math.Pow(currentPos.Y - starPos.Y, 2)) <= starDelimeter;
 		}
 
-		public bool StarIsEmpty(Star starArray){
-			return starArray == null;
+		public bool StarIsEmpty(Star star){
+			return star == null;
 		}
 
 		public override void Draw(SpriteBatch _spriteBatch) {

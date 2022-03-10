@@ -36,86 +36,16 @@ namespace StarCollector.Screen {
 				_gunColor = Color.White
             };
 
-             switch(Singleton.Instance.currentLevel){
-                case 1:
-                    Singleton.Instance.ceilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
-                    Singleton.Instance.oldCeilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
-                    for(int i = 0 ; i < getRowOfCurrentLevel(); i++){
-                    for(int j = 0 ; j < star.GetLength(1) ; j++){
-                        star[i,j] = new Star(StarTexture){
-                            IsActive = false,
-                            pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
-                            _starColor = Singleton.Instance.GetColor()
-                        };
-                    }
-                }
-                break;
-                case 2:
-                    Singleton.Instance.ceilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
-                    Singleton.Instance.oldCeilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
-                    for(int i = 0 ; i < getRowOfCurrentLevel(); i++){
-                    for(int j = 0 ; j < star.GetLength(1) ; j++){
-                        star[i,j] = new Star(StarTexture){
-                            IsActive = false,
-                            pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
-                            _starColor = Singleton.Instance.GetColor()
-                        };
-                    }
-                }
-                break;
-                case 3:
-                    Singleton.Instance.ceilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
-                    Singleton.Instance.oldCeilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
-                    for(int i = 0 ; i < getRowOfCurrentLevel(); i++){
-                    for(int j = 0 ; j < star.GetLength(1) ; j++){
-                        star[i,j] = new Star(StarTexture){
-                            IsActive = false,
-                            pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
-                            _starColor = Singleton.Instance.GetColor()
-                        };
-                    }
-                }
-                break;
-                case 4:
-                    Singleton.Instance.ceilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
-                    Singleton.Instance.oldCeilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
-                    for(int i = 0 ; i < getRowOfCurrentLevel(); i++){
-                    for(int j = 0 ; j < star.GetLength(1) ; j++){
-                        star[i,j] = new Star(StarTexture){
-                            IsActive = false,
-                            pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
-                            _starColor = Singleton.Instance.GetColor()
-                        };
-                    }
-                }
-                break;
-                case 5:
-                    Singleton.Instance.ceilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
-                    Singleton.Instance.oldCeilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
-                    for(int i = 0 ; i < getRowOfCurrentLevel(); i++){
-                    for(int j = 0 ; j < star.GetLength(1) ; j++){
-                        star[i,j] = new Star(StarTexture){
-                            IsActive = false,
-                            pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
-                            _starColor = Singleton.Instance.GetColor()
-                        };
-                    }
-                }
-                break;
-                case 6:
-                    Singleton.Instance.ceilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
-                    Singleton.Instance.oldCeilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
-                    for(int i = 0 ; i < getRowOfCurrentLevel(); i++){
-                    for(int j = 0 ; j < star.GetLength(1) ; j++){
-                        star[i,j] = new Star(StarTexture){
-                            IsActive = false,
-                            pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
-                            _starColor = Singleton.Instance.GetColor()
-                        };
-                    }
-                }
-
-                break;
+            Singleton.Instance.ceilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
+            Singleton.Instance.oldCeilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
+            for(int i = 0 ; i < getRowOfCurrentLevel(); i++){
+            for(int j = 0 ; j < star.GetLength(1) ; j++){
+                star[i,j] = new Star(StarTexture){
+                    IsActive = false,
+                    pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-10)))),
+                    _starColor = Singleton.Instance.GetColor()
+                };
+            }
             }
         }
 
@@ -328,6 +258,10 @@ namespace StarCollector.Screen {
                 default:
                     return 4;
             }
+        }
+
+        public bool MouseOnTexture(int StartX, int StartY, Texture2D texture){
+            return (Singleton.Instance.MouseCurrent.X > StartX && Singleton.Instance.MouseCurrent.Y > StartY) && (Singleton.Instance.MouseCurrent.X < StartX + texture.Width && Singleton.Instance.MouseCurrent.Y < StartY + texture.Height);
         }
          public bool MouseOnElement(int x1, int x2, int y1, int y2){
             return (Singleton.Instance.MouseCurrent.X > x1 && Singleton.Instance.MouseCurrent.Y > y1) && (Singleton.Instance.MouseCurrent.X < x2 && Singleton.Instance.MouseCurrent.Y < y2);
