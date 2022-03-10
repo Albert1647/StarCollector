@@ -181,6 +181,9 @@ namespace StarCollector.Screen {
                             if(Singleton.Instance.currentLevel < 6)
                             {
                                 Singleton.Instance.currentLevel += 1;
+                                if(Singleton.Instance.clearStar < 6) {
+                                    Singleton.Instance.clearStar += 1;
+                                }
                             }
                             ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
                         }
@@ -191,19 +194,17 @@ namespace StarCollector.Screen {
                     if(MouseOnElement(736,862,435,452)) {
                         MouseOnContinueButton = true;
                         if(IsClick()){
-                            if (gameWin == true) {                       
-                                if (Singleton.Instance.currentLevel < 6 ) {
-                                    Singleton.Instance.currentLevel += 1;
-                                    Singleton.Instance.ceilingY = 30;
-                                    Singleton.Instance.oldCeilingY = 30;
-                                    if(Singleton.Instance.clearStar < 6) {
-                                        Singleton.Instance.clearStar += 1;
-                                    }
-                                    ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.GameScreen);
-                                } else {
-                                    gameComplete = true;
-                                }                        
-                            }
+                            if (Singleton.Instance.currentLevel < 6 ) {
+                                Singleton.Instance.currentLevel += 1;
+                                Singleton.Instance.ceilingY = 30;
+                                Singleton.Instance.oldCeilingY = 30;
+                                if(Singleton.Instance.clearStar < 6) {
+                                    Singleton.Instance.clearStar += 1;
+                                }
+                                ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.GameScreen);
+                            } else {
+                                gameComplete = true;
+                            }                        
                         }
                     } else {
                         MouseOnContinueButton = false;
