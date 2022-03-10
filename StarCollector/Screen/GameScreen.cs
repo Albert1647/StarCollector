@@ -150,8 +150,13 @@ namespace StarCollector.Screen {
                  Singleton.Instance.MousePrevious = Singleton.Instance.MouseCurrent;
                  Singleton.Instance.MouseCurrent = Mouse.GetState();
                 //checkDialog
+                if(gameOver){
+                    // dont show dialogue
+                    dialog = true;
+                }
+
                 if(!dialog){
-                    if(MouseOnTexture(395,435,Ok_button)) {
+                    if(MouseOnTexture(395,600,Ok_button)) {
                         MouseOnOkButton = true;
                         if(IsClick()){
                             dialog = true;
@@ -352,7 +357,7 @@ namespace StarCollector.Screen {
                 case 5:
                     return 14;
                 case 6:
-                    return 3;
+                    return 1;
                 default:
                     return 8;
             }
@@ -366,7 +371,7 @@ namespace StarCollector.Screen {
                 case 4: case 5:
                     return 6;
                 case 6:
-                    return 3;
+                    return 1;
                 default:
                     return 4;
             }
