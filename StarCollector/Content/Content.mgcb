@@ -578,10 +578,3 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sound/theme.mp3
-
-#begin Sound/theme.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sound/theme.wav
-
