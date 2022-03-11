@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace StarCollector.Screen {
 	class MenuScreen : _GameScreen {
-        private SpriteFont Arial;
+        private SpriteFont Arial, scoreFont;
         private Texture2D StartButton, StartHover, CollectionButton, CollectionHover,
                             StarRotate,Menu_bg;
         private SoundEffect Click, HoverMenu;
@@ -33,6 +33,7 @@ namespace StarCollector.Screen {
             ThemeSong = Content.Load<Song>("Sound/theme");
             Click = Content.Load<SoundEffect>("Sound/click");
             HoverMenu = Content.Load<SoundEffect>("Sound/menu_select");
+            scoreFont = Content.Load<SpriteFont>("kor_bau");
 
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(ThemeSong);
@@ -100,6 +101,7 @@ namespace StarCollector.Screen {
 		}
 		public override void Draw(SpriteBatch _spriteBatch) {
             _spriteBatch.Draw(Menu_bg, new Vector2(0, 0),Color.White);
+            _spriteBatch.DrawString(scoreFont, "Highest Score : " + Singleton.Instance.HighestScore.ToString(), new Vector2(10, 10), Color.White);
             _spriteBatch.Draw(StarRotate, new Vector2(305, 230), null, Color.White, MathHelper.ToRadians(rotate) , new Vector2(StarRotate.Width / 2, StarRotate.Height/2), 0.5f, SpriteEffects.None, 0f);
             _spriteBatch.DrawString(Arial, "X = " + Singleton.Instance.MouseCurrent.X , new Vector2(0,0), Color.Black);
             _spriteBatch.DrawString(Arial, "Y = " + Singleton.Instance.MouseCurrent.Y, new Vector2(0, 40), Color.Black);
