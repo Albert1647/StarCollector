@@ -360,15 +360,6 @@ namespace StarCollector.Screen {
         public override void Draw(SpriteBatch _spriteBatch) {
 			_spriteBatch.Draw(BG, Vector2.Zero, Color.White);
             _spriteBatch.Draw(Ceiling, new Vector2(0, Singleton.Instance.ceilingY - Ceiling.Height),Color.White);
-            _spriteBatch.DrawString(Arial, "X = " + Singleton.Instance.MouseCurrent.X , new Vector2(0,0), Color.Black);
-            _spriteBatch.DrawString(Arial, "Y = " + Singleton.Instance.MouseCurrent.Y, new Vector2(0, 40), Color.Black);
-			_spriteBatch.DrawString(Arial, "Is Shooting = " + Singleton.Instance.IsShooting , new Vector2(0,60), Color.Black);
-            _spriteBatch.DrawString(Arial, "Ceiling = " + Singleton.Instance.ceilingY, new Vector2(0, 160), Color.Black);
-            _spriteBatch.DrawString(Arial, "game is over ?????? = " + gameOver, new Vector2(0, 180), Color.Black);
-            _spriteBatch.DrawString(Arial, "game is win ?????? = " + gameWin, new Vector2(0, 200), Color.Black);
-            _spriteBatch.DrawString(Arial, "Time : " + Timer.ToString("F"), new Vector2(20, 260), Color.Black);
-            _spriteBatch.DrawString(Arial, "MouseOnMainButton ?????? = " + MouseOnMainButton, new Vector2(0, 220), Color.Black);
-
             // draw star
             for (int i = 0; i < star.GetLength(0); i++) {
                 for (int j = 0; j < star.GetLength(1); j++) {
@@ -376,15 +367,13 @@ namespace StarCollector.Screen {
                         star[i, j].Draw(_spriteBatch);
                 }
             }
-
-
             // draw gun
 			gun.Draw(_spriteBatch);
 
             // draw score
             FontWidth = scoreFont.MeasureString(Singleton.Instance.Score.ToString());
             _spriteBatch.Draw(Score_Board, new Vector2(42, 54),Color.White);
-            _spriteBatch.DrawString(scoreFont,Singleton.Instance.Score.ToString(), new Vector2(150-FontWidth.X/2, 80), Color.Black);
+            _spriteBatch.DrawString(scoreFont,Singleton.Instance.Score.ToString(), new Vector2(150-FontWidth.X/2, 80), Color.White);
 
             // draw combo
             if((Singleton.Instance.Combo - 1) >= 2){
@@ -398,9 +387,6 @@ namespace StarCollector.Screen {
             _spriteBatch.Draw(Discover_Frame, new Vector2(1000, 60),Color.White);
             _spriteBatch.Draw(Ship, new Vector2(1095, 370),Color.White);
             _spriteBatch.Draw(Warp, new Vector2(1055 + Warp.Width / 2, 85 + Warp.Height / 2),null, Color.White, rotate, new Vector2(Warp.Width/2 , Warp.Height/2), 1f, SpriteEffects.None, 0f);
-
-            // check level
-            _spriteBatch.DrawString(Arial, "level = " + Singleton.Instance.currentLevel, new Vector2(0, 300), Color.Black);
             
             if(gameWin && !dialog){
                 _spriteBatch.Draw(Star_Collect, new Vector2(325, 100),Color.White);

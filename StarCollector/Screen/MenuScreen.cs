@@ -104,13 +104,6 @@ namespace StarCollector.Screen {
             _spriteBatch.Draw(Menu_bg, new Vector2(0, 0),Color.White);
             _spriteBatch.DrawString(scoreFont, "Highest Score : " + Singleton.Instance.HighestScore.ToString(), new Vector2(10, 10), Color.White);
             _spriteBatch.Draw(StarRotate, new Vector2(305, 230), null, Color.White, MathHelper.ToRadians(rotate) , new Vector2(StarRotate.Width / 2, StarRotate.Height/2), 0.5f, SpriteEffects.None, 0f);
-            _spriteBatch.DrawString(Arial, "X = " + Singleton.Instance.MouseCurrent.X , new Vector2(0,0), Color.Black);
-            _spriteBatch.DrawString(Arial, "Y = " + Singleton.Instance.MouseCurrent.Y, new Vector2(0, 40), Color.Black);
-            _spriteBatch.DrawString(Arial, "Click ?  " + IsClick(), new Vector2(0, 60), Color.Black);
-            _spriteBatch.DrawString(Arial, "Mouse on Start ?  " + MouseOnStartButton, new Vector2(0, 80), Color.Black);
-            _spriteBatch.DrawString(Arial, "Mouse on Collection ?  " + MouseOnCollectionButton, new Vector2(0, 100), Color.Black);
-            _spriteBatch.DrawString(Arial, "Roatation ?  " + rotate, new Vector2(0, 120), Color.Black);
-
             // Swap Texture If mouseHover 
             if(MouseOnStartButton)
                 _spriteBatch.Draw(StartHover, CenterElementWithHeight(StartHover,410) , Color.White);
