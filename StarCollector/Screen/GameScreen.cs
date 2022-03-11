@@ -37,7 +37,8 @@ namespace StarCollector.Screen {
             gun = new Gun(GunTexture, Indicator, StarTexture) {
                 pos = new Vector2(Singleton.Instance.Dimension.X / 2 - GunTexture.Width / 2, 700 - GunTexture.Height),
                 _gunColor = Color.White,
-                _GunShoot = GunShootInstance
+                _GunShoot = GunShootInstance,
+                _Pop = PopInstance
             };
 
             Singleton.Instance.ceilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
@@ -85,6 +86,7 @@ namespace StarCollector.Screen {
             GunShoot = Content.Load<SoundEffect>("Sound/gun_shoot(new)");
             GunShootInstance = GunShoot.CreateInstance();
             Pop = Content.Load<SoundEffect>("Sound/star_pop");
+            PopInstance = Pop.CreateInstance();
             HoverMenu = Content.Load<SoundEffect>("Sound/menu_select");
             ThemeSong = Content.Load<Song>("Sound/theme");
 

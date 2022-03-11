@@ -50,7 +50,8 @@ namespace StarCollector.GameObjects {
 							starArray[(int)v.Y, (int)v.X] = new Star(_texture) {
 							pos = new Vector2(leftWallX + (v.X * _texture.Width) + ((v.Y) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (v.Y) * (_texture.Height-Singleton.Instance.rowGapClosing))),
 							_starColor = _starColor,
-							IsActive = false
+							IsActive = false,
+							_Pop = _Pop
 							};
 						}
 					}
@@ -184,8 +185,9 @@ namespace StarCollector.GameObjects {
 								starArray[(int)v.Y, (int)v.X] = new Star(_texture) {
 								pos = new Vector2(leftWallX + (v.X * _texture.Width) + ((v.Y) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (v.Y) * (_texture.Height-Singleton.Instance.rowGapClosing))),
 								_starColor = _starColor,
-								IsActive = false
-							};
+								IsActive = false,
+								_Pop = _Pop
+								};
 							}
 						}
 						// Clear Removable star

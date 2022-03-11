@@ -13,7 +13,7 @@ namespace StarCollector.GameObjects {
 		private Color _starColor;
 		private Texture2D starTexture;
 		private Texture2D Indicator;
-		public SoundEffectInstance _GunShoot;
+		public SoundEffectInstance _GunShoot, _Pop;
 		private Star star; // star on gun
 		public Color _gunColor;
         private float rotate = 0;
@@ -44,8 +44,8 @@ namespace StarCollector.GameObjects {
 						Angle = aimAngle + MathHelper.Pi,
 						_starColor = _starColor,
 						Speed = 1000,
-						IsActive = true
-
+						IsActive = true,
+						_Pop = _Pop
 					};
 					// update starColor in board
 					checkStarColor(starArray);
