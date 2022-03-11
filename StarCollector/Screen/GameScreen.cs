@@ -91,6 +91,7 @@ namespace StarCollector.Screen {
             ThemeSong = Content.Load<Song>("Sound/theme");
 
             MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume=0.2f;
             MediaPlayer.Play(ThemeSong);
 
             switch (Singleton.Instance.currentLevel){
@@ -229,7 +230,8 @@ namespace StarCollector.Screen {
                 } else 
                 if(gameWin && gameComplete){
                     if(!playGameWin){
-                        GameWin.Play();
+                        MediaPlayer.Pause();
+                        GameWin.Play(0.3f,0.0f,0.0f);
                         playGameWin = true;
                     }
                     if(MouseOnElement(574,729,402,422)) {
@@ -252,7 +254,8 @@ namespace StarCollector.Screen {
                     }
                  } else if (gameWin) {
                      if(!playGameWin){
-                        GameWin.Play();
+                        MediaPlayer.Pause();
+                        GameWin.Play(0.3f,0.0f,0.0f);
                         playGameWin = true;
                      }
                      // Continue Button
@@ -312,6 +315,7 @@ namespace StarCollector.Screen {
                  } else {
                     // Retry Button
                     if(!playGameOver){
+                        MediaPlayer.Pause();
                         GameOver.Play();
                         playGameOver = true;
                     }

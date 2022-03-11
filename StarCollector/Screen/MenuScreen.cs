@@ -36,6 +36,7 @@ namespace StarCollector.Screen {
             scoreFont = Content.Load<SpriteFont>("kor_bau");
 
             MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume=0.2f;
             MediaPlayer.Play(ThemeSong);
             
             Initial();
