@@ -16,13 +16,13 @@ namespace StarCollector
 		public int Score = 0;
 		public int HighestScore = 0;
 		public int Combo = 1;
-		public int currentLevel = 6;
+		public int currentLevel = 1;
 		public int STARHITBOX = 74;
 		public int rowGapClosing = 10;
 		public int oldCeilingY = 30;
 		public int ceilingY = 30;
 		public List<Color> starColor = new List<Color>();
-		public int clearStar = 6;
+		public int clearStar = 1;
 
 		public Color GetColor(){
 			List<Color> color = new List<Color>();

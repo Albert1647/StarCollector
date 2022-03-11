@@ -243,6 +243,7 @@ namespace StarCollector.Screen {
                             Click.Play();
                             Singleton.Instance.currentLevel = 1;
                             Singleton.Instance.HighestScore = Singleton.Instance.Score;
+                            Singleton.Instance.Score = 0;
                             ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
                         }
                     } else {
@@ -272,6 +273,7 @@ namespace StarCollector.Screen {
                                     Singleton.Instance.clearStar += 1;
                                 }
                                 Singleton.Instance.HighestScore = Singleton.Instance.Score;
+                                Singleton.Instance.Score = 0;
                                 ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.GameScreen);
                             } else {
                                 gameComplete = true;
@@ -298,6 +300,7 @@ namespace StarCollector.Screen {
                                     Singleton.Instance.clearStar += 1;
                                 }
                                 Singleton.Instance.HighestScore = Singleton.Instance.Score;
+                                Singleton.Instance.Score = 0;
                             }
                             ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
                         }
@@ -321,6 +324,7 @@ namespace StarCollector.Screen {
                         }
                         if (IsClick()){
                             Click.Play();
+                            Singleton.Instance.Score = 0;
                             ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.GameScreen);
                         }
                     } else {
