@@ -15,10 +15,12 @@ namespace StarCollector.Screen
 		private Texture2D question, squareBG, Menu_bg;
 		private Texture2D warpOne, warpTwo, warpThree, warpFour, warpFive, warpSix;
 		private Texture2D detailsWarpOne, detailsWarpTwo, detailsWarpThree, detailsWarpFour, detailsWarpFive, detailsWarpSix;
+		private SoundEffect Click, HoverMenu;
 		private bool showWarbOne, showWarbTwo, showWarbThree, showWarbFour, showWarbFive, showWarbSix;
-		private bool showWarbOnedraw, showWarbTwodraw, showWarbThreedraw, showWarbFourdraw, showWarbFivedraw, showWarbSixdraw;
 		private bool clickOtherStar = true;
 		private bool showHoverLeave;
+		private bool HoverCloseButton, HoverCloseButtonInStar1, HoverCloseButtonInStar2, HoverCloseButtonInStar3, HoverCloseButtonInStar4, HoverCloseButtonInStar5, HoverCloseButtonInStar6,
+					 HoverStar1, HoverStar2, HoverStar3, HoverStar4, HoverStar5, HoverStar6;
 		public void Initial()
 		{
 
@@ -45,6 +47,8 @@ namespace StarCollector.Screen
 			squareBG = Content.Load<Texture2D>("CollectionScreen/squareBG");
 			Menu_bg = Content.Load<Texture2D>("MenuScreen/menu_bg");
 			HoverLeave = Content.Load<Texture2D>("CollectionScreen/HoverLeave");
+			Click = Content.Load<SoundEffect>("Sound/click");
+			HoverMenu = Content.Load<SoundEffect>("Sound/menu_select");
 
 			Initial();
 		}
@@ -61,36 +65,55 @@ namespace StarCollector.Screen
 			// Leave to menu 1150, 80
 			if (MouseOnElement(1150, 1196, 80, 118) && clickOtherStar)
 			{
+				if(HoverCloseButton == false) {
+					HoverMenu.Play();
+					HoverCloseButton = true;
+                }
 				showHoverLeave = true;
 				if (IsClick())
 				{
+					Click.Play();
 					ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
 				}
 			}else
 			{
 				showHoverLeave = false;
+				HoverCloseButton = false;
 			}
 
 			//unlock star 1 when win
 			if (Singleton.Instance.clearStar > 0)
 			{
+				
 				// Click WarbOne
 				if (MouseOnElement(141, 341, 157, 357) && clickOtherStar)
 				{
-					showWarbOnedraw = true;
+					if (HoverStar1 == false)
+					{
+						HoverMenu.Play();
+						HoverStar1 = true;
+					}
 					if (IsClick())
 					{
+						Click.Play();
 						showWarbOne = true;
-						showWarbOnedraw = false;
 					}
-				}
+				} else 
+				{
+					HoverStar1 = false;
+                }
 				// Leave to showWarbOne
 				if (MouseOnElement(1150, 1196, 80, 118) && showWarbOne && !clickOtherStar)
 				{
 					showHoverLeave = true;
+					if (HoverCloseButtonInStar1 == false)
+					{
+						HoverMenu.Play();
+						HoverCloseButtonInStar1 = true;
+					}
 					if (IsClick())
 					{
-
+						Click.Play();
 						ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
 						clickOtherStar = true;
 					}
@@ -98,6 +121,7 @@ namespace StarCollector.Screen
 				else if (showWarbOne)
 				{
 					showHoverLeave = false;
+					HoverCloseButtonInStar1 = false;
 				}
 			}
 
@@ -107,23 +131,39 @@ namespace StarCollector.Screen
 				// Click WarbTwo
 				if (MouseOnElement(540, 740, 157, 357) && clickOtherStar)
 				{
+					if (HoverStar2 == false)
+					{
+						HoverMenu.Play();
+						HoverStar2 = true;
+					}
 					if (IsClick())
 					{
+						Click.Play();
 						showWarbTwo = true;
 					}
-				}
+				} else
+                {
+					HoverStar2 = false;
+                }
 				// Leave to showWarbTwo
 				if (MouseOnElement(1150, 1196, 80, 118) && showWarbTwo && !clickOtherStar)
 				{
 					showHoverLeave = true;
+					if (HoverCloseButtonInStar2 == false)
+					{
+						HoverMenu.Play();
+						HoverCloseButtonInStar2 = true;
+					}
 					if (IsClick())
 					{
+						Click.Play();
 						ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
 						clickOtherStar = true;
 					}
 				}else if(showWarbTwo)
 				{
 					showHoverLeave = false;
+					HoverCloseButtonInStar2 = false;
 				}
 			}
 
@@ -133,17 +173,32 @@ namespace StarCollector.Screen
 				// Click WarbThree
 				if (MouseOnElement(939, 1139, 157, 357) && clickOtherStar)
 				{
+					if (HoverStar3 == false)
+					{
+						HoverMenu.Play();
+						HoverStar3 = true;
+					}
 					if (IsClick())
 					{
+						Click.Play();
 						showWarbThree = true;
 					}
-				}
+				} else
+                {
+					HoverStar3 = false;
+                }
 				// Leave to showWarbThree
 				if (MouseOnElement(1150, 1196, 80, 118) && showWarbThree && !clickOtherStar)
 				{
 					showHoverLeave = true;
+					if (HoverCloseButtonInStar3 == false)
+					{
+						HoverMenu.Play();
+						HoverCloseButtonInStar3 = true;
+					}
 					if (IsClick())
 					{
+						Click.Play();
 						ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
 						clickOtherStar = true;
 					}
@@ -151,6 +206,7 @@ namespace StarCollector.Screen
 				else if (showWarbThree)
 				{
 					showHoverLeave = false;
+					HoverCloseButtonInStar3 = false;
 				}
 			}
 
@@ -160,17 +216,32 @@ namespace StarCollector.Screen
 				// Click WarbFour
 				if (MouseOnElement(141, 341, 407, 607) && clickOtherStar)
 				{
+					if (HoverStar4 == false)
+					{
+						HoverMenu.Play();
+						HoverStar4 = true;
+					}
 					if (IsClick())
 					{
+						Click.Play();
 						showWarbFour = true;
 					}
-				}
+				} else
+                {
+					HoverStar4 = false;
+                }
 				// Leave to showWarbThree
 				if (MouseOnElement(1150, 1196, 80, 118) && showWarbFour && !clickOtherStar)
 				{
 					showHoverLeave = true;
+					if (HoverCloseButtonInStar4 == false)
+					{
+						HoverMenu.Play();
+						HoverCloseButtonInStar4 = true;
+					}
 					if (IsClick())
 					{
+						Click.Play();
 						ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
 						clickOtherStar = true;
 					}
@@ -178,6 +249,7 @@ namespace StarCollector.Screen
 				else if (showWarbFour)
 				{
 					showHoverLeave = false;
+					HoverCloseButtonInStar4 = false;
 				}
 			}
 
@@ -187,17 +259,32 @@ namespace StarCollector.Screen
 				// Click WarbFive
 				if (MouseOnElement(540, 740, 407, 607) && clickOtherStar)
 				{
+					if (HoverStar5 == false)
+					{
+						HoverMenu.Play();
+						HoverStar5 = true;
+					}
 					if (IsClick())
 					{
+						Click.Play();
 						showWarbFive = true;
 					}
-				}
+				} else
+                {
+					HoverStar5 = false;
+                }
 				// Leave to showWarbFive
 				if (MouseOnElement(1150, 1196, 80, 118) && showWarbFive && !clickOtherStar)
 				{
 					showHoverLeave = true;
+					if (HoverCloseButtonInStar5 == false)
+					{
+						HoverMenu.Play();
+						HoverCloseButtonInStar5 = true;
+					}
 					if (IsClick())
 					{
+						Click.Play();
 						ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
 						clickOtherStar = true;
 					}
@@ -205,6 +292,7 @@ namespace StarCollector.Screen
 				else if (showWarbFive)
 				{
 					showHoverLeave = false;
+					HoverCloseButtonInStar5 = false;
 				}
 			}
 
@@ -214,17 +302,31 @@ namespace StarCollector.Screen
 			{
 				if (MouseOnElement(939, 1139, 407, 607) && clickOtherStar)
 				{
+					if (HoverStar6 == false)
+					{
+						HoverMenu.Play();
+						HoverStar6 = true;
+					}
 					if (IsClick())
 					{
 						showWarbSix = true;
 					}
-				}
+				} else
+                {
+					HoverStar6 = false;
+                }
 				// Leave to showWarbFive
 				if (MouseOnElement(1150, 1196, 80, 118) && showWarbSix && !clickOtherStar)
 				{
 					showHoverLeave = true;
+					if (HoverCloseButtonInStar6 == false)
+					{
+						HoverMenu.Play();
+						HoverCloseButtonInStar6 = true;
+					}
 					if (IsClick())
 					{
+						Click.Play();
 						ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
 						clickOtherStar = true;
 					}
@@ -232,6 +334,7 @@ namespace StarCollector.Screen
 				else if (showWarbSix)
 				{
 					showHoverLeave = false;
+					HoverCloseButtonInStar6 = false;
 				}
 			}
 
