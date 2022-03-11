@@ -12,7 +12,7 @@ namespace StarCollector.Screen
 	{
 		private SpriteFont Arial;
 		private Texture2D leave;
-		private Texture2D question, squareBG ;
+		private Texture2D question, squareBG, Menu_bg;
 		private Texture2D warpOne, warpTwo, warpThree, warpFour, warpFive, warpSix;
 		private Texture2D detailsWarpOne, detailsWarpTwo, detailsWarpThree, detailsWarpFour, detailsWarpFive, detailsWarpSix;
 		private bool showWarbOne, showWarbTwo, showWarbThree, showWarbFour, showWarbFive, showWarbSix;
@@ -42,6 +42,7 @@ namespace StarCollector.Screen
 			detailsWarpSix = Content.Load<Texture2D>("CollectionScreen/details_warp_Six");
 			question = Content.Load<Texture2D>("CollectionScreen/question");
 			squareBG = Content.Load<Texture2D>("CollectionScreen/squareBG");
+			Menu_bg = Content.Load<Texture2D>("MenuScreen/menu_bg");
 
 			Initial();
 		}
@@ -214,6 +215,7 @@ namespace StarCollector.Screen
 		}
 		public override void Draw(SpriteBatch _spriteBatch)
 		{
+			_spriteBatch.Draw(Menu_bg, new Vector2(0, 0), Color.White);
 			//Draw question BG 
 			_spriteBatch.Draw(squareBG, new Rectangle(50, 50, 1280 - 100, 720 - 100), Color.White);
 			//Draw Leave Button
