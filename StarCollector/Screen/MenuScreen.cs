@@ -10,7 +10,7 @@ namespace StarCollector.Screen {
 	class MenuScreen : _GameScreen {
         private SpriteFont Arial;
         private Texture2D StartButton, StartHover, CollectionButton, CollectionHover,
-                            StarRotate;
+                            StarRotate,Menu_bg;
         private bool MouseOnStartButton, MouseOnCollectionButton;
         private float rotate = 0;
         private int counter = 0;
@@ -26,6 +26,7 @@ namespace StarCollector.Screen {
             CollectionButton = Content.Load<Texture2D>("MenuScreen/collection_button");
             CollectionHover = Content.Load<Texture2D>("MenuScreen/collection_button_hover");
             StarRotate = Content.Load<Texture2D>("MenuScreen/star_rotate");
+            Menu_bg = Content.Load<Texture2D>("MenuScreen/menu_bg");
 			Initial();
 		}
 		public override void UnloadContent() {
@@ -67,7 +68,7 @@ namespace StarCollector.Screen {
             // }
 
             // Check mouse on UI
-            if(MouseOnElement(600, 680, 280,300)){
+            if(MouseOnElement(600, 680, 430,450)){
                 MouseOnStartButton = true;
                 if(IsClick()){
                     ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.GameScreen);
@@ -75,7 +76,7 @@ namespace StarCollector.Screen {
             } else {
                 MouseOnStartButton = false;
             }
-            if(MouseOnElement(570, 710, 360,380)){
+            if(MouseOnElement(570, 710, 520,540)){
                 MouseOnCollectionButton = true;
                 if(IsClick()){
                     ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
@@ -87,6 +88,7 @@ namespace StarCollector.Screen {
 			base.Update(gameTime);
 		}
 		public override void Draw(SpriteBatch _spriteBatch) {
+            _spriteBatch.Draw(Menu_bg, new Vector2(0, 0),Color.White);
             _spriteBatch.Draw(StarRotate, new Vector2(200, 370), null, Color.White, MathHelper.ToRadians(rotate) , new Vector2(StarRotate.Width / 2, StarRotate.Height/2), 0.5f, SpriteEffects.None, 0f);
             _spriteBatch.Draw(StarRotate, new Vector2(800, 370), null, Color.White, MathHelper.ToRadians(rotate) , new Vector2(StarRotate.Width / 2, StarRotate.Height/2), 0.5f, SpriteEffects.None, 0f);
             _spriteBatch.DrawString(Arial, "X = " + Singleton.Instance.MouseCurrent.X , new Vector2(0,0), Color.Black);
@@ -98,14 +100,14 @@ namespace StarCollector.Screen {
 
             // Swap Texture If mouseHover 
             if(MouseOnStartButton)
-                _spriteBatch.Draw(StartHover, CenterElementWithHeight(StartHover,260) , Color.White);
+                _spriteBatch.Draw(StartHover, CenterElementWithHeight(StartHover,410) , Color.White);
             else
-                _spriteBatch.Draw(StartButton, CenterElementWithHeight(StartButton,260) , Color.White);
+                _spriteBatch.Draw(StartButton, CenterElementWithHeight(StartButton,410) , Color.White);
             
             if(MouseOnCollectionButton)
-                _spriteBatch.Draw(CollectionHover, CenterElementWithHeight(CollectionHover,340) , Color.White);
+                _spriteBatch.Draw(CollectionHover, CenterElementWithHeight(CollectionHover,500) , Color.White);
             else
-                _spriteBatch.Draw(CollectionButton, CenterElementWithHeight(CollectionButton,340) , Color.White);
+                _spriteBatch.Draw(CollectionButton, CenterElementWithHeight(CollectionButton,500) , Color.White);
 		}
         
         // if mouse on specify 'location/position'
