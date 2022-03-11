@@ -158,7 +158,7 @@ namespace StarCollector.Screen {
                 }
 
                 if(!dialog){
-                    if(MouseOnTexture(395,435,Ok_button)) {
+                    if(MouseOnElement(632,670,429,452)) {
                         MouseOnOkButton = true;
                         if(IsClick()){
                             dialog = true;
@@ -169,7 +169,7 @@ namespace StarCollector.Screen {
 
                 } else 
                 if(gameWin && gameComplete){
-                    if(MouseOnTexture(647,412,Mainmenu_button)) {
+                    if(MouseOnElement(574,729,402,422)) {
                         MouseOnMainButton = true;
                         if(IsClick()){
                             Singleton.Instance.currentLevel = 1;
