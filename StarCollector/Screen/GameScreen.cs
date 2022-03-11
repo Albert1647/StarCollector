@@ -158,7 +158,7 @@ namespace StarCollector.Screen {
                 }
 
                 if(!dialog){
-                    if(MouseOnTexture(395,435,Ok_button)) {
+                    if(MouseOnElement(632,670,429,452)) {
                         MouseOnOkButton = true;
                         if(IsClick()){
                             dialog = true;
@@ -169,16 +169,17 @@ namespace StarCollector.Screen {
 
                 } else 
                 if(gameWin && gameComplete){
-                    if(MouseOnTexture(647,412,Mainmenu_button)) {
+                    if(MouseOnElement(574,729,402,422)) {
                         MouseOnMainButton = true;
                         if(IsClick()){
                             Singleton.Instance.currentLevel = 1;
+                            Singleton.Instance.HighestScore = Singleton.Instance.Score;
                             ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
                         }
                     } else {
                         MouseOnMainButton = false;
                     }
-                 }else if (gameWin) {
+                 } else if (gameWin) {
                      // Continue Button
                     if(MouseOnElement(576,700,344,368)) {
                         MouseOnContinueButton = true;
@@ -190,6 +191,7 @@ namespace StarCollector.Screen {
                                 if(Singleton.Instance.clearStar < 6) {
                                     Singleton.Instance.clearStar += 1;
                                 }
+                                Singleton.Instance.HighestScore = Singleton.Instance.Score;
                                 ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.GameScreen);
                             } else {
                                 gameComplete = true;
@@ -208,6 +210,7 @@ namespace StarCollector.Screen {
                                 if(Singleton.Instance.clearStar < 6) {
                                     Singleton.Instance.clearStar += 1;
                                 }
+                                Singleton.Instance.HighestScore = Singleton.Instance.Score;
                             }
                             ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
                         }
@@ -268,6 +271,8 @@ namespace StarCollector.Screen {
             // draw score
             _spriteBatch.Draw(Score_Board, new Vector2(42, 54),Color.White);
             _spriteBatch.DrawString(scoreFont,Singleton.Instance.Score.ToString(), new Vector2(150-FontWidth.X/2, 80), Color.Black);
+            _spriteBatch.DrawString(scoreFont,Singleton.Instance.HighestScore.ToString(), new Vector2(150-FontWidth.X/2, 120), Color.Black);
+            _spriteBatch.DrawString(scoreFont,Singleton.Instance.Combo.ToString(), new Vector2(150-FontWidth.X/2, 160), Color.Black);
             
             // draw Discover_Frame
             _spriteBatch.Draw(Discover_Frame, new Vector2(1000, 60),Color.White);
@@ -365,7 +370,7 @@ namespace StarCollector.Screen {
         public int getRowOfCurrentLevel(){
             switch(Singleton.Instance.currentLevel){
                 case 1:
-                    return 1;
+                    return 2;
                 case 2:
                     return 10;
                 case 3:
@@ -383,7 +388,7 @@ namespace StarCollector.Screen {
         public int getShowRowOfCurrentLevel(){
             switch(Singleton.Instance.currentLevel){
                 case 1:
-                    return 1;
+                    return 2;
                 case 2: case 3:
                     return 5;
                 case 4: case 5:

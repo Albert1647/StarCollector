@@ -13,15 +13,16 @@ namespace StarCollector
 		public MouseState MousePrevious, MouseCurrent;
 		private Random random = new Random();
 		public bool IsShooting;
-		public int Score = 10000;
-		public int currentLevel = 6;
-
+		public int Score = 0;
+		public int HighestScore = 0;
+		public int Combo = 1;
+		public int currentLevel = 1;
 		public int STARHITBOX = 74;
 		public int rowGapClosing = 10;
 		public int oldCeilingY = 30;
 		public int ceilingY = 30;
 		public List<Color> starColor = new List<Color>();
-		public int clearStar = 0;
+		public int clearStar = 6;
 
 		public Color GetColor(){
 			List<Color> color = new List<Color>();
