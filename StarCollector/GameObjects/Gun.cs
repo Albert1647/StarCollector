@@ -13,9 +13,11 @@ namespace StarCollector.GameObjects {
 		private Color _starColor;
 		private Texture2D starTexture;
 		private Texture2D Indicator;
+		public SoundEffectInstance _GunShoot;
 		private Star star; // star on gun
 		public Color _gunColor;
         private float rotate = 0;
+
 		public Gun(Texture2D texture, Texture2D indicator, Texture2D star) : base(texture) {
 			// save texture
 			starTexture = star;
@@ -35,6 +37,7 @@ namespace StarCollector.GameObjects {
 				aimAngle = (float)Math.Atan2((pos.Y + _texture.Height / 2) - Singleton.Instance.MouseCurrent.Y, (pos.X + _texture.Width / 2) - Singleton.Instance.MouseCurrent.X);
 				// shooting
 				if (!Singleton.Instance.IsShooting && IsClick()) {
+					_GunShoot.Play();
 					star = new Star(starTexture) {
 						// shoot star start on pos below
 						pos = new Vector2(Singleton.Instance.Dimension.X / 2 - starTexture.Width / 2, 700 - starTexture.Height),
@@ -42,6 +45,7 @@ namespace StarCollector.GameObjects {
 						_starColor = _starColor,
 						Speed = 1000,
 						IsActive = true
+
 					};
 					// update starColor in board
 					checkStarColor(starArray);

@@ -12,6 +12,7 @@ namespace StarCollector.GameObjects {
 		public  bool IsActive;
 		public Vector2 Velocity;
 		public Color _starColor;
+		public SoundEffectInstance _Pop;
 		//define star delimiter
 		private int starDelimeter = 74;
 
@@ -37,6 +38,7 @@ namespace StarCollector.GameObjects {
 					starArray[0, block].pos = new Vector2(leftWallX + (block * _texture.Width) + ((0) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (0) * (_texture.Height - Singleton.Instance.rowGapClosing)));
 					CheckRemoveBubble(starArray, _starColor, new Vector2(block ,0));
 					if(Singleton.Instance.RemovableStar.Count >= 3){
+						_Pop.Play();
 						Singleton.Instance.Score += Singleton.Instance.RemovableStar.Count * 10 * Singleton.Instance.Combo; 
 						starArray = CheckLeftOver(starArray);
 						checkStarColor(starArray);
@@ -169,6 +171,7 @@ namespace StarCollector.GameObjects {
 						IsActive = false;
 						// 
 						if(Singleton.Instance.RemovableStar.Count >= 3){
+							_Pop.Play();
 							Singleton.Instance.Score += Singleton.Instance.RemovableStar.Count * 10 * Singleton.Instance.Combo; 
 							Singleton.Instance.Combo += 1;
 							starArray = CheckLeftOver(starArray);

@@ -3,11 +3,11 @@ using Microsoft.Xna.Framework.Graphics;
 using StarCollector.GameObjects;
 using System;
 using System.Diagnostics;
-using Microsoft.Xna.Framework.Audio;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 using StarCollector.Managers;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace StarCollector.Screen {
     class GameScreen : _GameScreen {
@@ -16,11 +16,14 @@ namespace StarCollector.Screen {
                             Mainmenu_button_hover,Retry_button,Retry_button_hover,
                             Ok_button,Ok_button_hover,Discover_Frame,Ship,Score_Board,Star_Collect,
                             Warp;
+        private SoundEffect Click, GameOver, GameWin, GotStar, GunShoot, Pop, HoverMenu;
+        private SoundEffectInstance GunShootInstance, PopInstance;
+        private Song ThemeSong;
 		private Gun gun;
         private float Timer = 0f;
 		public Star[,] star = new Star[23,8];
 		private SpriteFont Arial,scoreFont;
-        private bool gameOver,gameWin;
+        private bool gameOver, gameWin, HoverMainMenu, HoverRetry, HoverContinue, HoverOK, HoverMainMenuFinal, HoverMainMenuLose;
         private int leftWallX = 326;
 
         private bool dialog;
@@ -30,10 +33,11 @@ namespace StarCollector.Screen {
         private Vector2 FontWidth;
 
         public void Initial() {
-			// Instantiate gun on start GameScreen 
+            // Instantiate gun on start GameScreen 
             gun = new Gun(GunTexture, Indicator, StarTexture) {
-				pos = new Vector2(Singleton.Instance.Dimension.X / 2 - GunTexture.Width / 2, 700 - GunTexture.Height),
-				_gunColor = Color.White
+                pos = new Vector2(Singleton.Instance.Dimension.X / 2 - GunTexture.Width / 2, 700 - GunTexture.Height),
+                _gunColor = Color.White,
+                _GunShoot = GunShootInstance
             };
 
             Singleton.Instance.ceilingY = GetStartCeilingY(getRowOfCurrentLevel(), getShowRowOfCurrentLevel());
@@ -43,7 +47,8 @@ namespace StarCollector.Screen {
                 star[i,j] = new Star(StarTexture){
                     IsActive = false,
                     pos = new Vector2(leftWallX + (j * StarTexture.Width + (i % 2 == 0 ? 0 : StarTexture.Width / 2)), (Singleton.Instance.ceilingY + (i * (StarTexture.Height-Singleton.Instance.rowGapClosing)))),
-                    _starColor = Singleton.Instance.GetColor()
+                    _starColor = Singleton.Instance.GetColor(),
+                    _Pop = PopInstance
                 };
                 }
             }
@@ -73,8 +78,20 @@ namespace StarCollector.Screen {
             Ship = Content.Load<Texture2D>("gameScreen/ship");
             Score_Board = Content.Load<Texture2D>("gameScreen/score_board");
             Star_Collect = Content.Load<Texture2D>("gameScreen/star_Collect");
-            
-            switch(Singleton.Instance.currentLevel){
+            Click = Content.Load<SoundEffect>("Sound/click");
+            GameOver = Content.Load<SoundEffect>("Sound/game_over");
+            GameWin = Content.Load<SoundEffect>("Sound/game_win");
+            GotStar = Content.Load<SoundEffect>("Sound/got_star");
+            GunShoot = Content.Load<SoundEffect>("Sound/gun_shoot(new)");
+            GunShootInstance = GunShoot.CreateInstance();
+            Pop = Content.Load<SoundEffect>("Sound/star_pop");
+            HoverMenu = Content.Load<SoundEffect>("Sound/menu_select");
+            ThemeSong = Content.Load<Song>("Sound/theme");
+
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(ThemeSong);
+
+            switch (Singleton.Instance.currentLevel){
                 case 1:
                     Warp = Content.Load<Texture2D>("gameScreen/star_red");
                 break;
@@ -158,32 +175,54 @@ namespace StarCollector.Screen {
                 }
 
                 if(!dialog){
+                    GotStar.Play();
                     if(MouseOnElement(632,670,429,452)) {
                         MouseOnOkButton = true;
+                        if(HoverOK == false) {
+                            HoverMenu.Play();
+                            HoverOK = true;
+                        }
                         if(IsClick()){
+                            Click.Play();
                             dialog = true;
                         }
                     } else {
                             MouseOnOkButton = false;
+                            HoverOK = false;
                         }
 
                 } else 
                 if(gameWin && gameComplete){
+                    GameWin.Play();
                     if(MouseOnElement(574,729,402,422)) {
                         MouseOnMainButton = true;
-                        if(IsClick()){
+                        if (HoverMainMenuFinal == false)
+                        {
+                            HoverMenu.Play();
+                            HoverMainMenuFinal = true;
+                        }
+                        if (IsClick()){
+                            Click.Play();
                             Singleton.Instance.currentLevel = 1;
                             Singleton.Instance.HighestScore = Singleton.Instance.Score;
                             ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
                         }
                     } else {
                         MouseOnMainButton = false;
+                        HoverMainMenuFinal = false;
                     }
                  } else if (gameWin) {
+                    GameWin.Play();
                      // Continue Button
                     if(MouseOnElement(576,700,344,368)) {
                         MouseOnContinueButton = true;
-                        if(IsClick()){
+                        if (HoverContinue == false)
+                        {
+                            HoverMenu.Play();
+                            HoverContinue = true;
+                        }
+                        if (IsClick()){
+                            Click.Play();
                             if (Singleton.Instance.currentLevel < 6 ) {
                                 Singleton.Instance.currentLevel += 1;
                                 Singleton.Instance.ceilingY = 30;
@@ -199,11 +238,18 @@ namespace StarCollector.Screen {
                         }
                     } else {
                         MouseOnContinueButton = false;
+                        HoverContinue = false;
                     }
                     // MainMenu Button
                      if(MouseOnElement(561,715,436,452)) {
                         MouseOnMainButton = true;
-                        if(IsClick()){
+                        if (HoverMainMenu == false)
+                        {
+                            HoverMenu.Play();
+                            HoverMainMenu = true;
+                        }
+                        if (IsClick()){
+                            Click.Play();
                             if(Singleton.Instance.currentLevel < 6)
                             {
                                 Singleton.Instance.currentLevel += 1;
@@ -216,26 +262,41 @@ namespace StarCollector.Screen {
                         }
                     } else {
                         MouseOnMainButton = false;
+                        HoverMainMenu = false;
                     }
                       
                  } else {
                     // Retry Button
-                    if(MouseOnElement(600,676,342,363)) {
+                    GameOver.Play();
+                    if (MouseOnElement(600,676,342,363)) {
                         MouseOnRetryButton = true;
-                        if(IsClick()){
+                        if (HoverRetry == false)
+                        {
+                            HoverMenu.Play();
+                            HoverRetry = true;
+                        }
+                        if (IsClick()){
+                            Click.Play();
                             ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.GameScreen);
                         }
                     } else {
                         MouseOnRetryButton = false;
+                        HoverRetry = false;
                     }
                     // MainMenu Button
-                    if(MouseOnElement(563,765,438,453)) {
+                    if (HoverMainMenuLose == false)
+                    {
+                        HoverMenu.Play();
+                        HoverMainMenuLose = true;
+                    }
+                    if (MouseOnElement(563,765,438,453)) {
                         MouseOnMainButton = true;
                         if(IsClick()){
                             ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
                         }
                     } else {
                         MouseOnMainButton = false;
+                        HoverMainMenuLose = false;
                     }
                     // Retry Button
                     
