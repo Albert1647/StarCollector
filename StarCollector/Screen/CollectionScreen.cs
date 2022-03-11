@@ -363,6 +363,9 @@ namespace StarCollector.Screen
 			_spriteBatch.Draw(question, new Rectangle(195, 412, 196, 220), Color.White);
 			_spriteBatch.Draw(question, new Rectangle(542, 412, 196, 220), Color.White);
 			_spriteBatch.Draw(question, new Rectangle(889, 412, 196, 220), Color.White);
+
+			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 			//Draw Star
 			//draw star 1 when win
 			if (Singleton.Instance.clearStar > 0)
@@ -394,12 +397,6 @@ namespace StarCollector.Screen
 			{
 				_spriteBatch.Draw(warpSix, new Rectangle(889, 412, warpSix.Width, warpSix.Height), Color.White);
 			}
-
-			//mouse
-			_spriteBatch.DrawString(Arial, "X = " + Singleton.Instance.MouseCurrent.X, new Vector2(0, 0), Color.Black);
-			_spriteBatch.DrawString(Arial, "Y = " + Singleton.Instance.MouseCurrent.Y, new Vector2(0, 40), Color.Black);
-			_spriteBatch.DrawString(Arial, "Click ?  " + IsClick(), new Vector2(0, 60), Color.Black);
-
 
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
