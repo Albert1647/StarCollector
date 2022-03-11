@@ -11,13 +11,14 @@ namespace StarCollector.Screen
 	class CollectionScreen : _GameScreen
 	{
 		private SpriteFont Arial;
-		private Texture2D leave;
+		private Texture2D leave ,HoverLeave;
 		private Texture2D question, squareBG, Menu_bg;
 		private Texture2D warpOne, warpTwo, warpThree, warpFour, warpFive, warpSix;
 		private Texture2D detailsWarpOne, detailsWarpTwo, detailsWarpThree, detailsWarpFour, detailsWarpFive, detailsWarpSix;
 		private bool showWarbOne, showWarbTwo, showWarbThree, showWarbFour, showWarbFive, showWarbSix;
 		private bool showWarbOnedraw, showWarbTwodraw, showWarbThreedraw, showWarbFourdraw, showWarbFivedraw, showWarbSixdraw;
 		private bool clickOtherStar = true;
+		private bool showHoverLeave;
 		public void Initial()
 		{
 
@@ -43,6 +44,7 @@ namespace StarCollector.Screen
 			question = Content.Load<Texture2D>("CollectionScreen/question");
 			squareBG = Content.Load<Texture2D>("CollectionScreen/squareBG");
 			Menu_bg = Content.Load<Texture2D>("MenuScreen/menu_bg");
+			HoverLeave = Content.Load<Texture2D>("CollectionScreen/HoverLeave");
 
 			Initial();
 		}
@@ -59,10 +61,14 @@ namespace StarCollector.Screen
 			// Leave to menu 1150, 80
 			if (MouseOnElement(1150, 1196, 80, 118) && clickOtherStar)
 			{
+				showHoverLeave = true;
 				if (IsClick())
 				{
 					ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
 				}
+			}else
+			{
+				showHoverLeave = false;
 			}
 
 			//unlock star 1 when win
@@ -71,23 +77,27 @@ namespace StarCollector.Screen
 				// Click WarbOne
 				if (MouseOnElement(141, 341, 157, 357) && clickOtherStar)
 				{
+					showWarbOnedraw = true;
 					if (IsClick())
 					{
 						showWarbOne = true;
+						showWarbOnedraw = false;
 					}
 				}
 				// Leave to showWarbOne
 				if (MouseOnElement(1150, 1196, 80, 118) && showWarbOne && !clickOtherStar)
 				{
-					showWarbOnedraw = true;
+					showHoverLeave = true;
 					if (IsClick())
 					{
-						
+
 						ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
 						clickOtherStar = true;
-						showWarbOnedraw = false;
-						
 					}
+				}
+				else if (showWarbOne)
+				{
+					showHoverLeave = false;
 				}
 			}
 
@@ -103,15 +113,17 @@ namespace StarCollector.Screen
 					}
 				}
 				// Leave to showWarbTwo
-				if (MouseOnElement(1150, 1196, 80, 118) && showWarbTwo)
+				if (MouseOnElement(1150, 1196, 80, 118) && showWarbTwo && !clickOtherStar)
 				{
-					showWarbTwodraw = true;
+					showHoverLeave = true;
 					if (IsClick())
 					{
 						ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
 						clickOtherStar = true;
-						showWarbTwodraw = false;
 					}
+				}else if(showWarbTwo)
+				{
+					showHoverLeave = false;
 				}
 			}
 
@@ -127,15 +139,18 @@ namespace StarCollector.Screen
 					}
 				}
 				// Leave to showWarbThree
-				if (MouseOnElement(1150, 1196, 80, 118) && showWarbThree)
+				if (MouseOnElement(1150, 1196, 80, 118) && showWarbThree && !clickOtherStar)
 				{
-					showWarbThreedraw = true;
+					showHoverLeave = true;
 					if (IsClick())
 					{
 						ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
 						clickOtherStar = true;
-						showWarbThreedraw = false;
 					}
+				}
+				else if (showWarbThree)
+				{
+					showHoverLeave = false;
 				}
 			}
 
@@ -151,15 +166,18 @@ namespace StarCollector.Screen
 					}
 				}
 				// Leave to showWarbThree
-				if (MouseOnElement(1150, 1196, 80, 118) && showWarbFour)
+				if (MouseOnElement(1150, 1196, 80, 118) && showWarbFour && !clickOtherStar)
 				{
-					showWarbFourdraw = true;
+					showHoverLeave = true;
 					if (IsClick())
 					{
 						ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
 						clickOtherStar = true;
-						showWarbFourdraw = false;
 					}
+				}
+				else if (showWarbFour)
+				{
+					showHoverLeave = false;
 				}
 			}
 
@@ -175,15 +193,18 @@ namespace StarCollector.Screen
 					}
 				}
 				// Leave to showWarbFive
-				if (MouseOnElement(1150, 1196, 80, 118) && showWarbFive)
+				if (MouseOnElement(1150, 1196, 80, 118) && showWarbFive && !clickOtherStar)
 				{
-					showWarbFivedraw = true;
+					showHoverLeave = true;
 					if (IsClick())
 					{
 						ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
 						clickOtherStar = true;
-						showWarbFivedraw = false;
 					}
+				}
+				else if (showWarbFive)
+				{
+					showHoverLeave = false;
 				}
 			}
 
@@ -199,15 +220,18 @@ namespace StarCollector.Screen
 					}
 				}
 				// Leave to showWarbFive
-				if (MouseOnElement(1150, 1196, 80, 118) && showWarbSix)
+				if (MouseOnElement(1150, 1196, 80, 118) && showWarbSix && !clickOtherStar)
 				{
-					showWarbSixdraw = true;
+					showHoverLeave = true;
 					if (IsClick())
 					{
 						ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
 						clickOtherStar = true;
-						showWarbSixdraw = false;
 					}
+				}
+				else if (showWarbSix)
+				{
+					showHoverLeave = false;
 				}
 			}
 
@@ -218,8 +242,16 @@ namespace StarCollector.Screen
 			_spriteBatch.Draw(Menu_bg, new Vector2(0, 0), Color.White);
 			//Draw question BG 
 			_spriteBatch.Draw(squareBG, new Rectangle(50, 50, 1280 - 100, 720 - 100), Color.White);
-			//Draw Leave Button
-			_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
+			//Draw Hover Leave Button
+			if (showHoverLeave)
+			{
+				_spriteBatch.Draw(HoverLeave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
+			}
+			else
+			{
+				//Draw Leave Button
+				_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
+			}
 
 			//question
 			_spriteBatch.Draw(question, new Rectangle(195, 100, 196, 220), Color.White);
@@ -273,56 +305,102 @@ namespace StarCollector.Screen
 			{
 				//Draw details Star 1
 				_spriteBatch.Draw(detailsWarpOne, new Rectangle(50, 50, 1280 - 100, 720 - 100), Color.White);
-				//Draw Leave Button
-				_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
 				clickOtherStar = false;
+				//Draw Hover Leave Button
+				if (showHoverLeave)
+				{
+					_spriteBatch.Draw(HoverLeave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
+				}
+				else {
+					//Draw Leave Button
+					_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
+				}
 			}
 			// details Star 2
 			if (showWarbTwo)
 			{
 				//Draw details Star 2
 				_spriteBatch.Draw(detailsWarpTwo, new Rectangle(50, 50, 1280 - 100, 720 - 100), Color.White);
-				//Draw Leave Button
-				_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
 				clickOtherStar = false;
+				//Draw Hover Leave Button
+				if (showHoverLeave)
+				{
+					_spriteBatch.Draw(HoverLeave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
+				}
+				else
+				{
+					//Draw Leave Button
+					_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
+				}
 			}
 			// details Star 3
 			if (showWarbThree)
 			{
 				//Draw details Star 3
 				_spriteBatch.Draw(detailsWarpThree, new Rectangle(50, 50, 1280 - 100, 720 - 100), Color.White);
-				//Draw Leave Button
-				_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
 				clickOtherStar = false;
+				//Draw Hover Leave Button
+				if (showHoverLeave)
+				{
+					_spriteBatch.Draw(HoverLeave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
+				}
+				else
+				{
+					//Draw Leave Button
+					_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
+				}
 			}
 			// details Star 4
 			if (showWarbFour)
 			{
 				//Draw details Star 4
 				_spriteBatch.Draw(detailsWarpFour, new Rectangle(50, 50, 1280 - 100, 720 - 100), Color.White);
-				//Draw Leave Button
-				_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
 				clickOtherStar = false;
+				//Draw Hover Leave Button
+				if (showHoverLeave)
+				{
+					_spriteBatch.Draw(HoverLeave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
+				}
+				else
+				{
+					//Draw Leave Button
+					_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
+				}
 			}
 			//details Star 5
 			if (showWarbFive)
 			{
 				//Draw details Star 5
 				_spriteBatch.Draw(detailsWarpFive, new Rectangle(50, 50, 1280 - 100, 720 - 100), Color.White);
-				//Draw Leave Button
-				_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
 				clickOtherStar = false;
+				//Draw Hover Leave Button
+				if (showHoverLeave)
+				{
+					_spriteBatch.Draw(HoverLeave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
+				}
+				else
+				{
+					//Draw Leave Button
+					_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
+				}
 			}
 			//details Star 6
 			if (showWarbSix)
 			{
 				//Draw details Star 6
 				_spriteBatch.Draw(detailsWarpSix, new Rectangle(50, 50, 1280 - 100, 720 - 100), Color.White);
-				//Draw Leave Button
-				_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
 				clickOtherStar = false;
+				//Draw Hover Leave Button
+				if (showHoverLeave)
+				{
+					_spriteBatch.Draw(HoverLeave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
+				}
+				else
+				{
+					//Draw Leave Button
+					_spriteBatch.Draw(leave, new Rectangle(1150, 80, leave.Width, leave.Height), Color.White);
+				}
 			}
-			_spriteBatch.DrawString(Arial, "Mouse on Start ?  " + showWarbOnedraw, new Vector2(0, 80), Color.Black);
 
 
 		}
