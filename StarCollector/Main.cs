@@ -58,9 +58,8 @@ namespace StarCollector
             _spriteBatch.End();
 
             base.Draw(gameTime);
+
         }
         
-
-
     }
 }
