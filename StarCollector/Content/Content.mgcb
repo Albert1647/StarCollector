@@ -296,7 +296,7 @@
 /processorParam:TextureFormat=Color
 /build:GameScreen/indicator.png
 
-#begin GameScreen/ingame_bg.png
+#begin GameScreen/ingame_bg4.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -306,19 +306,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:GameScreen/ingame_bg.png
-
-#begin GameScreen/ingame_bg3.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:GameScreen/ingame_bg3.png
+/build:GameScreen/ingame_bg4.png
 
 #begin GameScreen/Lose.png
 /importer:TextureImporter

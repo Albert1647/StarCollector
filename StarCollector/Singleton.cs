@@ -22,7 +22,7 @@ namespace StarCollector
 		public int oldCeilingY = 30;
 		public int ceilingY = 30;
 		public List<Color> starColor = new List<Color>();
-		public int clearStar = 1;
+		public int clearStar = 0;
 
 		public Color GetColor(){
 			List<Color> color = new List<Color>();

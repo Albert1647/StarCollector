@@ -64,7 +64,7 @@ namespace StarCollector.Screen {
 			StarTexture = Content.Load<Texture2D>("gameScreen/star");
 			Ceiling = Content.Load<Texture2D>("gameScreen/ceiling");
 			Indicator = Content.Load<Texture2D>("gameScreen/indicator");
-			BG = Content.Load<Texture2D>("gameScreen/ingame_bg3");
+			BG = Content.Load<Texture2D>("gameScreen/ingame_bg4");
             WinWindow = Content.Load<Texture2D>("gameScreen/win");
             LoseWindow = Content.Load<Texture2D>("gameScreen/Lose");
             Mainmenu_button = Content.Load<Texture2D>("gameScreen/mainmenu_button");
