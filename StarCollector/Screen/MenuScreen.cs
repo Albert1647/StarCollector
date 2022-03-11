@@ -65,18 +65,6 @@ namespace StarCollector.Screen {
                 }
             }
 
-            // if(!reRotate){
-            //     rotate += 3;
-            //     if(rotate >= 360)
-            //         reRotate = !reRotate;
-            // }
-
-            // if(reRotate){
-            //     rotate -= 3;
-            //     if(rotate <= 0)
-            //         reRotate = !reRotate;
-            // }
-
             // Check mouse on UI
             if(MouseOnElement(600, 680, 430,450)){
                 MouseOnStartButton = true;

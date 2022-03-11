@@ -34,12 +34,16 @@ namespace StarCollector.GameObjects {
 				if (pos.Y <= Singleton.Instance.ceilingY) {
 					IsActive = false;
 					int block = (int)Math.Ceiling(((GetMiddleOfStar(pos).X - leftWallX) / _texture.Width)) - 1;
+					if(block == 8){
+						block = 7;
+					}
 					starArray[0, block] = this;
 					starArray[0, block].pos = new Vector2(leftWallX + (block * _texture.Width) + ((0) % 2 == 0 ? 0 : _texture.Width / 2), (Singleton.Instance.ceilingY + (0) * (_texture.Height - Singleton.Instance.rowGapClosing)));
 					CheckRemoveBubble(starArray, _starColor, new Vector2(block ,0));
 					if(Singleton.Instance.RemovableStar.Count >= 3){
 						_Pop.Play();
 						Singleton.Instance.Score += Singleton.Instance.RemovableStar.Count * 10 * Singleton.Instance.Combo; 
+						Singleton.Instance.Combo += 1;
 						starArray = CheckLeftOver(starArray);
 						checkStarColor(starArray);
 					}

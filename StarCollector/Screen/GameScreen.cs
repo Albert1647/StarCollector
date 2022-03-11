@@ -15,7 +15,7 @@ namespace StarCollector.Screen {
                             WinWindow,LoseWindow,Mainmenu_button,Continue_button,Continue_button_hover,
                             Mainmenu_button_hover,Retry_button,Retry_button_hover,
                             Ok_button,Ok_button_hover,Discover_Frame,Ship,Score_Board,Star_Collect,
-                            Warp;
+                            Warp, WinStar;
         private SoundEffect Click, GameOver, GameWin, GotStar, GunShoot, Pop, HoverMenu;
         private SoundEffectInstance GunShootInstance, PopInstance;
         private Song ThemeSong;
@@ -25,8 +25,8 @@ namespace StarCollector.Screen {
 		private SpriteFont Arial,scoreFont;
         private bool gameOver, gameWin, HoverMainMenu, HoverRetry, HoverContinue, HoverOK, HoverMainMenuFinal, HoverMainMenuLose;
         private int leftWallX = 326;
-
-        private bool dialog;
+        private float rotate = 0;
+        private bool dialog, playGameOver, playGameWin, playGotStar;
         // private int rightWallX = 600;
         private bool gameComplete,Dialog;
         private bool MouseOnMainButton,MouseOnRetryButton,MouseOnContinueButton,MouseOnOkButton;
@@ -113,6 +113,27 @@ namespace StarCollector.Screen {
                     Warp = Content.Load<Texture2D>("gameScreen/star_blue");
                 break;
             }
+
+            switch(Singleton.Instance.currentLevel){
+                case 1:
+                    WinStar = Content.Load<Texture2D>("collectionScreen/warp_One");
+                break;
+                case 2:
+                    WinStar = Content.Load<Texture2D>("collectionScreen/warp_Two");
+                break;
+                case 3:
+                    WinStar = Content.Load<Texture2D>("collectionScreen/warp_Three");
+                break;
+                case 4:
+                    WinStar = Content.Load<Texture2D>("collectionScreen/warp_Four");
+                break;
+                case 5:
+                    WinStar = Content.Load<Texture2D>("collectionScreen/warp_Five");
+                break;
+                case 6:
+                    WinStar = Content.Load<Texture2D>("collectionScreen/warp_Six");
+                break;
+            }
             Initial();
         }
         public override void UnloadContent() {
@@ -140,6 +161,15 @@ namespace StarCollector.Screen {
                     Singleton.Instance.ceilingY += StarTexture.Height;
                     Timer = 0;
                 }
+
+                if(rotate < 360){
+                    rotate += 0.05f;
+				if(rotate >= 360){
+					rotate = 0;
+				}
+            }
+
+
                 
             
                 // if star reach bottom boundary -> GameOver
@@ -177,7 +207,10 @@ namespace StarCollector.Screen {
                 }
 
                 if(!dialog){
-                    GotStar.Play();
+                    if(!playGotStar){
+                        GotStar.Play();
+                        playGotStar = true;
+                    }
                     if(MouseOnElement(632,670,429,452)) {
                         MouseOnOkButton = true;
                         if(HoverOK == false) {
@@ -195,7 +228,10 @@ namespace StarCollector.Screen {
 
                 } else 
                 if(gameWin && gameComplete){
-                    GameWin.Play();
+                    if(!playGameWin){
+                        GameWin.Play();
+                        playGameWin = true;
+                    }
                     if(MouseOnElement(574,729,402,422)) {
                         MouseOnMainButton = true;
                         if (HoverMainMenuFinal == false)
@@ -214,7 +250,10 @@ namespace StarCollector.Screen {
                         HoverMainMenuFinal = false;
                     }
                  } else if (gameWin) {
-                    GameWin.Play();
+                     if(!playGameWin){
+                        GameWin.Play();
+                        playGameWin = true;
+                     }
                      // Continue Button
                     if(MouseOnElement(576,700,344,368)) {
                         MouseOnContinueButton = true;
@@ -269,7 +308,10 @@ namespace StarCollector.Screen {
                       
                  } else {
                     // Retry Button
-                    GameOver.Play();
+                    if(!playGameOver){
+                        GameOver.Play();
+                        playGameOver = true;
+                    }
                     if (MouseOnElement(600,676,342,363)) {
                         MouseOnRetryButton = true;
                         if (HoverRetry == false)
@@ -329,25 +371,31 @@ namespace StarCollector.Screen {
 
             // draw gun
 			gun.Draw(_spriteBatch);
-            FontWidth = scoreFont.MeasureString(Singleton.Instance.Score.ToString());
 
             // draw score
+            FontWidth = scoreFont.MeasureString(Singleton.Instance.Score.ToString());
             _spriteBatch.Draw(Score_Board, new Vector2(42, 54),Color.White);
             _spriteBatch.DrawString(scoreFont,Singleton.Instance.Score.ToString(), new Vector2(150-FontWidth.X/2, 80), Color.Black);
-            _spriteBatch.DrawString(scoreFont,Singleton.Instance.HighestScore.ToString(), new Vector2(150-FontWidth.X/2, 120), Color.Black);
-            _spriteBatch.DrawString(scoreFont,(Singleton.Instance.Combo - 1).ToString(), new Vector2(150-FontWidth.X/2, 160), Color.Black);
+
+            // draw combo
+            if((Singleton.Instance.Combo - 1) >= 2){
+                FontWidth = scoreFont.MeasureString("Combo");
+                _spriteBatch.DrawString(scoreFont,"Combo", new Vector2(150-FontWidth.X/2, 600), Color.White);
+                FontWidth = scoreFont.MeasureString("x" + (Singleton.Instance.Combo - 1).ToString());
+                _spriteBatch.DrawString(scoreFont,"x" + (Singleton.Instance.Combo - 1).ToString(), new Vector2(150-FontWidth.X/2, 640), Color.White);
+            }
             
             // draw Discover_Frame
             _spriteBatch.Draw(Discover_Frame, new Vector2(1000, 60),Color.White);
             _spriteBatch.Draw(Ship, new Vector2(1095, 370),Color.White);
-            _spriteBatch.Draw(Warp, new Vector2(1055, 85),Color.White);
+            _spriteBatch.Draw(Warp, new Vector2(1055 + Warp.Width / 2, 85 + Warp.Height / 2),null, Color.White, rotate, new Vector2(Warp.Width/2 , Warp.Height/2), 1f, SpriteEffects.None, 0f);
 
             // check level
             _spriteBatch.DrawString(Arial, "level = " + Singleton.Instance.currentLevel, new Vector2(0, 300), Color.Black);
-
             
             if(gameWin && !dialog){
                 _spriteBatch.Draw(Star_Collect, new Vector2(325, 100),Color.White);
+                _spriteBatch.Draw(WinStar, new Vector2(1000 + (Discover_Frame.Width / 2) , 85), null,Color.White, 0f,new Vector2(WinStar.Width/2, 0), 1f, SpriteEffects.None, 0f);
                 if (MouseOnOkButton)
                 {
                     _spriteBatch.Draw(Ok_button_hover, new Vector2(452, 412),Color.White);
@@ -359,6 +407,7 @@ namespace StarCollector.Screen {
             else if (gameWin && gameComplete) { 
                 // draw WinWindow
                 _spriteBatch.Draw(WinWindow, new Vector2(325, 100),Color.White);
+                _spriteBatch.Draw(WinStar, new Vector2(1000 + (Discover_Frame.Width / 2) , 85), null,Color.White, 0f,new Vector2(WinStar.Width/2, 0), 1f, SpriteEffects.None, 0f);
                 if (MouseOnMainButton)
                 {
                     _spriteBatch.Draw(Mainmenu_button_hover, new Vector2(452, 380),Color.White);
@@ -369,6 +418,7 @@ namespace StarCollector.Screen {
             } else if (gameWin) {
                 // draw WinWindow
                 _spriteBatch.Draw(WinWindow, new Vector2(325, 100),Color.White);
+                _spriteBatch.Draw(WinStar, new Vector2(1000 + (Discover_Frame.Width / 2) , 85), null,Color.White, 0f,new Vector2(WinStar.Width/2, 0), 1f, SpriteEffects.None, 0f);
                 if (MouseOnContinueButton)
                 {
                     _spriteBatch.Draw(Continue_button_hover, CenterElementWithHeight(Continue_button_hover,327) , Color.White);
