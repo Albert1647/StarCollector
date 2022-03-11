@@ -89,8 +89,7 @@ namespace StarCollector.Screen {
 		}
 		public override void Draw(SpriteBatch _spriteBatch) {
             _spriteBatch.Draw(Menu_bg, new Vector2(0, 0),Color.White);
-            _spriteBatch.Draw(StarRotate, new Vector2(200, 370), null, Color.White, MathHelper.ToRadians(rotate) , new Vector2(StarRotate.Width / 2, StarRotate.Height/2), 0.5f, SpriteEffects.None, 0f);
-            _spriteBatch.Draw(StarRotate, new Vector2(800, 370), null, Color.White, MathHelper.ToRadians(rotate) , new Vector2(StarRotate.Width / 2, StarRotate.Height/2), 0.5f, SpriteEffects.None, 0f);
+            _spriteBatch.Draw(StarRotate, new Vector2(305, 230), null, Color.White, MathHelper.ToRadians(rotate) , new Vector2(StarRotate.Width / 2, StarRotate.Height/2), 0.5f, SpriteEffects.None, 0f);
             _spriteBatch.DrawString(Arial, "X = " + Singleton.Instance.MouseCurrent.X , new Vector2(0,0), Color.Black);
             _spriteBatch.DrawString(Arial, "Y = " + Singleton.Instance.MouseCurrent.Y, new Vector2(0, 40), Color.Black);
             _spriteBatch.DrawString(Arial, "Click ?  " + IsClick(), new Vector2(0, 60), Color.Black);
