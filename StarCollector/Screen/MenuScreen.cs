@@ -5,13 +5,16 @@ using StarCollector.Managers;
 using StarCollector.GameObjects;
 using System;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace StarCollector.Screen {
 	class MenuScreen : _GameScreen {
         private SpriteFont Arial;
         private Texture2D StartButton, StartHover, CollectionButton, CollectionHover,
                             StarRotate,Menu_bg;
-        private bool MouseOnStartButton, MouseOnCollectionButton;
+        private SoundEffect Click, HoverMenu;
+        private Song ThemeSong;
+        private bool MouseOnStartButton, MouseOnCollectionButton, HoverStart, HoverCollection;
         private float rotate = 0;
         private int counter = 0;
         private bool reRotate;
@@ -27,7 +30,14 @@ namespace StarCollector.Screen {
             CollectionHover = Content.Load<Texture2D>("MenuScreen/collection_button_hover");
             StarRotate = Content.Load<Texture2D>("MenuScreen/star_rotate");
             Menu_bg = Content.Load<Texture2D>("MenuScreen/menu_bg");
-			Initial();
+            ThemeSong = Content.Load<Song>("Sound/theme");
+            Click = Content.Load<SoundEffect>("Sound/click");
+            HoverMenu = Content.Load<SoundEffect>("Sound/menu_select");
+
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(ThemeSong);
+            
+            Initial();
 		}
 		public override void UnloadContent() {
 			base.UnloadContent();
@@ -70,19 +80,32 @@ namespace StarCollector.Screen {
             // Check mouse on UI
             if(MouseOnElement(600, 680, 430,450)){
                 MouseOnStartButton = true;
+                if(HoverStart == false){
+                    HoverMenu.Play();
+                    HoverStart = true;
+                }
                 if(IsClick()){
+                    Click.Play();
                     ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.GameScreen);
                 }
             } else {
                 MouseOnStartButton = false;
+                HoverStart = false;
             }
             if(MouseOnElement(570, 710, 520,540)){
                 MouseOnCollectionButton = true;
-                if(IsClick()){
+                if (HoverCollection == false)
+                {
+                    HoverMenu.Play();
+                    HoverCollection = true;
+                }
+                if (IsClick()){
+                    Click.Play();
                     ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
                 }
             } else {
                 MouseOnCollectionButton = false;
+                HoverCollection = false;
             }
 
 			base.Update(gameTime);
