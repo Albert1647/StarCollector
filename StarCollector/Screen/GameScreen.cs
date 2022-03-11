@@ -383,6 +383,7 @@ namespace StarCollector.Screen {
                 _spriteBatch.DrawString(scoreFont,"x" + (Singleton.Instance.Combo - 1).ToString(), new Vector2(150-FontWidth.X/2, 640), Color.White);
             }
             
+            _spriteBatch.DrawString(scoreFont,"Level " + (Singleton.Instance.currentLevel).ToString(), new Vector2(75, 0), Color.White);
             // draw Discover_Frame
             _spriteBatch.Draw(Discover_Frame, new Vector2(1000, 60),Color.White);
             _spriteBatch.Draw(Ship, new Vector2(1095, 370),Color.White);
@@ -459,19 +460,19 @@ namespace StarCollector.Screen {
         public float getLevelTimePerUpdate(){
             switch(Singleton.Instance.currentLevel){
                 case 1:
-                    return 12f;
+                    return 11f;
                 case 2:
-                    return 12f;
+                    return 11f;
                 case 3:
-                    return 12f;
+                    return 11f;
                 case 4:
-                    return 12f;
+                    return 11f;
                 case 5:
-                    return 12f;
+                    return 12;
                 case 6:
-                    return 12f;
+                    return 12;
                 default:
-                    return 12f;
+                    return 11f;
             }
         }
 
@@ -497,17 +498,17 @@ namespace StarCollector.Screen {
         public int getShowRowOfCurrentLevel(){
             switch(Singleton.Instance.currentLevel){
                 case 1:
-                    return 4;
+                    return 3;
                 case 2:
-                    return 5;
+                    return 4;
                 case 3:
-                    return 6;
+                    return 4;
                 case 4: 
-                    return 7;
+                    return 4;
                 case 5:
-                    return 8;
+                    return 5;
                 case 6:
-                    return 10;
+                    return 5;
                 default:
                     return 4;
             }
