@@ -169,14 +169,14 @@ namespace StarCollector.Screen {
 
                 } else 
                 if(gameWin && gameComplete){
-                    if(MouseOnTexture(395,435,Ok_button)) {
-                        MouseOnOkButton = true;
+                    if(MouseOnTexture(647,412,Mainmenu_button)) {
+                        MouseOnMainButton = true;
                         if(IsClick()){
                             Singleton.Instance.currentLevel = 1;
                             ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
                         }
                     } else {
-                        MouseOnOkButton = false;
+                        MouseOnMainButton = false;
                     }
                  }else if (gameWin) {
                      // Continue Button
@@ -291,12 +291,12 @@ namespace StarCollector.Screen {
             else if (gameWin && gameComplete) { 
                 // draw WinWindow
                 _spriteBatch.Draw(WinWindow, new Vector2(325, 100),Color.White);
-                if (MouseOnOkButton)
+                if (MouseOnMainButton)
                 {
-                    _spriteBatch.Draw(Ok_button_hover, new Vector2(452, 412),Color.White);
+                    _spriteBatch.Draw(Mainmenu_button_hover, new Vector2(452, 380),Color.White);
                 }
                 else {
-                    _spriteBatch.Draw(Ok_button, new Vector2(452, 412),Color.White);
+                    _spriteBatch.Draw(Mainmenu_button, new Vector2(452, 380),Color.White);
                 }
             } else if (gameWin) {
                 // draw WinWindow
