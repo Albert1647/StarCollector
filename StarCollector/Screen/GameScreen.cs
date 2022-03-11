@@ -328,13 +328,14 @@ namespace StarCollector.Screen {
                         HoverRetry = false;
                     }
                     // MainMenu Button
-                    if (HoverMainMenuLose == false)
-                    {
-                        HoverMenu.Play();
-                        HoverMainMenuLose = true;
-                    }
+                    
                     if (MouseOnElement(563,765,438,453)) {
                         MouseOnMainButton = true;
+                        if (HoverMainMenuLose == false)
+                        {
+                            HoverMenu.Play();
+                            HoverMainMenuLose = true;
+                        }
                         if(IsClick()){
                             ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.MenuScreen);
                         }
