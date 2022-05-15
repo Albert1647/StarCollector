@@ -23,7 +23,13 @@ namespace StarCollector
 		public int ceilingY = 30;
 		public List<Color> starColor = new List<Color>();
 		public int clearStar = 0;
-
+		public GraphicsDeviceManager _graphics;
+		public void ToggleFullscreen(){
+			// if(Singleton.Instance.gdm.IsFullScreen){
+            // 	Singleton.Instance.gdm.IsFullScreen=false;
+            // }else{Singleton.Instance.gdm.IsFullScreen=true;}
+			Singleton.Instance._graphics.ToggleFullScreen();
+		}
 		public Color GetColor(){
 			List<Color> color = new List<Color>();
 			color.Add(new Color(255 ,85, 85)); // red

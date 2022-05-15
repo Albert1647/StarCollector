@@ -91,7 +91,8 @@ namespace StarCollector.Screen {
                 }
                 if (IsClick()){
                     Click.Play();
-                    ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
+                    Singleton.Instance.ToggleFullscreen();
+                    //ScreenManager.Instance.LoadScreen(ScreenManager.GameScreenName.CollectionScreen);
                 }
             } else {
                 MouseOnCollectionButton = false;
